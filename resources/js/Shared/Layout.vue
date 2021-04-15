@@ -21,10 +21,10 @@
                 <img class="w-auto h-8" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow" />
               </div>
               <nav class="px-2 mt-5 space-y-1">
-                <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']">
+                <inertia-link v-for="item in navigation" :key="item.name" :href="route(item.href)" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']">
                   <component :is="item.icon" :class="[item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300', 'mr-4 h-6 w-6']" aria-hidden="true" />
                   {{ item.name }}
-                </a>
+                </inertia-link>
               </nav>
             </div>
             <div class="flex flex-shrink-0 p-4 bg-gray-700">
@@ -58,10 +58,10 @@
               <img class="w-auto h-8" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow" />
             </div>
             <nav class="flex-1 px-2 mt-5 space-y-1 bg-gray-800">
-              <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']">
+              <inertia-link v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']">
                 <component :is="item.icon" :class="[item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300', 'mr-3 h-6 w-6']" aria-hidden="true" />
                 {{ item.name }}
-              </a>
+              </inertia-link>
             </nav>
           </div>
           <div class="flex flex-shrink-0 p-4 hover:bg-gray-700">
@@ -106,47 +106,18 @@
 <script>
 import { ref } from 'vue'
 import { Dialog, DialogOverlay, Menu, MenuButton, MenuItem, MenuItems, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { BellIcon, ClockIcon, CogIcon, CreditCardIcon, DocumentReportIcon, HomeIcon, MenuAlt1Icon, QuestionMarkCircleIcon, ScaleIcon, ShieldCheckIcon, UserGroupIcon, XIcon } from '@heroicons/vue/outline'
+import { BellIcon, HomeIcon, MenuAlt1Icon, UserGroupIcon, XIcon } from '@heroicons/vue/outline'
 import { CashIcon, CheckCircleIcon, ChevronDownIcon, ChevronRightIcon, OfficeBuildingIcon, SearchIcon } from '@heroicons/vue/solid'
+import { MenuIcon } from '@heroicons/vue/outline'
 
 const navigation = [
-  { name: 'Home', href: '#', icon: HomeIcon, current: true },
-  { name: 'History', href: '#', icon: ClockIcon, current: false },
-  { name: 'Balances', href: '#', icon: ScaleIcon, current: false },
-  { name: 'Cards', href: '#', icon: CreditCardIcon, current: false },
-  { name: 'Recipients', href: '#', icon: UserGroupIcon, current: false },
-  { name: 'Reports', href: '#', icon: DocumentReportIcon, current: false },
+  { name: 'Home', href: 'dashboardIndex', icon: HomeIcon, current: true },
+  { name: 'Recipients', href: 'dashboardIndex', icon: UserGroupIcon, current: false },
 ]
-const secondaryNavigation = [
-  { name: 'Settings', href: '#', icon: CogIcon },
-  { name: 'Help', href: '#', icon: QuestionMarkCircleIcon },
-  { name: 'Privacy', href: '#', icon: ShieldCheckIcon },
-]
-const cards = [
-  { name: 'Account balance', href: '#', icon: ScaleIcon, amount: '$30,659.45' },
-  // More items...
-]
-const transactions = [
-  {
-    id: 1,
-    name: 'Payment to Molly Sanders',
-    href: '#',
-    amount: '$20,000',
-    currency: 'USD',
-    status: 'success',
-    date: 'July 11, 2020',
-    datetime: '2020-07-11',
-  },
-  // More transactions...
-]
-const statusStyles = {
-  success: 'bg-green-100 text-green-800',
-  processing: 'bg-yellow-100 text-yellow-800',
-  failed: 'bg-gray-100 text-gray-800',
-}
 
 export default {
   components: {
+    MenuIcon,
     Dialog,
     DialogOverlay,
     Menu,
@@ -170,10 +141,6 @@ export default {
 
     return {
       navigation,
-      secondaryNavigation,
-      cards,
-      transactions,
-      statusStyles,
       sidebarOpen,
     }
   },

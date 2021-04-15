@@ -25,6 +25,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboardIndex')->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboardIndex')->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';

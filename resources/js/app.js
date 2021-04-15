@@ -1,19 +1,21 @@
 require('./bootstrap')
 
+// Import modules...
 import { createApp, h } from 'vue'
-import { App, plugin } from '@inertiajs/inertia-vue3'
-
+import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue3'
 import { InertiaProgress } from '@inertiajs/progress'
-InertiaProgress.init()
 
 const el = document.getElementById('app')
 
 createApp({
   render: () =>
-    h(App, {
+    h(InertiaApp, {
       initialPage: JSON.parse(el.dataset.page),
       resolveComponent: (name) => require(`./Pages/${name}`).default,
     }),
 })
-  .use(plugin)
+  .mixin({ methods: { route } })
+  .use(InertiaPlugin)
   .mount(el)
+
+InertiaProgress.init({ color: '#4B5563' })

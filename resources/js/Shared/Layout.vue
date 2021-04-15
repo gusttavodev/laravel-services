@@ -34,7 +34,7 @@
                     <img class="inline-block w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
                   </div>
                   <div class="ml-3">
-                    <p class="text-base font-medium text-white">Tom Cook</p>
+                    <p class="text-base font-medium text-white">{{ $page.props.auth.user.name }}</p>
                     <p class="text-sm font-medium text-gray-400 group-hover:text-gray-300">View profile</p>
                   </div>
                 </div>
@@ -64,6 +64,15 @@
               </a>
             </nav>
           </div>
+          <div class="flex flex-shrink-0 p-4 hover:bg-gray-700">
+            <a href="#" class="flex-shrink-0 block w-full group">
+              <div class="flex items-center">
+                <div class="ml-3">
+                  <inertia-link :href="route('logout')" method="post" as="button" class="text-sm font-medium text-white">Log Out</inertia-link>
+                </div>
+              </div>
+            </a>
+          </div>
           <div class="flex flex-shrink-0 p-4 bg-gray-700">
             <a href="#" class="flex-shrink-0 block w-full group">
               <div class="flex items-center">
@@ -71,7 +80,7 @@
                   <img class="inline-block rounded-full h-9 w-9" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
                 </div>
                 <div class="ml-3">
-                  <p class="text-sm font-medium text-white">Tom Cook</p>
+                  <p class="text-sm font-medium text-white">{{ $page.props.auth.user.name }}</p>
                   <p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">View profile</p>
                 </div>
               </div>

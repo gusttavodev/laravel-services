@@ -1,16 +1,25 @@
 <template>
-  <div class="bg-gray-300">
-    <h1>Teste!</h1>
-    <h2>{{ title }}</h2>
-  </div>
+  <breeze-authenticated-layout>
+    <template #header>
+      <h2 class="text-xl font-semibold leading-tight text-gray-800">Dashboard</h2>
+    </template>
+
+    <div class="py-12">
+      <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+          <div class="p-6 bg-white border-b border-gray-200">You're logged in!</div>
+        </div>
+      </div>
+    </div>
+  </breeze-authenticated-layout>
 </template>
 
 <script>
+import BreezeAuthenticatedLayout from '@/Layouts/Authenticated'
+
 export default {
-  props: {
-    title: String,
+  components: {
+    BreezeAuthenticatedLayout,
   },
 }
 </script>
-
-<style></style>

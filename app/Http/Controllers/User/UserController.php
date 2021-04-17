@@ -19,7 +19,6 @@ class UserController extends Controller
 
     public function index(){
         $users = UserResource::collection(User::paginate(5));
-
         return Inertia::render('User/Index', [
             'users' => $users
         ]);

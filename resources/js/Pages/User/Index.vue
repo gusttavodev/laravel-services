@@ -12,9 +12,8 @@
             <thead class="bg-gray-50">
               <tr>
                 <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Name</th>
-                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Title</th>
-                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Status</th>
-                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Role</th>
+                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Email</th>
+                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Funções</th>
                 <th scope="col" class="relative px-6 py-3">
                   <span class="sr-only">Edit</span>
                 </th>
@@ -37,15 +36,14 @@
                     </div>
                   </div>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <!-- <div class="text-sm text-gray-900">{{ person.title }}</div> -->
-                  <!-- <div class="text-sm text-gray-500">{{ person.department }}</div> -->
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <span class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full"> Active </span>
+                <td class="px-6 py-4 text-left whitespace-nowrap">
+                  <span v-if="user.email_verified_at !== null" class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full"> Verificado </span>
+                  <span v-else class="inline-flex px-2 text-xs font-semibold leading-5 text-red-800 bg-red-100 rounded-full"> Não Verificado </span>
                 </td>
                 <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                  <!-- {{ person.role }} -->
+                  <span v-for="role in user.roles" :key="role" class="m-1 inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-purple-100 text-purple-800">
+                    {{ role }}
+                  </span>
                 </td>
                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                   <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
@@ -62,15 +60,15 @@
           <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
             <div>
               <p class="text-sm text-gray-700">
-                Mostando
+                Página
                 {{ ' ' }}
                 <span class="font-medium">{{ users.meta.from }}</span>
                 {{ ' ' }}
-
-                {{ ' ' }}
-                <span class="font-medium">{{ users.meta.to }}</span>
-                {{ ' ' }}
                 de
+                {{ ' ' }}
+                <span class="font-medium">{{ users.meta.last_page }}</span>
+                {{ ' ' }}
+                |
                 {{ ' ' }}
                 <span class="font-medium">{{ users.meta.total }}</span>
                 {{ ' ' }}
@@ -79,15 +77,15 @@
             </div>
             <div>
               <nav class="relative z-0 inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-                <a v-if="users.links.prev" :href="users.links.prev" class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50">
+                <inertia-link v-if="users.links.prev" :href="users.links.prev" class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50">
                   <span class="sr-only">Anterior</span>
                   <ChevronLeftIcon class="w-5 h-5" aria-hidden="true" />
-                </a>
+                </inertia-link>
 
-                <a v-if="users.links.next" :href="users.links.next" class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50">
+                <inertia-link v-if="users.links.next" :href="users.links.next" class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50">
                   <span class="sr-only">Next</span>
                   <ChevronRightIcon class="w-5 h-5" aria-hidden="true" />
-                </a>
+                </inertia-link>
               </nav>
             </div>
           </div>

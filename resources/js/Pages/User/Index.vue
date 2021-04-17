@@ -3,6 +3,9 @@
     <div class="flex-1 min-w-0">
       <h1 class="text-lg font-medium leading-6 text-gray-900 sm:truncate">Usuários</h1>
     </div>
+    <div class="flex mt-4 sm:mt-0 sm:ml-4">
+      <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-sys_primary-600 order-0 hover:bg-sys_primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3">Criar</button>
+    </div>
   </div>
   <div class="px-4 mt-6 sm:px-6 lg:px-8">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -37,16 +40,16 @@
                   </div>
                 </td>
                 <td class="px-6 py-4 text-left whitespace-nowrap">
-                  <span v-if="user.email_verified_at !== null" class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full"> Verificado </span>
-                  <span v-else class="inline-flex px-2 text-xs font-semibold leading-5 text-red-800 bg-red-100 rounded-full"> Não Verificado </span>
+                  <span v-if="user.email_verified_at !== null" class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full text-sys_success-800 bg-sys_success-100"> Verificado </span>
+                  <span v-else class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full text-sys_error-800 bg-sys_error-100"> Não Verificado </span>
                 </td>
                 <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                  <span v-for="role in user.roles" :key="role" class="m-1 inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-purple-100 text-purple-800">
+                  <span v-for="role in user.roles" :key="role" class="m-1 inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-sys_secondary-100 text-sys_secondary-800">
                     {{ role }}
                   </span>
                 </td>
                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                  <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                  <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white border border-transparent rounded-md shadow-sm bg-sys_primary-600 hover:bg-sys_primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Editar</button>
                 </td>
               </tr>
             </tbody>

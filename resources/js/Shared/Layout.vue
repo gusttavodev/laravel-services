@@ -58,7 +58,7 @@
               <img class="w-auto h-8" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow" />
             </div>
             <nav class="flex-1 px-2 mt-5 space-y-1 bg-gray-800">
-              <inertia-link v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']">
+              <inertia-link v-for="item in navigation" :key="item.name" :href="route(item.href)" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']">
                 <component :is="item.icon" :class="[item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300', 'mr-3 h-6 w-6']" aria-hidden="true" />
                 {{ item.name }}
               </inertia-link>
@@ -111,8 +111,8 @@ import { CashIcon, CheckCircleIcon, ChevronDownIcon, ChevronRightIcon, OfficeBui
 import { MenuIcon } from '@heroicons/vue/outline'
 
 const navigation = [
-  { name: 'Home', href: 'dashboardIndex', icon: HomeIcon, current: true },
-  { name: 'Recipients', href: 'dashboardIndex', icon: UserGroupIcon, current: false },
+  { name: 'Dashboard', href: 'dashboardIndex', icon: HomeIcon, current: true },
+  { name: 'Usuários', href: 'userIndex', icon: UserGroupIcon, current: false },
 ]
 
 export default {
@@ -138,7 +138,6 @@ export default {
   },
   setup() {
     const sidebarOpen = ref(false)
-
     return {
       navigation,
       sidebarOpen,

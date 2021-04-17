@@ -4,6 +4,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\User\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/user', [UserController::class, 'index'])->name('userIndex')->middleware(['auth', 'verified']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboardIndex')->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';

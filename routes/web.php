@@ -6,16 +6,7 @@ use Illuminate\Foundation\Application;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\User\UserController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+require __DIR__.'/auth.php';
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -26,7 +17,13 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/user', [UserController::class, 'index'])->name('userIndex')->middleware(['auth', 'verified']);
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboardIndex')->middleware(['auth', 'verified']);
+Route::prefix('user')->group(function () {
+    Route::get('/', [UserController::class, 'index'])->name('userIndex');
+    Route::get('/create', [UserController::class, 'create'])->name('userCreate');
+    Route::post('/create', [UserController::class, 'store'])->name('userStore');
+});
 
-require __DIR__.'/auth.php';
+Route::prefix('dashboard')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboardIndex');
+});
+

@@ -4,7 +4,12 @@
       <h1 class="text-lg font-medium leading-6 text-gray-900 sm:truncate">Usuários</h1>
     </div>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
-      <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-sys_primary-600 order-0 hover:bg-sys_primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3">Criar</button>
+      <inertia-link
+        :href="route('userCreate')"
+        type="button"
+        class="inline-flex items-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-sys_primary-600 order-0 hover:bg-sys_primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3"
+        >Criar
+      </inertia-link>
     </div>
   </div>
   <div class="px-4 mt-6 sm:px-6 lg:px-8">
@@ -49,7 +54,12 @@
                   </span>
                 </td>
                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                  <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white border border-transparent rounded-md shadow-sm bg-sys_primary-600 hover:bg-sys_primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Editar</button>
+                  <button
+                    type="button"
+                    class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white border border-transparent rounded-md shadow-sm bg-sys_primary-600 hover:bg-sys_primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                    Editar
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -80,12 +90,20 @@
             </div>
             <div>
               <nav class="relative z-0 inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-                <inertia-link v-if="users.links.prev" :href="users.links.prev" class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50">
+                <inertia-link
+                  v-if="users.links.prev"
+                  :href="users.links.prev"
+                  class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50"
+                >
                   <span class="sr-only">Anterior</span>
                   <ChevronLeftIcon class="w-5 h-5" aria-hidden="true" />
                 </inertia-link>
 
-                <inertia-link v-if="users.links.next" :href="users.links.next" class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50">
+                <inertia-link
+                  v-if="users.links.next"
+                  :href="users.links.next"
+                  class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50"
+                >
                   <span class="sr-only">Next</span>
                   <ChevronRightIcon class="w-5 h-5" aria-hidden="true" />
                 </inertia-link>

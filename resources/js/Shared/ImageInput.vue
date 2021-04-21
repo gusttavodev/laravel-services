@@ -55,7 +55,6 @@ export default {
       type: String,
       default: 'Foto:',
     },
-
     isEdit: {
       type: Boolean,
       default: false,
@@ -64,7 +63,6 @@ export default {
       type: [File, String, Boolean],
       default: '',
     },
-
     errors: {
       type: Array,
     },
@@ -94,11 +92,11 @@ export default {
       reader.readAsDataURL(eventFile)
 
       // Emmit v-model default input event
-      this.$emit('input', eventFile)
+      this.$emit('update:modelValue', eventFile)
     },
     remove() {
       this.photoPreview = null
-      this.$emit('input', null)
+      this.$emit('update:modelValue', null)
     },
     selectNewPhoto() {
       this.$refs.component_picture_upload.click()

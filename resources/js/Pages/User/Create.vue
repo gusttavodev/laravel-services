@@ -28,8 +28,9 @@
           >
             <image-input
               v-model="form.picture"
+              :errors="errors.picture"
               label="Foto"
-              :isEdit="isEdit"
+              :isEdit="false"
               :defaultImageUrl="form.picture"
             />
           </div>
@@ -44,7 +45,7 @@
               class="mt-10"
               label="name"
               type="text"
-              :required="true"
+              :required="false"
             />
           </div>
           <div
@@ -59,7 +60,7 @@
               type="text"
               id="email"
               name="email"
-              :required="true"
+              :required="false"
             />
           </div>
           <div
@@ -74,7 +75,7 @@
               type="password"
               id="password"
               name="password"
-              :required="true"
+              :required="false"
             />
           </div>
           <div
@@ -89,7 +90,7 @@
               type="password"
               id="confirm_password"
               name="confirm_password"
-              :required="true"
+              :required="false"
             />
           </div>
         </div>
@@ -131,13 +132,18 @@ export default {
         name: null,
         email: null,
         password: null,
+        picture: null,
         confirm_password: null,
       },
     }
   },
   methods: {
     submit() {
-      this.$inertia.post(route('userStore'), this.form)
+      const form = this.mountForm(this.form)
+
+      console.log('FORM ', form)
+
+      this.$inertia.post(route('userStore'), form)
     },
     selectPicture() {
       const reader = new FileReader()
@@ -146,6 +152,21 @@ export default {
         this.photoPreview = e.target.result
       }
       reader.readAsDataURL(this.$refs.photo.files[0])
+    },
+    mountForm(form) {
+      let picture = false
+      if (typeof this.form.picture === 'object') {
+        picture = this.form.picture
+      }
+      console.log('mountForm picture ', picture)
+      let data = new FormData()
+      data.append('name', form.name || '')
+      data.append('email', form.email || '')
+      data.append('password', form.password || '')
+      data.append('confirm_password', form.confirm_password || '')
+      data.append('picture', picture || '')
+
+      return data
     },
   },
 }

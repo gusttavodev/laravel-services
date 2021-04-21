@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\User\UserResource;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -33,6 +35,9 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request)
     {
+
+        $request->user()->picture = Storage::url($request->user()->picture);
+
         return array_merge(parent::share($request), [
             'auth' => [
                 'user' => $request->user(),

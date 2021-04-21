@@ -162,11 +162,11 @@
           </div>
           <div class="flex flex-shrink-0 p-4 bg-gray-700">
             <a href="#" class="flex-shrink-0 block w-full group">
-              <div class="flex items-center">
+              <div class="flex ite ms-center">
                 <div>
                   <img
                     class="inline-block rounded-full h-9 w-9"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    :src="$page.props.auth.user.picture"
                     alt=""
                   />
                 </div>

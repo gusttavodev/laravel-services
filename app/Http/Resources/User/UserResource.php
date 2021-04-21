@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\User;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
@@ -17,6 +18,7 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'picture' => Storage::url($this->picture),
             'email' => $this->email,
             'roles' => $this->roles->pluck('name'),
 

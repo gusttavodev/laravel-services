@@ -1,5 +1,7 @@
 <template>
-  <div class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+  <div
+    class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
+  >
     <div class="flex-1 min-w-0">
       <h1 class="text-lg font-medium leading-6 text-gray-900 sm:truncate">Usuários</h1>
     </div>
@@ -19,20 +21,36 @@
           <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
               <tr>
-                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Name</th>
-                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Email</th>
-                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Funções</th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                >
+                  Name
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                >
+                  Email
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                >
+                  Funções
+                </th>
                 <th scope="col" class="relative px-6 py-3">
                   <span class="sr-only">Edit</span>
                 </th>
               </tr>
             </thead>
+
             <tbody class="bg-white divide-y divide-gray-200">
               <tr v-for="user in users.data" :key="user.id">
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 w-10 h-10">
-                      <!-- <img class="w-10 h-10 rounded-full" :src="person.image" alt="" /> -->
+                      <img class="w-10 h-10 rounded-full" :src="user.picture" alt="" />
                     </div>
                     <div class="ml-4">
                       <div class="text-sm font-medium text-gray-900">
@@ -45,11 +63,25 @@
                   </div>
                 </td>
                 <td class="px-6 py-4 text-left whitespace-nowrap">
-                  <span v-if="user.email_verified_at !== null" class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full text-sys_success-800 bg-sys_success-100"> Verificado </span>
-                  <span v-else class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full text-sys_error-800 bg-sys_error-100"> Não Verificado </span>
+                  <span
+                    v-if="user.email_verified_at !== null"
+                    class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full text-sys_success-800 bg-sys_success-100"
+                  >
+                    Verificado
+                  </span>
+                  <span
+                    v-else
+                    class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full text-sys_error-800 bg-sys_error-100"
+                  >
+                    Não Verificado
+                  </span>
                 </td>
                 <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                  <span v-for="role in user.roles" :key="role" class="m-1 inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-sys_secondary-100 text-sys_secondary-800">
+                  <span
+                    v-for="role in user.roles"
+                    :key="role"
+                    class="m-1 inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-sys_secondary-100 text-sys_secondary-800"
+                  >
                     {{ role }}
                   </span>
                 </td>
@@ -67,8 +99,18 @@
         </div>
         <div class="flex items-center justify-between px-4 py-3 bg-white sm:px-6 sm:rounded-b-lg">
           <div class="flex justify-between flex-1 sm:hidden">
-            <a href="#" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:text-gray-500"> Previous </a>
-            <a href="#" class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:text-gray-500"> Next </a>
+            <a
+              href="#"
+              class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:text-gray-500"
+            >
+              Previous
+            </a>
+            <a
+              href="#"
+              class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:text-gray-500"
+            >
+              Next
+            </a>
           </div>
           <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
             <div>
@@ -89,7 +131,10 @@
               </p>
             </div>
             <div>
-              <nav class="relative z-0 inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+              <nav
+                class="relative z-0 inline-flex -space-x-px rounded-md shadow-sm"
+                aria-label="Pagination"
+              >
                 <inertia-link
                   v-if="users.links.prev"
                   :href="users.links.prev"
@@ -126,7 +171,8 @@ const people = [
     department: 'Optimization',
     role: 'Admin',
     email: 'jane.cooper@example.com',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
+    image:
+      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
   },
 ]
 

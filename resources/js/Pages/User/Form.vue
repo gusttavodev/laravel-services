@@ -43,7 +43,7 @@
               :value="form.name"
               :error="errors.name"
               class="mt-10"
-              label="name"
+              label="Nome"
               type="text"
               :required="false"
             />
@@ -93,6 +93,19 @@
               :required="false"
             />
           </div>
+          <div
+            class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+          >
+            <select-input
+              v-model="form.roles"
+              :options="roles"
+              :error="errors.roles"
+              class="mt-10"
+              labelName="name"
+              valueName="id"
+              label="Função"
+            />
+          </div>
         </div>
         <div class="px-4 py-3 text-right bg-gray-50 sm:px-6">
           <button
@@ -111,6 +124,7 @@
 import Layout from '@/Shared/Layout'
 import ImageInput from '@/Shared/ImageInput'
 import TextInput from '@/Shared/TextInput'
+import SelectInput from '@/Shared/SelectInput'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid'
 
 export default {
@@ -121,14 +135,17 @@ export default {
     ImageInput,
     ChevronLeftIcon,
     ChevronRightIcon,
+    SelectInput,
   },
   props: {
     errors: Object,
+    roles: Array,
   },
   data() {
     return {
       isEdit: false,
       form: {
+        roles: null,
         name: null,
         email: null,
         password: null,
@@ -140,8 +157,6 @@ export default {
   methods: {
     submit() {
       const form = this.mountForm(this.form)
-
-      console.log('FORM ', form)
 
       this.$inertia.post(route('userStore'), form)
     },

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use Inertia\Inertia;
 use App\Models\User\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -15,8 +16,8 @@ use App\Http\Requests\User\UserStoreRequest;
 class UserController extends Controller
 {
     public function __construct() {
-        // $this->middleware('auth');
-        // $this->middleware('verified');
+        $this->middleware('auth');
+        $this->middleware('verified');
         // $this->middleware('verified')->only('store');
         // $this->middleware('subscribed')->except('store');
     }
@@ -29,17 +30,19 @@ class UserController extends Controller
     }
 
     public function create(){
-        return Inertia::render('User/Create');
+        $roles =  Role::all();
+
+        return Inertia::render('User/Form', [
+            'roles' => $roles
+        ]);
     }
 
     public function store(UserStoreRequest $request){
 
         $input = $request->validated();
 
-        // $filePath = $request->file('picture')->store('images/userPicture');
-
-        if(!empty($input['picture'])) $input['picture'] = Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/userPicture', $request->file('picture'));
-        if(!empty($input['password'])) $input['password'] = Hash::make($input['password']);
+        $input['picture'] = Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/userPicture', $request->file('picture'));
+        $input['password'] = Hash::make($input['password']);
 
         User::create($input)->assignRole('user');
 

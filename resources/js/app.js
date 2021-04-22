@@ -7,15 +7,18 @@ import { InertiaProgress } from '@inertiajs/progress'
 
 const el = document.getElementById('app')
 
-createApp({
+const app = createApp({
   render: () =>
     h(InertiaApp, {
       initialPage: JSON.parse(el.dataset.page),
       resolveComponent: (name) => require(`./Pages/${name}`).default,
     }),
 })
-  .mixin({ methods: { route } })
-  .use(InertiaPlugin)
-  .mount(el)
+
+// import '../../node_modulesvueform/multiselect/themes/default.css'
+import Multiselect from '@vueform/multiselect'
+app.component('v-select', Multiselect)
+
+app.mixin({ methods: { route } }).use(InertiaPlugin).mount(el)
 
 InertiaProgress.init({ color: '#4B5563' })

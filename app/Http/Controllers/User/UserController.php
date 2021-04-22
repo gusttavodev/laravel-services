@@ -48,4 +48,22 @@ class UserController extends Controller
 
         return Redirect::route('userIndex')->with('success', 'User updated.');
     }
+
+    public function edit(User $user){
+        $roles =  Role::all();
+
+        return Inertia::render('User/Form', [
+            'roles' => $roles,
+            'user' => new UserResource($user)
+        ]);
+    }
+
+    public function update(User $user){
+        // $roles =  Role::all();
+
+        // return Inertia::render('User/Form', [
+        //     'roles' => $roles,
+        //     'user' => new UserResource($user)
+        // ]);
+    }
 }

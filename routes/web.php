@@ -21,6 +21,9 @@ Route::prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('userIndex');
     Route::get('/create', [UserController::class, 'create'])->name('userCreate');
     Route::post('/create', [UserController::class, 'store'])->name('userStore');
+
+    Route::get('/{user}', [UserController::class, 'edit'])->name('userEdit');
+    Route::put('/{user}', [UserController::class, 'update'])->name('userUpdate');
 });
 
 Route::prefix('dashboard')->group(function () {

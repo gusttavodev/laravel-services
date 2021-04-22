@@ -86,12 +86,12 @@
                   </span>
                 </td>
                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                  <button
+                  <inertia-link
+                    :href="route('userEdit', user.id)"
                     type="button"
-                    class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white border border-transparent rounded-md shadow-sm bg-sys_primary-600 hover:bg-sys_primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Editar
-                  </button>
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-sys_primary-600 order-0 hover:bg-sys_primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3"
+                    >Editar
+                  </inertia-link>
                 </td>
               </tr>
             </tbody>

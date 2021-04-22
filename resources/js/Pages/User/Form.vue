@@ -30,7 +30,7 @@
               v-model="form.picture"
               :errors="errors.picture"
               label="Foto"
-              :isEdit="false"
+              :isEdit="user"
               :defaultImageUrl="form.picture"
             />
           </div>
@@ -140,10 +140,10 @@ export default {
   props: {
     errors: Object,
     roles: Array,
+    user: Object,
   },
   data() {
     return {
-      isEdit: false,
       form: {
         roles: null,
         name: null,
@@ -153,6 +153,9 @@ export default {
         confirm_password: null,
       },
     }
+  },
+  created() {
+    this.form = this.user.data
   },
   methods: {
     submit() {

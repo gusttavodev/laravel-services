@@ -1,5 +1,5 @@
 <template>
-  <Header title="Usuários" buttonText="Criar" :buttonAction="route('userCreate')" />
+  <Header title="Usuários" buttonText="Criar" :buttonAction="route('categoryCreate')" />
 
   <div class="px-4 mt-6 sm:px-6 lg:px-8">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

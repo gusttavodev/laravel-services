@@ -1,20 +1,5 @@
 <template>
-  <div
-    class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
-  >
-    <div class="flex-1 min-w-0">
-      <h1 class="text-lg font-medium leading-6 text-gray-900 sm:truncate">Criar Usuário</h1>
-    </div>
-    <div class="flex mt-4 sm:mt-0 sm:ml-4">
-      <inertia-link
-        :href="route('userIndex')"
-        type="button"
-        class="inline-flex items-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-sys_primary-600 order-0 hover:bg-sys_primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3"
-        >Voltar
-      </inertia-link>
-    </div>
-  </div>
-
+  <Header title="Usuários" buttonText="Voltar" :buttonAction="route('userIndex')" />
   <div class="px-4 mt-6 sm:px-6 lg:px-8">
     <form @submit.prevent="submit">
       <div class="shadow sm:rounded-md sm:overflow-hidden">
@@ -23,88 +8,42 @@
             <h3 class="text-lg font-medium leading-6 text-gray-900">Infromações básicas</h3>
             <p class="mt-1 text-sm text-gray-500">Cadastre um novo usuário no sistema.</p>
           </div>
-          <div
-            class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
-          >
-            <image-input
-              v-model="form.picture"
-              :errors="errors.picture"
-              label="Foto"
-              :isEdit="user"
-              :defaultImageUrl="form.picture"
-            />
-          </div>
 
-          <div
-            class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
-          >
-            <text-input
-              v-model="form.name"
-              :value="form.name"
-              :error="errors.name"
-              class="mt-10"
-              label="Nome"
-              type="text"
-              :required="false"
-            />
-          </div>
-          <div
-            class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
-          >
-            <text-input
-              v-model="form.email"
-              :value="form.email"
-              :error="errors.email"
-              class="mt-10"
-              label="Email"
-              type="text"
-              id="email"
-              name="email"
-              :required="false"
-            />
-          </div>
-          <div
-            class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
-          >
-            <text-input
-              v-model="form.password"
-              :value="form.password"
-              :error="errors.password"
-              class="mt-10"
-              label="Senha"
-              type="password"
-              id="password"
-              name="password"
-              :required="false"
-            />
-          </div>
-          <div
-            class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
-          >
-            <text-input
-              v-model="form.confirm_password"
-              :value="form.confirm_password"
-              :error="errors.confirm_password"
-              class="mt-10"
-              label="Confirmar senha"
-              type="password"
-              id="confirm_password"
-              name="confirm_password"
-              :required="false"
-            />
-          </div>
-          <div
-            class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
-          >
-            <select-input
-              v-model="form.roles"
-              :options="roles"
-              :error="errors.roles"
-              class="mt-10"
-              labelName="name"
-              valueName="id"
-              label="Função"
-            />
+          <image-input
+            v-model="form.picture"
+            :errors="errors.picture"
+            label="Foto"
+            :isEdit="user"
+            :defaultImageUrl="form.picture"
+          />
+
+          <text-input
+            v-model="form.name"
+            :value="form.name"
+            :error="errors.name"
+            class="mt-10"
+            label="Nome"
+            type="text"
+            :required="false"
+          />
+          <text-input
+            v-model="form.priority"
+            :value="form.priority"
+            :error="errors.priority"
+            class="mt-10"
+            label="Prioridade"
+            type="number"
+            id="priority"
+            name="priority"
+            :required="false"
+          />
+          <div class="block mt-4">
+            <label class="flex items-center">
+              <label class="block pr-4 text-sm font-medium text-gray-700 sm:mt-px">
+                Habilitado
+              </label>
+              <breeze-checkbox name="enable" v-model:checked="form.enable" />
+            </label>
           </div>
         </div>
         <div class="px-4 py-3 text-right bg-gray-50 sm:px-6">
@@ -124,33 +63,34 @@
 import Layout from '@/Shared/Layout'
 import ImageInput from '@/Shared/ImageInput'
 import TextInput from '@/Shared/TextInput'
+import Header from '@/Layouts/Header'
 import SelectInput from '@/Shared/SelectInput'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid'
+import BreezeCheckbox from '@/Components/Checkbox'
 
 export default {
   metaInfo: { title: 'Users' },
   layout: Layout,
   components: {
+    BreezeCheckbox,
     TextInput,
     ImageInput,
     ChevronLeftIcon,
     ChevronRightIcon,
     SelectInput,
+    Header,
   },
   props: {
     errors: Object,
-    roles: Array,
     user: Object,
   },
   data() {
     return {
       form: {
-        roles: null,
         name: null,
-        email: null,
-        password: null,
+        priority: null,
+        enable: null,
         picture: null,
-        confirm_password: null,
       },
     }
   },
@@ -161,7 +101,7 @@ export default {
     submit() {
       const form = this.mountForm(this.form)
 
-      this.$inertia.post(route('userStore'), form)
+      this.$inertia.post(route('categoryStore'), form)
     },
     selectPicture() {
       const reader = new FileReader()
@@ -176,12 +116,11 @@ export default {
       if (typeof this.form.picture === 'object') {
         picture = this.form.picture
       }
-      console.log('mountForm picture ', picture)
+
       let data = new FormData()
       data.append('name', form.name || '')
-      data.append('email', form.email || '')
-      data.append('password', form.password || '')
-      data.append('confirm_password', form.confirm_password || '')
+      data.append('priority', form.priority || '')
+      data.append('enable', form.enable ? '1' : '0')
       data.append('picture', picture || '')
 
       return data

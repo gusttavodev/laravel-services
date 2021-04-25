@@ -34,9 +34,11 @@ Route::prefix('user')->group(function () {
 Route::prefix('category')->group(function () {
     Route::get('/', [CategoryController::class, 'index'])->name('categoryIndex');
 
-    Route::get('/create', [CategoryController::class, 'create'])->name('categoryCreate');
-    Route::post('/create', [CategoryController::class, 'store'])->name('categoryStore');
+    Route::get('create', [CategoryController::class, 'create'])->name('categoryCreate');
+    Route::post('create', [CategoryController::class, 'store'])->name('categoryStore');
 
-    Route::get('/{category}', [CategoryController::class, 'edit'])->name('categoryEdit');
+    Route::get('{category}', [CategoryController::class, 'edit'])->name('categoryEdit');
     Route::post('{category}', [CategoryController::class, 'update'])->name('categoryUpdate');
+
+    Route::delete('{category}', [CategoryController::class, 'destroy'])->name('categoryDelete');
 });

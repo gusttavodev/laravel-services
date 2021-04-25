@@ -114,8 +114,10 @@ class CategoryController extends Controller
      * @param  Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Request $request, Category $category)
     {
-        //
+        $category =  $request->user()->categories()->findOrFail($category->id)->delete();
+
+        return Redirect::back()->with('success', 'Categoria Removida.');
     }
 }

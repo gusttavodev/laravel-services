@@ -85,6 +85,14 @@
                     class="inline-flex items-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-sys_primary-600 order-0 hover:bg-sys_primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3"
                     >Editar
                   </inertia-link>
+
+                  <button
+                    @click="remove(category.id)"
+                    type="button"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-sys_error-600 order-0 hover:bg-sys_error-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3"
+                  >
+                    Remover
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -111,6 +119,11 @@ export default {
   },
   props: {
     categories: Object,
+  },
+  methods: {
+    remove(id) {
+      this.$inertia.delete(route('categoryDelete', id))
+    },
   },
 }
 </script>

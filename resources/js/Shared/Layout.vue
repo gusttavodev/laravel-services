@@ -212,7 +212,7 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue'
-import { BellIcon, HomeIcon, MenuAlt1Icon, UserGroupIcon, XIcon } from '@heroicons/vue/outline'
+import { BellIcon, HomeIcon, MenuAlt1Icon, UserGroupIcon, XIcon, MenuIcon, ShoppingBagIcon } from '@heroicons/vue/outline'
 import {
   CashIcon,
   CheckCircleIcon,
@@ -221,11 +221,11 @@ import {
   OfficeBuildingIcon,
   SearchIcon,
 } from '@heroicons/vue/solid'
-import { MenuIcon } from '@heroicons/vue/outline'
 import FlashMessages from '@/Shared/FlashMessages'
 const navigation = [
   { name: 'Dashboard', href: 'dashboardIndex', icon: HomeIcon, current: true },
   { name: 'Usuários', href: 'userIndex', icon: UserGroupIcon, current: false },
+  { name: 'Categorias', href: 'categoryIndex', icon: ShoppingBagIcon, current: false },
 ]
 
 export default {

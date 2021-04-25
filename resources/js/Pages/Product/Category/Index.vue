@@ -12,19 +12,25 @@
                   scope="col"
                   class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                 >
-                  Name
+                  ID
                 </th>
                 <th
                   scope="col"
                   class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                 >
-                  Email
+                  Nome
                 </th>
                 <th
                   scope="col"
                   class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                 >
-                  Funções
+                  Prioridade
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                >
+                  Habilitado
                 </th>
                 <th scope="col" class="relative px-6 py-3">
                   <span class="sr-only">Edit</span>
@@ -33,48 +39,48 @@
             </thead>
 
             <tbody class="bg-white divide-y divide-gray-200">
-              <tr v-for="user in users.data" :key="user.id">
+              <tr v-for="category in categories.data" :key="category.id">
+                <td class="px-6 py-4 text-left whitespace-nowrap">
+                  <span class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full">
+                    {{ category.id }}
+                  </span>
+                </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 w-10 h-10">
-                      <img class="w-10 h-10 rounded-full" :src="user.picture" alt="" />
+                      <img class="w-10 h-10 rounded-full" :src="category.picture" alt="" />
                     </div>
                     <div class="ml-4">
                       <div class="text-sm font-medium text-gray-900">
-                        {{ user.name }}
-                      </div>
-                      <div class="text-sm text-gray-500">
-                        {{ user.email }}
+                        {{ category.name }}
                       </div>
                     </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 text-left whitespace-nowrap">
                   <span
-                    v-if="user.email_verified_at !== null"
+                    class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full text-sys_alert-800 bg-sys_alert-100"
+                  >
+                    {{ category.priority }}
+                  </span>
+                </td>
+                <td class="px-6 py-4 text-left whitespace-nowrap">
+                  <span
+                    v-if="category.enable"
                     class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full text-sys_success-800 bg-sys_success-100"
                   >
-                    Verificado
+                    Habilitado
                   </span>
                   <span
                     v-else
                     class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full text-sys_error-800 bg-sys_error-100"
                   >
-                    Não Verificado
-                  </span>
-                </td>
-                <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                  <span
-                    v-for="role in user.roles"
-                    :key="role"
-                    class="m-1 inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-sys_secondary-100 text-sys_secondary-800"
-                  >
-                    {{ role }}
+                    Deabilitado
                   </span>
                 </td>
                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                   <inertia-link
-                    :href="route('userEdit', user.id)"
+                    :href="route('userEdit', category.id)"
                     type="button"
                     class="inline-flex items-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-sys_primary-600 order-0 hover:bg-sys_primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3"
                     >Editar
@@ -85,7 +91,7 @@
           </table>
         </div>
 
-        <Paginate :meta="users.meta" :links="users.links" />
+        <Paginate :meta="categories.meta" :links="categories.links" />
       </div>
     </div>
   </div>
@@ -95,19 +101,16 @@
 import Layout from '@/Shared/Layout'
 import Header from '@/Layouts/Header'
 import Paginate from '@/Layouts/Paginate'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid'
 
 export default {
-  metaInfo: { title: 'Users' },
+  metaInfo: { title: 'Categorias' },
   layout: Layout,
   components: {
-    ChevronLeftIcon,
-    ChevronRightIcon,
-    Header,
     Paginate,
+    Header,
   },
   props: {
-    users: Object,
+    categories: Object,
   },
 }
 </script>

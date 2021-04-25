@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Product\CategoryController;
 
 require __DIR__.'/auth.php';
 
@@ -17,6 +18,10 @@ Route::get('/', function () {
     ]);
 });
 
+Route::prefix('dashboard')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboardIndex');
+});
+
 Route::prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('userIndex');
     Route::get('/create', [UserController::class, 'create'])->name('userCreate');
@@ -26,7 +31,8 @@ Route::prefix('user')->group(function () {
     Route::put('/{user}', [UserController::class, 'update'])->name('userUpdate');
 });
 
-Route::prefix('dashboard')->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboardIndex');
+Route::prefix('category')->group(function () {
+    Route::get('/', [CategoryController::class, 'index'])->name('categoryIndex');
 });
+
 

@@ -80,7 +80,7 @@
                 </td>
                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                   <inertia-link
-                    :href="route('userEdit', category.id)"
+                    :href="route('categoryEdit', category.id)"
                     type="button"
                     class="inline-flex items-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-sys_primary-600 order-0 hover:bg-sys_primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3"
                     >Editar

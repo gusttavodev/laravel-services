@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Resources\Product\CategoryResource;
 use App\Http\Requests\Product\CategoryStoreRequest;
+use App\Http\Requests\Product\CategoryUpdateRequest;
 
 class CategoryController extends Controller
 {
@@ -57,16 +58,16 @@ class CategoryController extends Controller
         $input['picture'] = Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/categoryPicture', $request->file('picture'));
         Category::create($input);
 
-        return Redirect::route('categoryIndex')->with('success', 'Categoria Atualizada.');
+        return Redirect::route('categoryIndex')->with('success', 'Categoria Criada.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
         //
     }
@@ -74,33 +75,46 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, Category $category)
     {
-        //
+        $category =  $request->user()->categories()->findOrFail($category->id);
+
+        return Inertia::render('Product/Category/Form', ['category' => new CategoryResource($category)]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  CategoryUpdateRequest  $request
+     * @param  Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryUpdateRequest $request, Category $category)
     {
-        //
+        $category =  $request->user()->categories()->findOrFail($category->id);
+
+        if ($request->picture) {
+            $category->picture =  Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/categoryPicture', $request->file('picture'));
+        }
+
+        $category->name = $request->name;
+        $category->priority = $request->priority;
+        $category->enable = $request->enable;
+        $category->save();
+
+        return Redirect::route('categoryIndex')->with('success', 'Categoria Atualizada.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
         //
     }

@@ -1,19 +1,19 @@
 <template>
-  <Header title="Usuários" buttonText="Voltar" :buttonAction="route('userIndex')" />
+  <Header title="Categorias" buttonText="Voltar" :buttonAction="route('categoryIndex')" />
   <div class="px-4 mt-6 sm:px-6 lg:px-8">
     <form @submit.prevent="submit">
       <div class="shadow sm:rounded-md sm:overflow-hidden">
         <div class="px-4 py-6 space-y-6 bg-white sm:p-6">
           <div>
-            <h3 class="text-lg font-medium leading-6 text-gray-900">Infromações básicas</h3>
-            <p class="mt-1 text-sm text-gray-500">Cadastre um novo usuário no sistema.</p>
+            <h3 class="text-lg font-medium leading-6 text-gray-900">Criar Categorias</h3>
+            <p class="mt-1 text-sm text-gray-500">Crie uma categoria para seus produtos.</p>
           </div>
 
           <image-input
             v-model="form.picture"
             :errors="errors.picture"
             label="Foto"
-            :isEdit="user"
+            :isEdit="category"
             :defaultImageUrl="form.picture"
           />
 
@@ -69,7 +69,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid'
 import BreezeCheckbox from '@/Components/Checkbox'
 
 export default {
-  metaInfo: { title: 'Users' },
+  metaInfo: { title: 'Category' },
   layout: Layout,
   components: {
     BreezeCheckbox,
@@ -82,7 +82,7 @@ export default {
   },
   props: {
     errors: Object,
-    user: Object,
+    category: Object,
   },
   data() {
     return {
@@ -95,12 +95,16 @@ export default {
     }
   },
   created() {
-    if (this.user) this.form = this.user.data
+    if (this.category) this.form = this.category.data
   },
   methods: {
     submit() {
       const form = this.mountForm(this.form)
 
+      if (this.category) {
+        this.$inertia.post(route('categoryUpdate', this.category.data.id), form)
+        return
+      }
       this.$inertia.post(route('categoryStore'), form)
     },
     selectPicture() {
@@ -116,7 +120,6 @@ export default {
       if (typeof this.form.picture === 'object') {
         picture = this.form.picture
       }
-
       let data = new FormData()
       data.append('name', form.name || '')
       data.append('priority', form.priority || '')

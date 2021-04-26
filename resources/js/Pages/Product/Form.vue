@@ -136,7 +136,7 @@ export default {
     }
   },
   created() {
-    if (this.product) this.form = this.product.data
+    if(this.product) this.form = this.product.data
   },
   methods: {
     submit() {

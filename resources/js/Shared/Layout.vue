@@ -220,6 +220,7 @@ import {
   XIcon,
   MenuIcon,
   ShoppingBagIcon,
+  ShoppingCartIcon
 } from '@heroicons/vue/outline'
 import {
   CashIcon,
@@ -234,7 +235,7 @@ const navigation = [
   { name: 'Dashboard', href: 'dashboardIndex', icon: HomeIcon, current: true },
   { name: 'Usuários', href: 'userIndex', icon: UserGroupIcon, current: false },
   { name: 'Categorias', href: 'categoryIndex', icon: ShoppingBagIcon, current: false },
-  { name: 'Produtos', href: 'productIndex', icon: ShoppingBagIcon, current: false },
+  { name: 'Produtos', href: 'productIndex', icon: ShoppingCartIcon, current: false },
 ]
 
 export default {

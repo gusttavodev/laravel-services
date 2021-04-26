@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Product;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\Product\Product;
-use App\Models\Product\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Resources\Product\CategoryResource;
 use App\Http\Requests\Product\ProductStoreRequest;
+use App\Http\Requests\Product\ProductUpdateRequest;
 
 class ProductController extends Controller
 {
@@ -84,9 +84,12 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Request $request, Product $product)
     {
-        //
+        $product =  $request->user()->products()->findOrFail($product->id);
+        $categories = $request->user()->categories();
+
+        return Inertia::render('Product/Form', ['product' => new ProductResource($product), 'categories' => CategoryResource::collection($categories->paginate(5))]);
     }
 
     /**
@@ -96,9 +99,20 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductUpdateRequest $request, Product $product)
     {
-        //
+        $product =  $request->user()->products()->findOrFail($product->id);
+
+        if ($request->picture) {
+            $product->picture =  Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/productPicture', $request->file('picture'));
+        }
+
+        $product->name = $request->name;
+        $product->priority = $request->priority;
+        $product->enable = $request->enable;
+        $product->save();
+
+        return Redirect::route('productIndex')->with('success', 'Produto Atualizado.');
     }
 
     /**
@@ -107,8 +121,10 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Request $request, Product $product)
     {
-        //
+        $product =  $request->user()->products()->findOrFail($product->id)->delete();
+
+        return Redirect::back()->with('success', 'Produto Removido.');
     }
 }

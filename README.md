@@ -15,3 +15,6 @@
 # Factory
 
     Category::factory(1)->make(['user_id' => 1])
+
+
+# Colocar Soft Delete em Products and categories

@@ -212,7 +212,15 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue'
-import { BellIcon, HomeIcon, MenuAlt1Icon, UserGroupIcon, XIcon, MenuIcon, ShoppingBagIcon } from '@heroicons/vue/outline'
+import {
+  BellIcon,
+  HomeIcon,
+  MenuAlt1Icon,
+  UserGroupIcon,
+  XIcon,
+  MenuIcon,
+  ShoppingBagIcon,
+} from '@heroicons/vue/outline'
 import {
   CashIcon,
   CheckCircleIcon,
@@ -226,6 +234,7 @@ const navigation = [
   { name: 'Dashboard', href: 'dashboardIndex', icon: HomeIcon, current: true },
   { name: 'Usuários', href: 'userIndex', icon: UserGroupIcon, current: false },
   { name: 'Categorias', href: 'categoryIndex', icon: ShoppingBagIcon, current: false },
+  { name: 'Produtos', href: 'productIndex', icon: ShoppingBagIcon, current: false },
 ]
 
 export default {

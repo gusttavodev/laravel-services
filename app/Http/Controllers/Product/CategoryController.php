@@ -54,9 +54,9 @@ class CategoryController extends Controller
     {
         $input = $request->validated();
 
-        $input['user_id'] = $request->user()->id;
         $input['picture'] = Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/categoryPicture', $request->file('picture'));
-        Category::create($input);
+
+        $request->user()->categories()->create($input);
 
         return Redirect::route('categoryIndex')->with('success', 'Categoria Criada.');
     }

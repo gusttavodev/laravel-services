@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\CategoryController;
 
 require __DIR__.'/auth.php';
@@ -32,7 +33,7 @@ Route::prefix('user')->group(function () {
 });
 
 Route::prefix('category')->group(function () {
-    Route::get('/', [CategoryController::class, 'index'])->name('categoryIndex');
+    Route::get('', [CategoryController::class, 'index'])->name('categoryIndex');
 
     Route::get('create', [CategoryController::class, 'create'])->name('categoryCreate');
     Route::post('create', [CategoryController::class, 'store'])->name('categoryStore');
@@ -41,4 +42,16 @@ Route::prefix('category')->group(function () {
     Route::post('{category}', [CategoryController::class, 'update'])->name('categoryUpdate');
 
     Route::delete('{category}', [CategoryController::class, 'destroy'])->name('categoryDelete');
+});
+
+Route::prefix('product')->group(function () {
+    Route::get('', [ProductController::class, 'index'])->name('productIndex');
+
+    Route::get('create', [ProductController::class, 'create'])->name('productCreate');
+    Route::post('create', [ProductController::class, 'store'])->name('productStore');
+
+    Route::get('{product}', [ProductController::class, 'edit'])->name('productEdit');
+    Route::post('{product}', [ProductController::class, 'update'])->name('productUpdate');
+
+    Route::delete('{product}', [ProductController::class, 'destroy'])->name('productDelete');
 });

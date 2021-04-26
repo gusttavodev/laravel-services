@@ -10,6 +10,7 @@
 
     php artisan make:controller CategoryController --resource --model=Category
     php artisan make:controller PhotoController --api
+    php artisan make:model Product --migration
 
 # Factory
 

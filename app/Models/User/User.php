@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\Models\Product\Product;
 use App\Models\Product\Category;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
@@ -44,7 +45,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function categories(){
+    public function categories()
+    {
         return $this->HasMany(Category::class);
+    }
+
+    public function products()
+    {
+        return $this->HasMany(Product::class);
     }
 }

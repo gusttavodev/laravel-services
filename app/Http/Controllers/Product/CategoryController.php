@@ -116,7 +116,7 @@ class CategoryController extends Controller
      */
     public function destroy(Request $request, Category $category)
     {
-        $category =  $request->user()->categories()->findOrFail($category->id)->delete();
+       $request->user()->categories()->findOrFail($category->id)->delete();
 
         return Redirect::back()->with('success', 'Categoria Removida.');
     }

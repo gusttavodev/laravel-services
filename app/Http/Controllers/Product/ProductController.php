@@ -123,7 +123,7 @@ class ProductController extends Controller
      */
     public function destroy(Request $request, Product $product)
     {
-        $product =  $request->user()->products()->findOrFail($product->id)->delete();
+        $request->user()->products()->findOrFail($product->id)->delete();
 
         return Redirect::back()->with('success', 'Produto Removido.');
     }

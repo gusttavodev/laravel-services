@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\CategoryController;
+use App\Http\Controllers\Establishment\EstablishmentController;
 
 require __DIR__.'/auth.php';
 
@@ -54,4 +55,16 @@ Route::prefix('product')->group(function () {
     Route::post('{product}', [ProductController::class, 'update'])->name('productUpdate');
 
     Route::delete('{product}', [ProductController::class, 'destroy'])->name('productDelete');
+});
+
+Route::prefix('establishment')->group(function () {
+    Route::get('', [EstablishmentController::class, 'index'])->name('establishmentIndex');
+
+    Route::get('create', [EstablishmentController::class, 'create'])->name('establishmentCreate');
+    Route::post('create', [EstablishmentController::class, 'store'])->name('establishmentStore');
+
+    Route::get('{establishment}', [EstablishmentController::class, 'edit'])->name('establishmentEdit');
+    Route::post('{establishment}', [EstablishmentController::class, 'update'])->name('establishmentUpdate');
+
+    Route::delete('{establishment}', [EstablishmentController::class, 'destroy'])->name('establishmentDelete');
 });

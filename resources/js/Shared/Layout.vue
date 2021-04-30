@@ -236,6 +236,7 @@ const navigation = [
   { name: 'Usuários', href: 'userIndex', icon: UserGroupIcon, current: false },
   { name: 'Categorias', href: 'categoryIndex', icon: ShoppingBagIcon, current: false },
   { name: 'Produtos', href: 'productIndex', icon: ShoppingCartIcon, current: false },
+  { name: 'Estabelecimentos', href: 'establishmentIndex', icon: OfficeBuildingIcon, current: false },
 ]
 
 export default {

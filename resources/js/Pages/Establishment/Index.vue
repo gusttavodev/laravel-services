@@ -36,7 +36,7 @@
                   scope="col"
                   class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                 >
-                  Precisa Confirmar
+                  Precisa Confirmar Entrega
                 </th>
                 <th
                   scope="col"
@@ -105,6 +105,15 @@
                   </span>
                 </td>
                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+
+                      <inertia-link
+                    :href="route('establishmentCustomize', establishment.id)"
+                    type="button"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-sys_success-600 order-0 hover:bg-sys_success-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3"
+                    >Personalizar
+                  </inertia-link>
+
+
                   <inertia-link
                     :href="route('establishmentEdit', establishment.id)"
                     type="button"

@@ -22,7 +22,7 @@ class OpeningHoursResource extends JsonResource
             'label' => $enumData['label'],
             'start_time' => $this->start_time,
             'end_time' => $this->end_time,
-            'not_open' => $this->not_open,
+            'not_open' => $this->not_open === 1 ? true : false,
             'start_time_error' => false,
             'end_time_error' => false
         ];

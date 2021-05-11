@@ -7,6 +7,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\CategoryController;
+use App\Http\Controllers\Establishment\AddressController;
+use App\Http\Controllers\Establishment\OpeningHourController;
 use App\Http\Controllers\Establishment\EstablishmentController;
 
 require __DIR__.'/auth.php';
@@ -67,4 +69,13 @@ Route::prefix('establishment')->group(function () {
     Route::post('{establishment}', [EstablishmentController::class, 'update'])->name('establishmentUpdate');
 
     Route::delete('{establishment}', [EstablishmentController::class, 'destroy'])->name('establishmentDelete');
+
+    Route::prefix('customize')->group(function () {
+        Route::get('{establishment}', [EstablishmentController::class, 'customize'])->name('establishmentCustomize');
+
+        Route::post('opening_hour_store', [OpeningHourController::class, 'store'])->name('establishmentOpeningHourStore');
+        Route::post('address_store', [AddressController::class, 'store'])->name('establishmentAddressStore');
+    });
 });
+
+

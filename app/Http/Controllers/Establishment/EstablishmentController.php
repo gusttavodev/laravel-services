@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Establishment;
 
 use Inertia\Inertia;
+use App\Enums\DaysOfWeek;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Establishment\Establishment;
+use App\Http\Resources\Establishment\AddressResource;
+use App\Http\Resources\Establishment\OpeningHoursResource;
 use App\Http\Resources\Establishment\EstablishmentResource;
 use App\Http\Requests\Establishment\EstablishmentStoreRequest;
 
@@ -53,7 +56,6 @@ class EstablishmentController extends Controller
     {
         $input = $request->validated();
 
-
         $input['picture'] = Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/establishmentPicture', $request->file('picture'));
         $input['background_picture'] = Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/establishmentPicture', $request->file('background_picture'));
         $input['public_link_name'] = strtolower(str_replace(' ', '_', $input['name']));
@@ -80,9 +82,11 @@ class EstablishmentController extends Controller
      * @param  \App\Models\Establishment  $establishment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Establishment $establishment)
+    public function edit(Request $request, Establishment $establishment)
     {
-        //
+        $establishment =  $request->user()->establishments()->findOrFail($establishment->id);
+
+        return Inertia::render('Establishment/Form', ['establishment' => new EstablishmentResource($establishment)]);
     }
 
     /**
@@ -94,7 +98,28 @@ class EstablishmentController extends Controller
      */
     public function update(Request $request, Establishment $establishment)
     {
-        //
+
+        $establishment =  $request->user()->establishments()->findOrFail($establishment->id);
+
+        if ($request->picture) {
+            $establishment->picture =  Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/establishmentPicture', $request->file('picture'));
+        }
+        if ($request->background_picture) {
+            $establishment->background_picture =  Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/establishmentPicture', $request->file('background_picture'));
+        }
+
+        $establishment->name = $request->name;
+        $establishment->description = $request->description;
+        $establishment->phone = $request->phone;
+        $establishment->delivery_time = $request->delivery_time;
+        $establishment->min_value = $request->min_value;
+        $establishment->need_confirm_order = $request->need_confirm_order;
+
+        $establishment->public_link_name = strtolower(str_replace(' ', '_', $request->name));
+
+        $establishment->save();
+
+        return Redirect::route('establishmentIndex')->with('success', 'Estabelecimento atualizado com sucesso!.');
     }
 
     /**
@@ -108,5 +133,20 @@ class EstablishmentController extends Controller
         $request->user()->establishments()->findOrFail($establishment->id)->delete();
 
         return Redirect::back()->with('success', 'Estabelecimento Removido.');
+    }
+
+    public function customize(Request $request, Establishment $establishment)
+    {
+        $establishment =  $request->user()->establishments()->findOrFail($establishment->id);
+
+        // $establishmentOpeningHours =  OpeningHoursResource::collection($establishment->openingHours);
+        // if($establishment->openingHours()->count() !== 7) $establishmentOpeningHours = DaysOfWeek::List;
+
+        $daysOfWeek = DaysOfWeek::List;
+
+        return Inertia::render('Establishment/Customize', [
+            'establishment' => new EstablishmentResource($establishment),
+            'daysOfWeek' => $daysOfWeek
+        ]);
     }
 }

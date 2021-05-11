@@ -15,6 +15,15 @@
 # Factory
 
     Category::factory(1)->make(['user_id' => 1])
-
-
+# Commandos
+    Cria Factory InvoiceFactory na pasta Invoice
+    php artisan make:factory Invoice\\InvoiceFactory
+    
 # Colocar Soft Delete em Products and categories
+
+Falhando OS TESTES
+CSRF token mismatch.
+
+
+# Taks
+    Adicionar telefone no user para uma possivel confirmação de compra do cliente via WPP

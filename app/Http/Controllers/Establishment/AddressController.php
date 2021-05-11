@@ -4,38 +4,28 @@ namespace App\Http\Controllers\Establishment;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Establishment\Address;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\Establishment\Address\AddressStoreRequest;
 
 class AddressController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function store(AddressStoreRequest $request)
     {
-        //
-    }
+        $input = $request->validated();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        // Trocar para scoped
+        $establishment =  $request->user()->establishments()->findOrFail($request->establishment_id);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        $address = $establishment->address()->find($establishment->address_id);
+
+        if(!empty($address)) {
+            $establishment->address()->update($input);
+            return Redirect::route('establishmentIndex')->with('success', 'Estabelecimento atualizado com sucesso!.');
+        }
+
+        $establishment->address()->create($input);
+        return Redirect::route('establishmentIndex')->with('success', 'Estabelecimento atualizado com sucesso!.');
     }
 
     /**

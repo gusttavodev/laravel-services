@@ -53,7 +53,7 @@
             :error="errors.delivery_time"
             class="mt-10"
             label="Tempo médio de entrega"
-            type="number"
+            type="text"
             id="delivery_time"
             name="delivery_time"
             :required="true"
@@ -68,18 +68,6 @@
             type="number"
             id="min_value"
             name="min_value"
-            :required="true"
-          />
-
-          <text-input
-            v-model="form.priority"
-            :value="form.priority"
-            :error="errors.priority"
-            class="mt-10"
-            label="Prioridade"
-            type="number"
-            id="priority"
-            name="priority"
             :required="true"
           />
 
@@ -159,6 +147,7 @@ export default {
     }
   },
   created() {
+    console.log("establishment ", this.establishment);
     if(this.establishment) this.form = this.establishment.data
   },
   methods: {
@@ -196,10 +185,9 @@ export default {
       data.append('delivery_time', form.delivery_time)
       data.append('phone', form.phone)
       data.append('description', form.description)
-      data.append('picture', picture)
-      data.append('background_picture', background_picture)
+      data.append('picture', picture  ? '1' : '0')
+      data.append('background_picture', background_picture  ? '1' : '0')
       data.append('need_confirm_order', form.need_confirm_order ? '1' : '0')
-
 
       return data
     },

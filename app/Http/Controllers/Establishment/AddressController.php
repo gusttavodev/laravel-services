@@ -20,14 +20,14 @@ class AddressController extends Controller
         $address = $establishment->address()->find($establishment->address_id);
         if(!empty($address)) {
             $address->update($input);
-            return Redirect::route('establishmentIndex')->with('success', 'Estabelecimento atualizado com sucesso!.');
+            return Redirect::back()->with('success', 'Estabelecimento atualizado com sucesso!.');
         }
 
         $address = Address::create($input);
         $establishment->update([
             'address_id' => $address->id
         ]);
-        return Redirect::route('establishment$signature = new Signature($values);Index')->with('success', 'Estabelecimento atualizado com sucesso!.');
+        return Redirect::back()->with('success', 'Estabelecimento atualizado com sucesso!.');
     }
 
     /**

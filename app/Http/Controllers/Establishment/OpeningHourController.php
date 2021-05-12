@@ -32,7 +32,7 @@ class OpeningHourController extends Controller
             $openingHour->save();
         }
 
-        return Redirect::route('establishmentIndex')->with('success', 'Estabelecimento atualizado com sucesso!.');
+        return Redirect::back()->with('success', 'Estabelecimento atualizado com sucesso!.');
     }
 
 }

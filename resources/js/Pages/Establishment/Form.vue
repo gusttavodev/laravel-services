@@ -185,8 +185,8 @@ export default {
       data.append('delivery_time', form.delivery_time)
       data.append('phone', form.phone)
       data.append('description', form.description)
-      data.append('picture', picture  ? '1' : '0')
-      data.append('background_picture', background_picture  ? '1' : '0')
+      data.append('picture', picture)
+      data.append('background_picture', background_picture)
       data.append('need_confirm_order', form.need_confirm_order ? '1' : '0')
 
       return data

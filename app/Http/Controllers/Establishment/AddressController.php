@@ -18,14 +18,16 @@ class AddressController extends Controller
         $establishment =  $request->user()->establishments()->findOrFail($request->establishment_id);
 
         $address = $establishment->address()->find($establishment->address_id);
-
         if(!empty($address)) {
-            $establishment->address()->update($input);
+            $address->update($input);
             return Redirect::route('establishmentIndex')->with('success', 'Estabelecimento atualizado com sucesso!.');
         }
 
-        $establishment->address()->create($input);
-        return Redirect::route('establishmentIndex')->with('success', 'Estabelecimento atualizado com sucesso!.');
+        $address = Address::create($input);
+        $establishment->update([
+            'address_id' => $address->id
+        ]);
+        return Redirect::route('establishment$signature = new Signature($values);Index')->with('success', 'Estabelecimento atualizado com sucesso!.');
     }
 
     /**

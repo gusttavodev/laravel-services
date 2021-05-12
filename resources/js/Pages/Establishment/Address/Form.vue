@@ -69,16 +69,6 @@
           />
 
           <text-input
-            v-model="form.country"
-            :value="form.country"
-            :error="errors.country"
-            class="mt-10"
-            label="País"
-            type="text"
-            :required="true"
-          />
-
-          <text-input
             v-model="form.number"
             :value="form.number"
             :error="errors.number"
@@ -131,7 +121,6 @@ export default {
   data() {
     return {
       form: {
-        establishment_id: this.establishment.data.id,
         zip_code: null,
         street: null,
         city: null,
@@ -145,10 +134,11 @@ export default {
   },
   mounted() {
     console.log("establishmentAddress ", this.establishmentAddress);
-    if (this.establishmentAddress.data) this.form = this.establishmentAddress.data
+    if (this.establishmentAddress) this.form = this.establishmentAddress
   },
   methods: {
     submit() {
+        this.form.establishment_id = this.establishment.data.id,
         this.$inertia.post(route('establishmentAddressStore'), this.form)
     },
   },

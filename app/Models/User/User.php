@@ -4,6 +4,7 @@ namespace App\Models\User;
 
 use App\Models\Product\Product;
 use App\Models\Product\Category;
+use App\Models\Establishment\Theme;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Establishment\Establishment;

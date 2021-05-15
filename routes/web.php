@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\CategoryController;
+use App\Http\Controllers\Establishment\ThemeController;
 use App\Http\Controllers\Establishment\AddressController;
 use App\Http\Controllers\Establishment\OpeningHourController;
 use App\Http\Controllers\Establishment\EstablishmentController;
@@ -58,6 +59,20 @@ Route::prefix('product')->group(function () {
 
     Route::delete('{product}', [ProductController::class, 'destroy'])->name('productDelete');
 });
+
+Route::prefix('theme')->group(function () {
+    Route::get('', [ThemeController::class, 'index'])->name('themeIndex');
+
+    Route::get('create', [ThemeController::class, 'create'])->name('themeCreate');
+    Route::post('create', [ThemeController::class, 'store'])->name('themeStore');
+
+    Route::get('{theme}', [ThemeController::class, 'edit'])->name('themeEdit');
+    Route::post('{theme}', [ThemeController::class, 'update'])->name('themeUpdate');
+
+    Route::delete('{theme}', [ThemeController::class, 'destroy'])->name('themeDelete');
+});
+
+
 
 Route::prefix('establishment')->group(function () {
     Route::get('', [EstablishmentController::class, 'index'])->name('establishmentIndex');

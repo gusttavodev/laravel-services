@@ -149,4 +149,19 @@ class EstablishmentController extends Controller
             'daysOfWeek' => $daysOfWeek
         ]);
     }
+
+    public function showEstablishmentPublic($public_link_name)
+    {
+        // $establishment = Establishment::where('public_link_name', $public_link_name)->get()->first();
+
+        // $userId = $establishment->user_id;
+        // $user = User::find($userId);
+
+        // $categories = $user->categories;
+
+        // return Inertia::render('Menu/Establishment/Home', [
+        //     'categories' =>  CategoryWithProducts::collection($categories),
+        //     'establishment' => new EstablishmentResource($establishment)
+        // ]);
+    }
 }

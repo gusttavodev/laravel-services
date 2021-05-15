@@ -10,6 +10,15 @@
   </div>
 
   <div class="px-4 mt-6 sm:px-6 lg:px-8">
+      <OpeningHourForm
+        :errors="errors"
+        :establishment="establishment"
+        :establishmentOpeningHours="establishment.data.opening_hours"
+        :daysOfWeek="daysOfWeek"
+      />
+  </div>
+
+  <div class="px-4 mt-6 sm:px-6 lg:px-8">
       <AddressForm
         :errors="errors"
         :establishment="establishment"

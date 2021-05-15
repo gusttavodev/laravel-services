@@ -228,6 +228,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
   OfficeBuildingIcon,
+  ColorSwatchIcon,
   SearchIcon,
 } from '@heroicons/vue/solid'
 import FlashMessages from '@/Shared/FlashMessages'
@@ -237,6 +238,7 @@ const navigation = [
   { name: 'Categorias', href: 'categoryIndex', icon: ShoppingBagIcon, current: false },
   { name: 'Produtos', href: 'productIndex', icon: ShoppingCartIcon, current: false },
   { name: 'Estabelecimentos', href: 'establishmentIndex', icon: OfficeBuildingIcon, current: false },
+  { name: 'Temas', href: 'themeIndex', icon: ColorSwatchIcon, current: false },
 ]
 
 export default {

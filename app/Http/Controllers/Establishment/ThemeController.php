@@ -2,84 +2,73 @@
 
 namespace App\Http\Controllers\Establishment;
 
+use Inertia\Inertia;
 use Illuminate\Http\Request;
+use App\Models\Establishment\Theme;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Resources\Establishment\ThemeResource;
+use App\Http\Requests\Establishment\Theme\ThemeStoreRequest;
+use App\Http\Requests\Establishment\Theme\ThemeUpdateRequest;
 
 class ThemeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
+        $this->middleware('verified');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function index(Request $request)
+    {
+        $themes = $request->user()->themes();
+
+        return Inertia::render('Establishment/Theme/Index', [
+            'themes' => ThemeResource::collection($themes->paginate(5))
+        ]);
+    }
+
     public function create()
     {
-        //
+        return Inertia::render('Establishment/Theme/Form');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(ThemeStoreRequest $request)
     {
-        //
+        $input = $request->validated();
+
+        $request->user()->themes()->create($input);
+
+        return Redirect::route('themeIndex')->with('success', 'Tema criado com sucesso !!!.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(Request $request, Theme $theme)
     {
-        //
+        $theme =  $request->user()->themes()->findOrFail($theme->id);
+
+        return Inertia::render('Establishment/Theme/Form', [ 'theme' => new ThemeResource($theme) ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(ThemeUpdateRequest $request, Theme $theme)
     {
-        //
+        $input = $request->validated();
+
+        $theme =  $request->user()->themes()->findOrFail($theme->id);
+
+        $theme->update($input);
+
+        return Redirect::route('themeIndex')->with('success', 'Tema Atualizado.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Request $request, Theme $theme)
     {
-        //
+        $request->user()->themes()->findOrFail($theme->id)->delete();
+
+        return Redirect::back()->with('success', 'Tema Removido.');
     }
 }

@@ -35,6 +35,7 @@
     "@inertiajs/progress": "^0.2.4",
     "@vueform/multiselect": "^1.4.0",
     "vue": "^3.0.11",
+    "vue3-colorpicker": "^1.0.5",
     "vuejs-datepicker": "^1.6.2"
   }
 }

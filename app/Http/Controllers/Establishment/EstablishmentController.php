@@ -18,8 +18,8 @@ class EstablishmentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('verified');
+        $this->middleware('auth')->except('showEstablishmentPublic');
+        $this->middleware('verified')->except('showEstablishmentPublic');
     }
 
     /**
@@ -152,16 +152,8 @@ class EstablishmentController extends Controller
 
     public function showEstablishmentPublic($public_link_name)
     {
-        // $establishment = Establishment::where('public_link_name', $public_link_name)->get()->first();
+        $establishment =  Establishment::where('public_link_name', $public_link_name)->firstOrFail();
 
-        // $userId = $establishment->user_id;
-        // $user = User::find($userId);
-
-        // $categories = $user->categories;
-
-        // return Inertia::render('Menu/Establishment/Home', [
-        //     'categories' =>  CategoryWithProducts::collection($categories),
-        //     'establishment' => new EstablishmentResource($establishment)
-        // ]);
+        return Inertia::render('Establishment/Menu/Index', ['establishment' => new EstablishmentResource($establishment)]);
     }
 }

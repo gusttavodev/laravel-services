@@ -93,4 +93,6 @@ Route::prefix('establishment')->group(function () {
     });
 });
 
-
+Route::prefix('menu')->group(function () {
+    Route::get('/establishment/{public_link_name}', [EstablishmentController::class, 'showEstablishmentPublic'])->name('establishmentShowPublic');
+});

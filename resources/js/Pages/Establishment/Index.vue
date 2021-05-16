@@ -63,9 +63,15 @@
                       <img class="w-10 h-10 rounded-full" :src="establishment.picture" alt="" />
                     </div>
                     <div class="ml-4">
-                      <div class="text-sm font-medium text-gray-900">
+
+                    <inertia-link
+                        :href="route('establishmentShowPublic', establishment.public_link_name)"
+                        type="button"
+                        class="text-sm font-medium text-gray-900"
+                    >
                         {{ establishment.name }}
-                      </div>
+                    </inertia-link>
+
                     </div>
                   </div>
                 </td>

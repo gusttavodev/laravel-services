@@ -64,7 +64,7 @@
             :value="form.min_value"
             :error="errors.min_value"
             class="mt-10"
-            label="Preço"
+            label="Preço Minimo de Entrega"
             type="number"
             id="min_value"
             name="min_value"

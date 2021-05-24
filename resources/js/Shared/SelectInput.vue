@@ -33,6 +33,10 @@ export default {
       type: Array,
       required: true,
     },
+    value: {
+      type: Array,
+      required: true,
+    },
     labelName: {
       type: String,
       default() {
@@ -60,7 +64,7 @@ export default {
   },
   data() {
     return {
-      selectedValues: null,
+      selectedValues: this.value,
     }
   },
   methods: {},

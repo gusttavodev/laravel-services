@@ -5,8 +5,8 @@
       <div class="shadow sm:rounded-md sm:overflow-hidden">
         <div class="px-4 py-6 space-y-6 bg-white sm:p-6">
           <div>
-            <h3 class="text-lg font-medium leading-6 text-gray-900">Criar Produtos</h3>
-            <p class="mt-1 text-sm text-gray-500">Crie um produto</p>
+            <h3 class="text-lg font-medium leading-6 text-gray-900">Criar Estabelecimento</h3>
+            <p class="mt-1 text-sm text-gray-500">Crie um Estabelecimento</p>
           </div>
             <div
             class="sm:grid sm:grid-cols-2 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
@@ -169,8 +169,8 @@ export default {
       reader.readAsDataURL(this.$refs.photo.files[0])
     },
     mountForm(form) {
-      let picture = false
-      let background_picture = false
+      let picture = 0
+      let background_picture = 0
 
       if (typeof this.form.picture === 'object') {
         picture = this.form.picture

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Product;
 
+use App\Http\Resources\ProductResource;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Resources\Product\CategoryResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProductResource extends JsonResource
+class CategoryProductResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -23,8 +23,7 @@ class ProductResource extends JsonResource
             'priority' => $this->priority,
             'enable' => $this->enable,
 
-            'price' => $this->price,
-            'description' => $this->description,
+            'products' => ProductResource::collection($this->products),
 
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at

@@ -116,7 +116,7 @@ export default {
       reader.readAsDataURL(this.$refs.photo.files[0])
     },
     mountForm(form) {
-      let picture = false
+      let picture = 0
       if (typeof this.form.picture === 'object') {
         picture = this.form.picture
       }

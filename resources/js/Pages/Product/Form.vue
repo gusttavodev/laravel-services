@@ -62,14 +62,17 @@
             name="description"
             :required="false"
           />
+
           <select-input
             v-model="form.categories"
+            :value="form.categories"
             :options="categories.data"
             :error="errors.categories"
             class="mt-10"
+            :selectedValues="form.categories"
             labelName="name"
             valueName="id"
-            label="Função"
+            label="Categorias"
           />
 
           <div class="block mt-4">
@@ -136,7 +139,13 @@ export default {
     }
   },
   created() {
-    if(this.product) this.form = this.product.data
+    if(this.product) {
+        this.form = this.product.data
+        if(this.product.data.categories){
+            this.form.categories = this.product.data.categories.map(({ id }) => id)
+        }
+    }
+
   },
   methods: {
     submit() {
@@ -157,7 +166,7 @@ export default {
       reader.readAsDataURL(this.$refs.photo.files[0])
     },
     mountForm(form) {
-      let picture = false
+      let picture = 0
       if (typeof this.form.picture === 'object') {
         picture = this.form.picture
       }

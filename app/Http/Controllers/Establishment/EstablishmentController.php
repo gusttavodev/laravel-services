@@ -9,8 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Establishment\Establishment;
-use App\Http\Resources\Establishment\AddressResource;
-use App\Http\Resources\Establishment\OpeningHoursResource;
+use App\Http\Resources\Product\CategoryProductResource;
 use App\Http\Resources\Establishment\EstablishmentResource;
 use App\Http\Requests\Establishment\EstablishmentStoreRequest;
 
@@ -154,6 +153,11 @@ class EstablishmentController extends Controller
     {
         $establishment =  Establishment::where('public_link_name', $public_link_name)->firstOrFail();
 
-        return Inertia::render('Establishment/Menu/Index', ['establishment' => new EstablishmentResource($establishment)]);
+        $categories = $establishment->user->categories;
+
+        return Inertia::render('Establishment/Menu/Index', [
+            'establishment' => new EstablishmentResource($establishment),
+            'categories' => CategoryProductResource::collection($categories)
+        ]);
     }
 }

@@ -47,7 +47,7 @@
       </div>
       <div class="flex-1 hidden min-w-0 mt-6 sm:block md:hidden">
         <h1 class="text-2xl font-bold text-gray-900 truncate">
-          {{ profile.name }}
+          {{establishment.data.name}}
         </h1>
       </div>
     </div>
@@ -179,20 +179,20 @@
             </div>
             <div class="hidden sm:block">
               <div class="flex items-center border-b border-gray-200">
-                <nav class="flex flex-1 -mb-px space-x-6 xl:space-x-8" aria-label="Tabs">
+                <nav class="flex items-center justify-between flex-1 -mb-px space-x-6 xl:space-x-8" aria-label="Tabs">
                   <a
-                    v-for="tab in tabs"
-                    :key="tab.name"
-                    :href="tab.href"
-                    :aria-current="tab.current ? 'page' : undefined"
+                    v-for="category in categories.data"
+                    :key="category.id"
+                    @click="changeCategory(category)"
+                    :aria-current="category.id == selectedCategory?.id ? 'page' : undefined"
                     :class="[
-                      tab.current
+                      category.id == selectedCategory?.id
                         ? 'border-indigo-500 text-indigo-600'
                         : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
-                      'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm',
+                      'py-4 px-1 border-b-2 font-medium text-2xl cursor-pointer',
                     ]"
                   >
-                    {{ tab.name }}
+                    {{ category.name }}
                   </a>
                 </nav>
               </div>
@@ -207,33 +207,33 @@
               class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-1 sm:gap-x-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 xl:gap-x-8"
             >
               <li
-                v-for="person in people"
-                :key="person.email"
+                v-for="product in selectedProducts"
+                :key="product.id"
                 class="flex flex-col col-span-1 text-center bg-white divide-y divide-gray-200 rounded-lg shadow-xl "
               >
                 <div class="flex flex-col flex-1 p-8">
-                  <img class="object-cover rounded-lg shadow-lg" :src="person.imageUrl" alt="" />
-                  <h3 class="mt-6 text-sm font-medium text-gray-900">{{ person.name }}</h3>
+                  <img   class="block w-full max-h-full rounded h-80 md:max-h-screen md:h-40 lg:h-40" :src="product.picture" alt="" />
+                  <h3 class="mt-6 text-sm font-medium text-gray-900">{{ product.name }}</h3>
                   <dl class="flex flex-col justify-between flex-grow mt-1">
                     <dt class="sr-only">Title</dt>
                     <dt class="sr-only">Role</dt>
                     <dd class="mt-3">
                       <span
                         class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full "
-                        >{{ person.role }}</span
+                        >R$ {{ product.price }}</span
                       >
                     </dd>
                   </dl>
                 </div>
                 <div>
                   <div class="flex -mt-px divide-x divide-gray-200">
-                    <a
-                      :href="`mailto:${person.email}`"
+                    <button
+                      @click="onSelectProduct(product)"
                       class="relative inline-flex items-center justify-center flex-1 w-0 py-4 -mr-px text-sm font-medium text-gray-700 border border-transparent rounded-bl-lg hover:text-gray-500"
                     >
                       <ShoppingCartIcon class="w-5 h-5 text-gray-400" aria-hidden="true" />
                       <span class="ml-3">Adicionar ao Carrinho</span>
-                    </a>
+                    </button>
                   </div>
                 </div>
               </li>
@@ -263,7 +263,7 @@ export default {
     PhoneIcon,
     MailIcon,
     ShoppingCartIcon,
-
+    UserAddIcon,
     LocationMarkerIcon,
     CurrencyDollarIcon,
     ClockIcon,
@@ -272,31 +272,16 @@ export default {
   },
   props: {
     establishment: Object,
+    categories: Object
   },
   data() {
     return {
-      profile: {
-        name: 'Ricardo Cooper',
-        email: 'ricardo.cooper@example.com',
-        avatar:
-          'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-        backgroundImage:
-          'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-        fields: [
-          ['Phone', '(555) 123-4567'],
-          ['Email', 'ricardocooper@example.com'],
-          ['Title', 'Senior Front-End Developer'],
-          ['Team', 'Product Development'],
-          ['Location', 'San Francisco'],
-          ['Sits', 'Oasis, 4th floor'],
-          ['Salary', '$145,000'],
-          ['Birthday', 'June 8, 1990'],
-        ],
-      },
+      selectedCategory: {},
+      selectedProducts: {},
       tabs: [
-        { name: 'Recently Viewed', href: '#', current: true },
-        { name: 'Recently Added', href: '#', current: false },
-        { name: 'Favorited', href: '#', current: false },
+        { name: 'Açai', href: '#', current: true },
+        { name: 'Pizza', href: '#', current: false },
+        { name: 'Cervejas', href: '#', current: false },
       ],
       people: [
         {
@@ -312,8 +297,16 @@ export default {
     }
   },
   created() {
-    if (this.establishment) this.form = this.establishment.data
+    console.log("GUSTAVO TESTE ", this.categories.data);
   },
-  methods: {},
+  methods: {
+      changeCategory(category){
+        this.selectedCategory = category;
+        this.selectedProducts = category.products;
+      },
+      onSelectProduct(product){
+
+      }
+  },
 }
 </script>

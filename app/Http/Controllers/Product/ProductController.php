@@ -6,7 +6,7 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\Product\Product;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ProductResource;
+use App\Http\Resources\Product\ProductCategoryResource;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Resources\Product\CategoryResource;
@@ -31,7 +31,7 @@ class ProductController extends Controller
         $products = $request->user()->products();
 
         return Inertia::render('Product/Index', [
-            'products' => ProductResource::collection($products->paginate(5))
+            'products' => ProductCategoryResource::collection($products->paginate(5))
         ]);
     }
 
@@ -89,7 +89,7 @@ class ProductController extends Controller
         $product =  $request->user()->products()->findOrFail($product->id);
         $categories = $request->user()->categories();
 
-        return Inertia::render('Product/Form', ['product' => new ProductResource($product), 'categories' => CategoryResource::collection($categories->paginate(5))]);
+        return Inertia::render('Product/Form', ['product' => new ProductCategoryResource($product), 'categories' => CategoryResource::collection($categories->paginate(5))]);
     }
 
     /**
@@ -103,14 +103,24 @@ class ProductController extends Controller
     {
         $product =  $request->user()->products()->findOrFail($product->id);
 
+        if($request->categories){
+            $categories = json_decode($request->categories);
+            $product->categories()->sync($categories);
+        }
+
         if ($request->picture) {
             $product->picture =  Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/productPicture', $request->file('picture'));
         }
 
         $product->name = $request->name;
         $product->priority = $request->priority;
-        $product->enable = $request->enable;
+        $product->price = $request->price;
+        $product->description = $request->description;
+        $product->enable = $request->enable == '1' ? true : false;
+
         $product->save();
+
+
 
         return Redirect::route('productIndex')->with('success', 'Produto Atualizado.');
     }

@@ -19,7 +19,7 @@ class ProductResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'picture' =>   Storage::url($this->picture),
+            'picture' =>   asset('/imagecache/medium/'.$this->picture),
             'priority' => $this->priority,
             'enable' => $this->enable,
 

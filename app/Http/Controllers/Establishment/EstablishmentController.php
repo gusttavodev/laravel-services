@@ -155,6 +155,7 @@ class EstablishmentController extends Controller
 
         $categories = $establishment->user->categories;
 
+
         return Inertia::render('Establishment/Menu/Index', [
             'establishment' => new EstablishmentResource($establishment),
             'categories' => CategoryProductResource::collection($categories)

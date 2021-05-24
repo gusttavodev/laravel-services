@@ -27,3 +27,8 @@ CSRF token mismatch.
 
 # Taks
     Adicionar telefone no user para uma possivel confirmação de compra do cliente via WPP
+
+
+# Images URL
+- http://localhost:8000/imagecache/medium/productPicture/JBBv848R52rLhcwp1kZDzJbMo7WH6rrjq5KoA7DV.jpg
+- http://localhost:8000/storage/images/productPicture/JBBv848R52rLhcwp1kZDzJbMo7WH6rrjq5KoA7DV.jpg

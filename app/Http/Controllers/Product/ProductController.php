@@ -6,12 +6,13 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\Product\Product;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Product\ProductCategoryResource;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Resources\Product\CategoryResource;
 use App\Http\Requests\Product\ProductStoreRequest;
+use App\Http\Resources\Product\AdditionalResource;
 use App\Http\Requests\Product\ProductUpdateRequest;
+use App\Http\Resources\Product\ProductCategoryResource;
 
 class ProductController extends Controller
 {
@@ -43,9 +44,11 @@ class ProductController extends Controller
     public function create(Request $request)
     {
         $categories = $request->user()->categories();
+        $additionals = $request->user()->additionals();
 
         return Inertia::render('Product/Form', [
-            'categories' => CategoryResource::collection($categories->paginate(5))
+            'categories' => CategoryResource::collection($categories->paginate(5)),
+            'additionals' => AdditionalResource::collection($additionals->paginate(5))
         ]);
     }
 
@@ -62,7 +65,13 @@ class ProductController extends Controller
         $input['picture'] = Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/productPicture', $request->file('picture'));
 
         $categories = json_decode($input['categories']);
-        $request->user()->products()->create($input)->categories()->sync($categories);
+        $additionals = json_decode($input['additionals']);
+
+
+        $product = $request->user()->products()->create($input)->categories()->sync($categories);
+
+        $product->categories()->sync($categories);
+        $product->additionals()->sync($additionals);
 
         return Redirect::route('productIndex')->with('success', 'Categoria Criada.');
     }
@@ -88,8 +97,13 @@ class ProductController extends Controller
     {
         $product =  $request->user()->products()->findOrFail($product->id);
         $categories = $request->user()->categories();
+        $additionals = $request->user()->additionals();
 
-        return Inertia::render('Product/Form', ['product' => new ProductCategoryResource($product), 'categories' => CategoryResource::collection($categories->paginate(5))]);
+        return Inertia::render('Product/Form', [
+            'product' => new ProductCategoryResource($product),
+            'categories' => CategoryResource::collection($categories->paginate(5)),
+            'additionals' => AdditionalResource::collection($additionals->paginate(5))
+        ]);
     }
 
     /**
@@ -103,9 +117,14 @@ class ProductController extends Controller
     {
         $product =  $request->user()->products()->findOrFail($product->id);
 
-        if($request->categories){
+        if ($request->categories) {
             $categories = json_decode($request->categories);
             $product->categories()->sync($categories);
+        }
+
+        if ($request->additionals) {
+            $additionals = json_decode($request->additionals);
+            $product->additionals()->sync($additionals);
         }
 
         if ($request->picture) {

@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\CategoryController;
+use App\Http\Controllers\Product\AdditionalController;
 use App\Http\Controllers\Establishment\ThemeController;
 use App\Http\Controllers\Establishment\AddressController;
 use App\Http\Controllers\Establishment\OpeningHourController;
@@ -58,6 +59,18 @@ Route::prefix('product')->group(function () {
     Route::post('{product}', [ProductController::class, 'update'])->name('productUpdate');
 
     Route::delete('{product}', [ProductController::class, 'destroy'])->name('productDelete');
+});
+
+Route::prefix('additional')->group(function () {
+    Route::get('', [AdditionalController::class, 'index'])->name('additionalIndex');
+
+    Route::get('create', [AdditionalController::class, 'create'])->name('additionalCreate');
+    Route::post('create', [AdditionalController::class, 'store'])->name('additionalStore');
+
+    Route::get('{additional}', [AdditionalController::class, 'edit'])->name('additionalEdit');
+    Route::post('{additional}', [AdditionalController::class, 'update'])->name('additionalUpdate');
+
+    Route::delete('{additional}', [AdditionalController::class, 'destroy'])->name('additionalDelete');
 });
 
 Route::prefix('theme')->group(function () {

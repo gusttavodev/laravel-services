@@ -4,6 +4,7 @@ namespace App\Models\User;
 
 use App\Models\Product\Product;
 use App\Models\Product\Category;
+use App\Models\Product\Additional;
 use App\Models\Establishment\Theme;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
@@ -55,6 +56,10 @@ class User extends Authenticatable
     public function products()
     {
         return $this->HasMany(Product::class);
+    }
+
+    public function additionals(){
+        return $this->HasMany(Additional::class);
     }
 
     public function establishments()

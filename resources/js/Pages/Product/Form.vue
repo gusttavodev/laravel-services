@@ -39,6 +39,30 @@
             :required="false"
           />
 
+          <select-input
+            v-model="form.categories"
+            :value="form.categories"
+            :options="categories.data"
+            :error="errors.categories"
+            class="mt-10"
+            :selectedValues="form.categories"
+            labelName="name"
+            valueName="id"
+            label="Categorias"
+          />
+
+          <select-input
+            v-model="form.additionals"
+            :value="form.additionals"
+            :options="additionals.data"
+            :error="errors.additionals"
+            class="mt-10"
+            :selectedValues="form.additionals"
+            labelName="name"
+            valueName="id"
+            label="Adicionais"
+          />
+
           <text-input
             v-model="form.priority"
             :value="form.priority"
@@ -63,18 +87,6 @@
             :required="false"
           />
 
-          <select-input
-            v-model="form.categories"
-            :value="form.categories"
-            :options="categories.data"
-            :error="errors.categories"
-            class="mt-10"
-            :selectedValues="form.categories"
-            labelName="name"
-            valueName="id"
-            label="Categorias"
-          />
-
           <div class="block mt-4">
             <label class="flex items-center">
               <label class="block pr-4 text-sm font-medium text-gray-700 sm:mt-px">
@@ -87,7 +99,7 @@
         <div class="px-4 py-3 text-right bg-gray-50 sm:px-6">
           <button
             type="submit"
-            class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-sys_primary-600 hover:bg-sys_primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sys_primary-500"
+            class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm  bg-sys_primary-600 hover:bg-sys_primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sys_primary-500"
           >
             Salvar
           </button>
@@ -124,6 +136,7 @@ export default {
     errors: Object,
     product: Object,
     categories: Object,
+    additionals: Object,
   },
   data() {
     return {
@@ -135,17 +148,20 @@ export default {
         description: null,
         price: null,
         categories: null,
+        additionals: null,
       },
     }
   },
   created() {
-    if(this.product) {
-        this.form = this.product.data
-        if(this.product.data.categories){
-            this.form.categories = this.product.data.categories.map(({ id }) => id)
-        }
+    if (this.product) {
+      this.form = this.product.data
+      if (this.product.data.categories) {
+        this.form.categories = this.product.data.categories.map(({ id }) => id)
+      }
+      if (this.product.data.additionals) {
+        this.form.additionals = this.product.data.additionals.map(({ id }) => id)
+      }
     }
-
   },
   methods: {
     submit() {
@@ -177,6 +193,7 @@ export default {
       data.append('description', form.description)
       data.append('enable', form.enable ? '1' : '0')
       data.append('categories', JSON.stringify(form.categories))
+      data.append('additionals', JSON.stringify(form.additionals))
       data.append('picture', picture)
 
       return data

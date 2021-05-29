@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\Product\CategoryResource;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Product\AdditionalResource;
 
 class ProductResource extends JsonResource
 {
@@ -25,6 +26,9 @@ class ProductResource extends JsonResource
 
             'price' => $this->price,
             'description' => $this->description,
+
+            'categories' => CategoryResource::collection($this->categories),
+            'additionals' => AdditionalResource::collection($this->additionals),
 
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at

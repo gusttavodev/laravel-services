@@ -220,8 +220,10 @@ import {
   XIcon,
   MenuIcon,
   ShoppingBagIcon,
-  ShoppingCartIcon
+  ShoppingCartIcon,
+  GiftIcon
 } from '@heroicons/vue/outline'
+
 import {
   CashIcon,
   CheckCircleIcon,
@@ -237,6 +239,7 @@ const navigation = [
   { name: 'Usuários', href: 'userIndex', icon: UserGroupIcon, current: false },
   { name: 'Categorias', href: 'categoryIndex', icon: ShoppingBagIcon, current: false },
   { name: 'Produtos', href: 'productIndex', icon: ShoppingCartIcon, current: false },
+  { name: 'Adicionais', href: 'additionalIndex', icon: GiftIcon, current: false },
   { name: 'Estabelecimentos', href: 'establishmentIndex', icon: OfficeBuildingIcon, current: false },
   { name: 'Temas', href: 'themeIndex', icon: ColorSwatchIcon, current: false },
 ]

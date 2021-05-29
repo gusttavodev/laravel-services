@@ -16,7 +16,7 @@
 
         <!-- Gallery -->
         <section class="pb-16 mt-8" aria-labelledby="gallery-heading">
-          <h2 id="gallery-heading" class="sr-only">Recently viewed</h2>
+          <h2 id="gallery-heading" class="sr-only">Lista de Produtos</h2>
           <ul
             role="list"
             class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-1 sm:gap-x-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 xl:gap-x-8"
@@ -29,6 +29,10 @@
 
           </ul>
         </section>
+
+        <ShoppingCart
+
+        />
       </div>
     </main>
   </div>
@@ -36,15 +40,18 @@
 
 <script>
 import { ShoppingCartIcon } from '@heroicons/vue/solid'
+
 import ProductCard from '@/Pages/Establishment/Menu/Product/Card'
 import ProductTab from '@/Pages/Establishment/Menu/Product/Tab'
+import ShoppingCart from '@/Pages/Establishment/Menu/ShoppingCart/Index'
 
 export default {
   name: 'MenuHeader',
   components: {
     ShoppingCartIcon,
     ProductCard,
-    ProductTab
+    ProductTab,
+    ShoppingCart
   },
   props: {
     categories: Object

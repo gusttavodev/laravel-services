@@ -7,34 +7,32 @@
         </div>
 
         <div class="mt-3 sm:mt-2">
-            <ProductTab
-                :categories="categories"
-                @onChangeTab="changeCategory"
-            />
+          <ProductTab :categories="categories" @onChangeTab="changeCategory" />
         </div>
-
 
         <!-- Gallery -->
         <section class="pb-16 mt-8" aria-labelledby="gallery-heading">
           <h2 id="gallery-heading" class="sr-only">Lista de Produtos</h2>
           <ul
             role="list"
-            class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-1 sm:gap-x-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 xl:gap-x-8"
+            class="grid grid-cols-1  gap-x-4 gap-y-8 sm:grid-cols-1 sm:gap-x-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 xl:gap-x-8"
           >
             <ProductCard
-                v-for="product in selectedProducts"
-                :key="product.id"
-                :product="product"
+              v-for="product in selectedProducts"
+              :key="product.id"
+              :product="product"
+              @onClickProduct="onClickProduct"
             />
-
           </ul>
         </section>
 
-        <ShoppingCart
-
-        />
+        <ShoppingCart />
       </div>
     </main>
+
+    <Modal :product="product">
+      <template v-slot:content> </template>
+    </Modal>
   </div>
 </template>
 
@@ -44,6 +42,7 @@ import { ShoppingCartIcon } from '@heroicons/vue/solid'
 import ProductCard from '@/Pages/Establishment/Menu/Product/Card'
 import ProductTab from '@/Pages/Establishment/Menu/Product/Tab'
 import ShoppingCart from '@/Pages/Establishment/Menu/ShoppingCart/Index'
+import Modal from '@/Shared/Modal'
 
 export default {
   name: 'MenuHeader',
@@ -51,15 +50,16 @@ export default {
     ShoppingCartIcon,
     ProductCard,
     ProductTab,
-    ShoppingCart
+    ShoppingCart,
+    Modal,
   },
   props: {
-    categories: Object
+    categories: Object,
   },
   data() {
     return {
       selectedCategory: {},
-      selectedProducts: {},
+      selectedProduct: {},
       tabs: [
         { name: 'Açai', href: '#', current: true },
         { name: 'Pizza', href: '#', current: false },
@@ -68,20 +68,13 @@ export default {
     }
   },
   methods: {
-    // selectChangeCategory(event) {
-    //   const category = event.target.value
-    //   console.log("SELECTED PRODUCT ", category);
-    //   console.log("SELECTED PRODUCT ", category.id);
-    //   this.selectedCategory = category
-    //   this.selectedProducts = category.products
-    // },
     changeCategory(category) {
       this.selectedCategory = category
       this.selectedProducts = category.products
     },
-    onSelectProduct(product) {
-        onsole.log("SELECTED PRODUCT ", product);
+    onClickProduct(product) {
+      console.log('SELECTED PRODUCT ', product)
     },
-  }
+  },
 }
 </script>

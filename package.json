@@ -38,6 +38,7 @@
     "@vueform/multiselect": "^1.4.0",
     "vue": "^3.0.11",
     "vue3-colorpicker": "^1.0.5",
-    "vuejs-datepicker": "^1.6.2"
+    "vuejs-datepicker": "^1.6.2",
+    "vuex": "^4.0.1"
   }
 }

@@ -17,22 +17,13 @@
             role="list"
             class="grid grid-cols-1  gap-x-4 gap-y-8 sm:grid-cols-1 sm:gap-x-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 xl:gap-x-8"
           >
-            <ProductCard
-              v-for="product in selectedProducts"
-              :key="product.id"
-              :product="product"
-              @onClickProduct="onClickProduct"
-            />
+            <ProductCard v-for="product in selectedProducts" :key="product.id" :product="product" />
           </ul>
         </section>
 
         <ShoppingCart />
       </div>
     </main>
-
-    <Modal :product="product">
-      <template v-slot:content> </template>
-    </Modal>
   </div>
 </template>
 
@@ -42,7 +33,6 @@ import { ShoppingCartIcon } from '@heroicons/vue/solid'
 import ProductCard from '@/Pages/Establishment/Menu/Product/Card'
 import ProductTab from '@/Pages/Establishment/Menu/Product/Tab'
 import ShoppingCart from '@/Pages/Establishment/Menu/ShoppingCart/Index'
-import Modal from '@/Shared/Modal'
 
 export default {
   name: 'MenuHeader',
@@ -51,7 +41,6 @@ export default {
     ProductCard,
     ProductTab,
     ShoppingCart,
-    Modal,
   },
   props: {
     categories: Object,
@@ -59,7 +48,7 @@ export default {
   data() {
     return {
       selectedCategory: {},
-      selectedProduct: {},
+      selectedProducts: {},
       tabs: [
         { name: 'Açai', href: '#', current: true },
         { name: 'Pizza', href: '#', current: false },
@@ -72,8 +61,8 @@ export default {
       this.selectedCategory = category
       this.selectedProducts = category.products
     },
-    onClickProduct(product) {
-      console.log('SELECTED PRODUCT ', product)
+    onSelectProduct(product) {
+      onsole.log('SELECTED PRODUCT ', product)
     },
   },
 }

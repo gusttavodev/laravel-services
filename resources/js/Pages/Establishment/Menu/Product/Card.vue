@@ -1,5 +1,6 @@
 <template>
   <div
+    @click="onSelectProduct(product)"
     class="flex flex-col col-span-1 text-center transform bg-white divide-y divide-gray-200 rounded-lg shadow-xl  hover:scale-110 motion-reduce:transform-none"
   >
     <div class="flex flex-col flex-1 p-8">
@@ -22,7 +23,6 @@
     <div>
       <div class="flex -mt-px divide-x divide-gray-200">
         <button
-          @click="onSelectProduct(product)"
           class="relative inline-flex items-center justify-center flex-1 w-0 py-4 -mr-px text-sm font-medium text-gray-700 border border-transparent rounded-bl-lg  hover:text-gray-500"
         >
           <ShoppingCartIcon class="w-5 h-5 text-gray-400" aria-hidden="true" />
@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import { SET_PRODUCT, GET_PRODUCT } from '@/store/mutationsTypes/Product'
+
 export default {
   name: 'ProductCard',
   components: {},
@@ -46,7 +48,7 @@ export default {
   created() {},
   methods: {
     onSelectProduct(product) {
-      this.$emit('onClickProduct', product)
+      this.$store.dispatch(SET_PRODUCT, product)
     },
   },
 }

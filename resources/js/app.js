@@ -1,4 +1,5 @@
 require('./bootstrap')
+import store from './store'
 
 // Import modules...
 import { createApp, h } from 'vue'
@@ -14,13 +15,14 @@ const app = createApp({
       resolveComponent: (name) => require(`./Pages/${name}`).default,
     }),
 })
+app.use(store)
 
 // import '../../node_modulesvueform/multiselect/themes/default.css'
 import Multiselect from '@vueform/multiselect'
 app.component('v-select', Multiselect)
 
-import colorPicker from "vue3-colorpicker";
-import "vue3-colorpicker/bundle.css";
+import colorPicker from 'vue3-colorpicker'
+import 'vue3-colorpicker/bundle.css'
 app.use(colorPicker)
 
 app.mixin({ methods: { route } }).use(InertiaPlugin).mount(el)

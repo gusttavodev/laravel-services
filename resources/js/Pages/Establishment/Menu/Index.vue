@@ -21,7 +21,7 @@
           <div class="">
             <img
               class="block rounded-md h-70 md:max-h-screen md:h-70 lg:h-70"
-              :src="selectedProduct.picture_large"
+              :src="selectedProduct.picture"
               alt=""
             />
             <div class="py-5">

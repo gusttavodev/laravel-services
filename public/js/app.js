@@ -44424,7 +44424,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     body: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
         "class": "block rounded-md h-70 md:max-h-screen md:h-70 lg:h-70",
-        src: $options.selectedProduct.picture_large,
+        src: $options.selectedProduct.picture,
         alt: ""
       }, null, 8
       /* PROPS */

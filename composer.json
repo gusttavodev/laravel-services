@@ -44,6 +44,8 @@
         }
     },
     "scripts": {
+        "test": "./vendor/bin/pest -c phpunit.xml",
+        "coverage": "XDEBUG_MODE=coverage ./vendor/bin/pest --coverage",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

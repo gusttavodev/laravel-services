@@ -47512,9 +47512,6 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "flex mt-1 rounded-md shadow-sm"
 };
-var _hoisted_2 = {
-  "class": "relative flex items-stretch flex-grow focus-within:z-10"
-};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_MinusCircleIcon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("MinusCircleIcon");
 
@@ -47524,21 +47521,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.downCounter && $options.downCounter.apply($options, arguments);
     }),
-    "class": "relative items-center px-4 py-2 -ml-px space-x-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-l-md bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+    "class": "px-4 py-2 -ml-px space-x-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-l-md bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_MinusCircleIcon, {
     "class": "w-5 h-5 mr-2 -ml-1 text-gray-400",
     "aria-hidden": "true"
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     disabled: true,
     value: $data.counter,
     "class": "w-full text-lg text-center border-gray-300 rounded-none focus:ring-indigo-500 focus:border-indigo-500"
   }, null, 8
   /* PROPS */
-  , ["value"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     onClick: _cache[2] || (_cache[2] = function () {
       return $options.upCounter && $options.upCounter.apply($options, arguments);
     }),
-    "class": "relative items-center px-4 py-2 -ml-px space-x-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-r-md bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+    "class": "px-4 py-2 -ml-px space-x-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-r-md bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_PlusCircleIcon, {
     "class": "w-5 h-5 mr-2 -ml-1 text-gray-400",
     "aria-hidden": "true"

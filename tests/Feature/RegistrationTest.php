@@ -2,9 +2,10 @@
 
 namespace Tests\Feature;
 
+use Tests\TestCase;
+use Spatie\Permission\Models\Role;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
 class RegistrationTest extends TestCase
 {
@@ -19,6 +20,8 @@ class RegistrationTest extends TestCase
 
     public function test_new_users_can_register()
     {
+        Role::create(['name' => 'user']);
+
         $response = $this->post('/register', [
             'name' => 'Test User',
             'email' => 'test@example.com',

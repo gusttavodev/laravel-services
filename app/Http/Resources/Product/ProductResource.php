@@ -20,7 +20,7 @@ class ProductResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'picture' =>   asset('/imagecache/medium/'.$this->picture),
+            'picture' =>   asset('/imagecache/large/'.$this->picture),
             'priority' => $this->priority,
             'enable' => $this->enable,
 

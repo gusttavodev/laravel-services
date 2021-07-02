@@ -39,7 +39,7 @@ class AdditionalController extends Controller
 
         $additional = $request->user()->additionals()->create($input);
 
-        $additional->products()->sync($input['products']);
+        if(!empty($input['products'])) $additional->products()->sync($input['products']);
 
         return Redirect::route('additionalIndex')->with('success', 'Adicional criado com sucesso !!!.');
     }

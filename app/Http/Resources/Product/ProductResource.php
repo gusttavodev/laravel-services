@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\Product\CategoryResource;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\Product\AdditionalResource;
+use App\Http\Resources\Product\AdditionalWithNotProductResource;
 
 class ProductResource extends JsonResource
 {
@@ -24,11 +24,11 @@ class ProductResource extends JsonResource
             'priority' => $this->priority,
             'enable' => $this->enable,
 
-            'price' => $this->price,
+            'price' => number_format((float)$this->price, 2, '.', ''),
             'description' => $this->description,
 
             'categories' => CategoryResource::collection($this->categories),
-            'additionals' => AdditionalResource::collection($this->additionals),
+            'additionals' => AdditionalWithNotProductResource::collection($this->additionals),
 
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at

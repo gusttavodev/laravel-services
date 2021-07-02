@@ -1,5 +1,5 @@
 <template>
-  <div
+  <li
     @click="onSelectProduct(product)"
     class="flex flex-col col-span-1 text-center transform bg-white divide-y divide-gray-200 rounded-lg shadow-xl hover:scale-110 motion-reduce:transform-none"
   >
@@ -30,7 +30,7 @@
         </button>
       </div>
     </div>
-  </div>
+  </li>
 </template>
 
 <script>

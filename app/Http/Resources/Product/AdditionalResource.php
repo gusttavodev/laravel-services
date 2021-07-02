@@ -17,8 +17,8 @@ class AdditionalResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'price' => $this->price,
-            'quantity_limit' => $this->quantity_limit,
+            'price' => number_format((float)$this->price, 2, '.', ''),
+            'quantity_limit' => (int) $this->quantity_limit,
 
             'products' => $this->products,
 

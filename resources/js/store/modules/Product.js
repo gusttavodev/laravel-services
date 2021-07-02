@@ -1,3 +1,5 @@
+import MoneyService from '@/Services/MoneyService'
+
 import { SET_PRODUCT, GET_PRODUCT, DELETE_PRODUCT, HAS_PRODUCT } from "@/store/mutationsTypes/Product";
 
 export default {
@@ -7,6 +9,15 @@ export default {
     mutations: {
         [SET_PRODUCT]: (state, product) => {
             state.product = product;
+            state.product.formatted_price = MoneyService.convertFloatToMoney(product.price)
+
+            state.product.additionals = product.additionals.map(additionalValue => ({
+                ...additionalValue,
+                formatted_price: MoneyService.convertFloatToMoney(additionalValue.price)
+            }))
+        },
+        [DELETE_PRODUCT]: (state) => {
+            state.product = {}
         }
     },
     getters: {
@@ -22,7 +33,7 @@ export default {
             commit(SET_PRODUCT, product)
         },
         [DELETE_PRODUCT]: ({ commit }) => {
-            commit(SET_PRODUCT, {})
+            commit(DELETE_PRODUCT)
         }
     }
 };

@@ -7,14 +7,16 @@
 
     <Products v-if="!hasProduct" :categories="categories.data" />
 
-    <Modal :open="hasProduct" @onCloseModal="closeModal">
+    <Modal v-if="hasProduct" :open="hasProduct" @onCloseModal="closeModal">
       <template v-slot:title>
-        <span class="px-2 py-1 text-lg font-medium">
+       <div class="py-2">
+            <span class="px-2 py-1 text-lg font-medium">
           {{ selectedProduct.name }}
         </span>
         <span class="px-2 py-1 text-lg font-medium text-green-800 bg-green-100 rounded-full">
-          R$ {{ selectedProduct.price }}
+        {{ selectedProduct.formatted_price.multiply(productQuantity).toFormat()}}
         </span>
+       </div>
       </template>
       <template v-slot:body>
         <div class="flex flex-wrap justify-center">
@@ -26,7 +28,7 @@
             />
             <div class="py-5">
                 <InputCounter
-                    :minValue="0"
+                    :minValue="1"
                     :maxValue="50"
                     v-model="productQuantity"
                 />
@@ -105,7 +107,7 @@ export default {
   },
   data() {
     return {
-        productQuantity: 0
+        productQuantity: 1
     }
   },
   created() {

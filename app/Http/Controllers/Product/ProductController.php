@@ -64,14 +64,16 @@ class ProductController extends Controller
 
         $input['picture'] = Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/productPicture', $request->file('picture'));
 
-        $categories = json_decode($input['categories']);
-        $additionals = json_decode($input['additionals']);
+        $product = $request->user()->products()->create($input);
 
-
-        $product = $request->user()->products()->create($input)->categories()->sync($categories);
-
-        $product->categories()->sync($categories);
-        $product->additionals()->sync($additionals);
+        if(!empty($input['categories'])){
+            $categories = json_decode($input['categories']);
+            $product->categories()->sync($categories);
+        }
+        if(!empty($input['additionals'])) {
+            $additionals = json_decode($input['additionals']);
+            $product->additionals()->sync($additionals);
+        }
 
         return Redirect::route('productIndex')->with('success', 'Categoria Criada.');
     }

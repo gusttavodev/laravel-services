@@ -33,12 +33,13 @@ export default {
   },
   data() {
     return {
-      counter: 0,
+      counter: this.minValue,
     }
   },
   props: {
     minValue: {
       type: Number,
+      default: 0
     },
     maxValue: {
       type: Number,

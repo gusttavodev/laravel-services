@@ -24,6 +24,7 @@ export default {
     },
     actions: {
         [ADD_ITEM]: ({ commit }, product) => {
+            console.log("COMMIT ADD TO CART PRODUCT");
             commit(ADD_ITEM, product)
         },
         [REMOVE_ITEM]: ({ commit }, product) => {

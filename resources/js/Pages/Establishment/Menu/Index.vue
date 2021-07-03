@@ -44,13 +44,14 @@
           Preço Total
         </span>
         <span class="px-2 py-1 text-lg font-medium text-green-800 bg-green-100 rounded-full">
-          R$ {{ selectedProduct.price }}
+          R$ {{ selectedProduct.formatted_price.multiply(productQuantity).toFormat() }}
         </span>
           </div>
         </div>
       </template>
       <template v-slot:footer>
         <button
+          @click="addToCart()"
           type="button"
           class="flex items-center justify-center w-full h-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
@@ -73,9 +74,13 @@ import AdditionalList from '@/Pages/Establishment/Menu/Additional/AdditionalList
 
 import ProductCard from '@/Pages/Establishment/Menu/Product/Card'
 
+import { MinusCircleIcon, PlusCircleIcon, ChevronDoubleDownIcon } from '@heroicons/vue/solid'
+
 import { GET_PRODUCT, DELETE_PRODUCT, HAS_PRODUCT } from '@/store/mutationsTypes/Product'
 
-import { MinusCircleIcon, PlusCircleIcon, ChevronDoubleDownIcon } from '@heroicons/vue/solid'
+import {
+    ADD_ITEM
+} from "@/store/mutationsTypes/StoreCart";
 
 
 export default {
@@ -110,18 +115,15 @@ export default {
         productQuantity: 1
     }
   },
-  created() {
-    console.log('selectedProduct ', this.selectedProduct)
-  },
   methods: {
-    confirmModal() {
-      //    this.$store.dispatch(ADD_ITEM, this.selectedProduct)
-      //         this.closeModal()
-    },
     closeModal() {
       this.selectedAdditionals = []
       this.$store.dispatch(DELETE_PRODUCT)
     },
+    addToCart() {
+        this.selectedProduct.quantity = this.productQuantity
+        this.$store.dispatch(ADD_ITEM, this.selectedProduct);
+    }
   },
 }
 </script>

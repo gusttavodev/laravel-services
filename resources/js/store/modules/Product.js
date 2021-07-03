@@ -1,6 +1,6 @@
 import MoneyService from '@/Services/MoneyService'
 
-import { SET_PRODUCT, GET_PRODUCT, DELETE_PRODUCT, HAS_PRODUCT } from "@/store/mutationsTypes/Product";
+import { SET_PRODUCT, GET_PRODUCT, DELETE_PRODUCT, HAS_PRODUCT, GET_TOTAL_PRICE } from "@/store/mutationsTypes/Product";
 
 export default {
     state: {
@@ -25,6 +25,9 @@ export default {
             return state.product
         },
         [HAS_PRODUCT]: (state) => {
+            return Object.keys( state.product).length === 0 ? false : true
+        },
+        [GET_TOTAL_PRICE]: (state) => {
             return Object.keys( state.product).length === 0 ? false : true
         }
     },

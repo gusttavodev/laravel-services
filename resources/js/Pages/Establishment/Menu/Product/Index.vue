@@ -21,26 +21,20 @@
           </ul>
         </section>
 
-        <ShoppingCart />
       </div>
     </main>
   </div>
 </template>
 
 <script>
-import { ShoppingCartIcon } from '@heroicons/vue/solid'
-
 import ProductCard from '@/Pages/Establishment/Menu/Product/Card'
 import ProductTab from '@/Pages/Establishment/Menu/Product/Tab'
-import ShoppingCart from '@/Pages/Establishment/Menu/ShoppingCart/Index'
 
 export default {
   name: 'MenuHeader',
   components: {
-    ShoppingCartIcon,
     ProductCard,
-    ProductTab,
-    ShoppingCart,
+    ProductTab
   },
   props: {
     categories: Object,
@@ -48,22 +42,14 @@ export default {
   data() {
     return {
       selectedCategory: {},
-      selectedProducts: {},
-      tabs: [
-        { name: 'Açai', href: '#', current: true },
-        { name: 'Pizza', href: '#', current: false },
-        { name: 'Cervejas', href: '#', current: false },
-      ],
+      selectedProducts: {}
     }
   },
   methods: {
     changeCategory(category) {
       this.selectedCategory = category
       this.selectedProducts = category.products
-    },
-    onSelectProduct(product) {
-      onsole.log('SELECTED PRODUCT ', product)
-    },
+    }
   },
 }
 </script>

@@ -40803,19 +40803,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Shared_Modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Shared/Modal */ "./resources/js/Shared/Modal.vue");
-/* harmony import */ var _Shared_InputCounter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Shared/InputCounter */ "./resources/js/Shared/InputCounter.vue");
-/* harmony import */ var _Pages_Establishment_Menu_MenuHeader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Pages/Establishment/Menu/MenuHeader */ "./resources/js/Pages/Establishment/Menu/MenuHeader.vue");
-/* harmony import */ var _Pages_Establishment_Menu_InfoCard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Pages/Establishment/Menu/InfoCard */ "./resources/js/Pages/Establishment/Menu/InfoCard.vue");
-/* harmony import */ var _Pages_Establishment_Menu_Product_Index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Pages/Establishment/Menu/Product/Index */ "./resources/js/Pages/Establishment/Menu/Product/Index.vue");
-/* harmony import */ var _Pages_Establishment_Menu_Product_Modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Pages/Establishment/Menu/Product/Modal */ "./resources/js/Pages/Establishment/Menu/Product/Modal.vue");
-/* harmony import */ var _Pages_Establishment_Menu_ShoppingCart_Index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Pages/Establishment/Menu/ShoppingCart/Index */ "./resources/js/Pages/Establishment/Menu/ShoppingCart/Index.vue");
-/* harmony import */ var _store_mutationsTypes_Product__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/store/mutationsTypes/Product */ "./resources/js/store/mutationsTypes/Product.js");
-/* harmony import */ var _store_mutationsTypes_StoreCart__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/store/mutationsTypes/StoreCart */ "./resources/js/store/mutationsTypes/StoreCart.js");
-
-
-
-
+/* harmony import */ var _Pages_Establishment_Menu_MenuHeader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Pages/Establishment/Menu/MenuHeader */ "./resources/js/Pages/Establishment/Menu/MenuHeader.vue");
+/* harmony import */ var _Pages_Establishment_Menu_InfoCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Pages/Establishment/Menu/InfoCard */ "./resources/js/Pages/Establishment/Menu/InfoCard.vue");
+/* harmony import */ var _Pages_Establishment_Menu_Product_Index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Pages/Establishment/Menu/Product/Index */ "./resources/js/Pages/Establishment/Menu/Product/Index.vue");
+/* harmony import */ var _Pages_Establishment_Menu_ShoppingCart_Index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Pages/Establishment/Menu/ShoppingCart/Index */ "./resources/js/Pages/Establishment/Menu/ShoppingCart/Index.vue");
+/* harmony import */ var _store_mutationsTypes_Product__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/store/mutationsTypes/Product */ "./resources/js/store/mutationsTypes/Product.js");
 
 
 
@@ -40827,41 +40819,24 @@ __webpack_require__.r(__webpack_exports__);
     title: 'establishment'
   },
   components: {
-    MenuHeader: _Pages_Establishment_Menu_MenuHeader__WEBPACK_IMPORTED_MODULE_2__.default,
-    InfoCard: _Pages_Establishment_Menu_InfoCard__WEBPACK_IMPORTED_MODULE_3__.default,
-    Products: _Pages_Establishment_Menu_Product_Index__WEBPACK_IMPORTED_MODULE_4__.default,
-    Modal: _Shared_Modal__WEBPACK_IMPORTED_MODULE_0__.default,
-    InputCounter: _Shared_InputCounter__WEBPACK_IMPORTED_MODULE_1__.default,
-    ProductModal: _Pages_Establishment_Menu_Product_Modal__WEBPACK_IMPORTED_MODULE_5__.default,
-    ShoppingCart: _Pages_Establishment_Menu_ShoppingCart_Index__WEBPACK_IMPORTED_MODULE_6__.default
+    MenuHeader: _Pages_Establishment_Menu_MenuHeader__WEBPACK_IMPORTED_MODULE_0__.default,
+    InfoCard: _Pages_Establishment_Menu_InfoCard__WEBPACK_IMPORTED_MODULE_1__.default,
+    Products: _Pages_Establishment_Menu_Product_Index__WEBPACK_IMPORTED_MODULE_2__.default,
+    ShoppingCart: _Pages_Establishment_Menu_ShoppingCart_Index__WEBPACK_IMPORTED_MODULE_3__.default
   },
   props: {
     establishment: Object,
     categories: Object
   },
   computed: {
-    selectedProduct: function selectedProduct() {
-      return this.$store.getters[_store_mutationsTypes_Product__WEBPACK_IMPORTED_MODULE_7__.GET_PRODUCT];
-    },
     hasProduct: function hasProduct() {
-      return this.$store.getters[_store_mutationsTypes_Product__WEBPACK_IMPORTED_MODULE_7__.HAS_PRODUCT];
-    },
-    totalPrice: function totalPrice() {
-      return this.$store.getters[_store_mutationsTypes_Product__WEBPACK_IMPORTED_MODULE_7__.GET_TOTAL_PRICE];
+      return this.$store.getters[_store_mutationsTypes_Product__WEBPACK_IMPORTED_MODULE_4__.HAS_PRODUCT];
     }
   },
   data: function data() {
     return {};
   },
-  methods: {
-    closeModal: function closeModal() {
-      this.selectedAdditionals = [];
-      this.$store.dispatch(_store_mutationsTypes_Product__WEBPACK_IMPORTED_MODULE_7__.DELETE_PRODUCT);
-    },
-    addToCart: function addToCart() {
-      this.$store.dispatch(_store_mutationsTypes_StoreCart__WEBPACK_IMPORTED_MODULE_8__.ADD_ITEM, this.selectedProduct);
-    }
-  }
+  methods: {}
 });
 
 /***/ }),

@@ -11,7 +11,7 @@ transform: translateX(-50%);"
             <div
                 class="absolute top-0 right-0 px-1 -mt-1 -mr-2 text-xs font-bold rounded-full bg-sys_success-400"
             >
-                3
+                {{ cartCount }}
             </div>
             <ShoppingCartIcon class="w-5 h-5 text-gray-400" aria-hidden="true" />
         </div>
@@ -22,6 +22,8 @@ transform: translateX(-50%);"
 <script>
 import { ShoppingCartIcon } from '@heroicons/vue/solid'
 
+import { CART_COUNT } from '@/store/mutationsTypes/StoreCart'
+
 export default {
     name: 'ShoppingCart',
     props: {},
@@ -29,7 +31,9 @@ export default {
         ShoppingCartIcon
     },
     computed: {
-
+        cartCount() {
+            return this.$store.getters[CART_COUNT]
+        },
     },
     data() {
         return {};

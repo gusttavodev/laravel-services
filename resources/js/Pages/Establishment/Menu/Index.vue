@@ -18,6 +18,7 @@
 import MenuHeader from '@/Pages/Establishment/Menu/MenuHeader'
 import InfoCard from '@/Pages/Establishment/Menu/InfoCard'
 import Products from '@/Pages/Establishment/Menu/Product/Index'
+import ProductModal from '@/Pages/Establishment/Menu/Product/Modal'
 import ShoppingCart from '@/Pages/Establishment/Menu/ShoppingCart/Index'
 
 import { HAS_PRODUCT } from '@/store/mutationsTypes/Product'
@@ -30,7 +31,8 @@ export default {
     MenuHeader,
     InfoCard,
     Products,
-    ShoppingCart
+    ShoppingCart,
+    ProductModal
   },
   props: {
     establishment: Object,

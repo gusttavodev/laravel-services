@@ -9,6 +9,7 @@
         :src="product.picture"
         alt=""
       />
+
       <h3 class="mt-6 text-sm font-medium text-gray-900">{{ product.name }}</h3>
       <dl class="flex flex-col justify-between flex-grow mt-1">
         <dt class="sr-only">Title</dt>

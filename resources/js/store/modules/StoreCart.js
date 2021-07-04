@@ -6,7 +6,6 @@ export default {
     },
     mutations: {
         [ADD_ITEM]: (state, product) => {
-            const foundIndex = state.storeCart.findIndex(data => data.id === product.id);
             state.storeCart.push(product);
         },
         [REMOVE_ITEM]: (state, product) => {

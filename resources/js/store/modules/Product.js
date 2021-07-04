@@ -8,7 +8,9 @@ export default {
     },
     mutations: {
         [SET_PRODUCT]: (state, product) => {
-            state.product = product;
+            // Create a Copy of Value to not alter base Value
+            state.product = {...product};
+
             state.product.formatted_price = MoneyService.convertFloatToMoney(product.price)
             state.product.quantity = 1
             state.product.additionals = product.additionals.map(additionalValue => ({

@@ -5,7 +5,7 @@
         style="z-index: 9999999999999999999999999; left: 50%; transform: translateX(-50%);"
         @click="showOrder"
     >
-        <h1 class="p-2 text-2xl">Seu pedido</h1>
+        <h1 class="p-2 text-2xl">Finalize Sua Compra</h1>
 
         <div class="relative">
             <div

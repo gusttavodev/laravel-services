@@ -12,7 +12,7 @@
         <div class="flex flex-wrap justify-center">
 
           <div class="w-full p-1">
-            <!-- <AdditionalList :additionals="selectedProduct.additionals" /> -->
+            <ProductsList/>
           </div>
 
            <div class="w-full ">
@@ -39,11 +39,13 @@
 
 <script>
 import Modal from '@/Shared/Modal'
+import ProductsList from '@/Pages/Establishment/Menu/ShoppingCart/ProductList/Index'
 
 export default {
   name: 'ShoppingCartModal',
   components: {
-    Modal
+    Modal,
+    ProductsList
   },
   computed: {
   },

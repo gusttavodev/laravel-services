@@ -23,7 +23,6 @@ import ShoppingCart from '@/Pages/Establishment/Menu/ShoppingCart/Index'
 
 import { HAS_PRODUCT } from '@/store/mutationsTypes/Product'
 
-
 export default {
   name: 'EstablishmentScreen',
   metaInfo: { title: 'establishment' },

@@ -1,8 +1,7 @@
 <template>
     <div
         class="fixed bottom-0 flex flex-wrap items-center justify-center w-3/4 pt-2 text-center rounded-t-lg cursor-pointer lg:w-2/4 sm:w-2/4 md:w-2/4 bg-sys_primary-300 hover:bg-sys_primary-600 text-button-text"
-        style="z-index: 9999999999999999999999999; left: 50%;
-transform: translateX(-50%);"
+        style="z-index: 9999999999999999999999999; left: 50%; transform: translateX(-50%);"
         @click="showOrder"
     >
         <h1 class="p-2 text-2xl">Seu pedido</h1>
@@ -16,7 +15,8 @@ transform: translateX(-50%);"
             <ShoppingCartIcon class="w-5 h-5 text-gray-400" aria-hidden="true" />
         </div>
     </div>
-    <!-- </div> -->
+
+    <ShoppingCartModal ref="ShoppingCartModal" />
 </template>
 
 <script>
@@ -24,11 +24,14 @@ import { ShoppingCartIcon } from '@heroicons/vue/solid'
 
 import { CART_COUNT } from '@/store/mutationsTypes/StoreCart'
 
+import ShoppingCartModal from '@/Pages/Establishment/Menu/ShoppingCart/Modal'
+
 export default {
     name: 'ShoppingCart',
     props: {},
     components: {
-        ShoppingCartIcon
+        ShoppingCartIcon,
+        ShoppingCartModal
     },
     computed: {
         cartCount() {
@@ -36,14 +39,15 @@ export default {
         },
     },
     data() {
-        return {};
+        return {
+        };
     },
     mounted() {
 
     },
     methods: {
         showOrder(){
-
+            this.$refs.ShoppingCartModal.openModal()
         }
     }
 };

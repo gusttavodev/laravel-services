@@ -67,16 +67,11 @@ import {
 
 
 export default {
-  name: 'EstablishmentScreen',
-  metaInfo: { title: 'establishment' },
+  name: 'ProductModal',
   components: {
     AdditionalList,
     Modal,
     InputCounter
-  },
-  props: {
-    establishment: Object,
-    categories: Object,
   },
   computed: {
     selectedProduct() {

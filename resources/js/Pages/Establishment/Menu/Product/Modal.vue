@@ -96,11 +96,11 @@ export default {
   },
   methods: {
     closeModal() {
-      this.selectedAdditionals = []
       this.$store.dispatch(DELETE_PRODUCT)
     },
     addToCart() {
         this.$store.dispatch(ADD_ITEM, this.selectedProduct);
+        this.closeModal()
     }
   },
 }

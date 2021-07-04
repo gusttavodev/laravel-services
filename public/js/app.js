@@ -41030,11 +41030,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     closeModal: function closeModal() {
-      this.selectedAdditionals = [];
       this.$store.dispatch(_store_mutationsTypes_Product__WEBPACK_IMPORTED_MODULE_3__.DELETE_PRODUCT);
     },
     addToCart: function addToCart() {
       this.$store.dispatch(_store_mutationsTypes_StoreCart__WEBPACK_IMPORTED_MODULE_4__.ADD_ITEM, this.selectedProduct);
+      this.closeModal();
     }
   }
 });

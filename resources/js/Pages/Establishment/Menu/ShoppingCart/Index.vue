@@ -1,5 +1,6 @@
 <template>
     <div
+        v-if="cartCount > 0"
         class="fixed bottom-0 flex flex-wrap items-center justify-center w-3/4 pt-2 text-center rounded-t-lg cursor-pointer lg:w-2/4 sm:w-2/4 md:w-2/4 bg-sys_primary-300 hover:bg-sys_primary-600 text-button-text"
         style="z-index: 9999999999999999999999999; left: 50%; transform: translateX(-50%);"
         @click="showOrder"

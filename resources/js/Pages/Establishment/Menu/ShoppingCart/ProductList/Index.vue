@@ -15,8 +15,9 @@
         <div class="relative">
         <div class="relative z-0 divide-y divide-gray-200">
             <ProductItem
-                v-for="product in cartProducts"
-                :key="`${product.id}_${Math.random().toString(36).substring(2, 9)}`"
+                v-for="(product, index) in cartProducts"
+                :key="index"
+                :index="index"
                 :product="product"
             />
         </div>

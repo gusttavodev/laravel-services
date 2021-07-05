@@ -20,7 +20,7 @@
           Preço Total
         </span>
         <span class="px-2 py-1 text-lg font-medium text-green-800 bg-green-100 rounded-full">
-            R$ 10
+            {{ totalPrice.toFormat() }}
         </span>
           </div>
         </div>
@@ -41,7 +41,7 @@
 import Modal from '@/Shared/Modal'
 import ProductsList from '@/Pages/Establishment/Menu/ShoppingCart/ProductList/Index'
 
-import { CART_COUNT } from '@/store/mutationsTypes/StoreCart'
+import { CART_COUNT, GET_CART_TOTAL_PRICE } from '@/store/mutationsTypes/StoreCart'
 
 export default {
   name: 'ShoppingCartModal',
@@ -50,6 +50,9 @@ export default {
     ProductsList
   },
   computed: {
+    totalPrice() {
+      return this.$store.getters[GET_CART_TOTAL_PRICE]
+    },
     cartCount() {
       return this.$store.getters[CART_COUNT]
     }

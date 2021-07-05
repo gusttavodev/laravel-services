@@ -21,7 +21,7 @@
 
     <div class="flex items-center justify-center">
         <span class="text-center px-2 py-1 text-sm font-medium text-green-800 bg-green-100 rounded-full">
-            R$ 10
+            {{ product.invoice.total.toFormat() }}
         </span>
     </div>
 
@@ -73,13 +73,14 @@ export default {
   },
   props: {
     product: Object,
+    index: Number
   },
   data() {
     return {}
   },
   methods: {
       removeItem(){
-        this.$store.dispatch(REMOVE_ITEM, this.product.id)
+        this.$store.dispatch(REMOVE_ITEM, this.index)
       }
   },
 }

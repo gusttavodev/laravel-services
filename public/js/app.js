@@ -41144,6 +41144,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Shared_Modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Shared/Modal */ "./resources/js/Shared/Modal.vue");
 /* harmony import */ var _Pages_Establishment_Menu_ShoppingCart_ProductList_Index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Pages/Establishment/Menu/ShoppingCart/ProductList/Index */ "./resources/js/Pages/Establishment/Menu/ShoppingCart/ProductList/Index.vue");
+/* harmony import */ var _store_mutationsTypes_StoreCart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/store/mutationsTypes/StoreCart */ "./resources/js/store/mutationsTypes/StoreCart.js");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -41152,7 +41154,11 @@ __webpack_require__.r(__webpack_exports__);
     Modal: _Shared_Modal__WEBPACK_IMPORTED_MODULE_0__.default,
     ProductsList: _Pages_Establishment_Menu_ShoppingCart_ProductList_Index__WEBPACK_IMPORTED_MODULE_1__.default
   },
-  computed: {},
+  computed: {
+    cartCount: function cartCount() {
+      return this.$store.getters[_store_mutationsTypes_StoreCart__WEBPACK_IMPORTED_MODULE_2__.CART_COUNT];
+    }
+  },
   data: function data() {
     return {
       showModal: false
@@ -41233,6 +41239,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Shared_InputCounter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Shared/InputCounter */ "./resources/js/Shared/InputCounter.vue");
 /* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/index.js");
+/* harmony import */ var _store_mutationsTypes_StoreCart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/store/mutationsTypes/StoreCart */ "./resources/js/store/mutationsTypes/StoreCart.js");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -41247,7 +41255,11 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {};
   },
-  methods: {}
+  methods: {
+    removeItem: function removeItem() {
+      this.$store.dispatch(_store_mutationsTypes_StoreCart__WEBPACK_IMPORTED_MODULE_2__.REMOVE_ITEM, this.product.id);
+    }
+  }
 });
 
 /***/ }),
@@ -45309,7 +45321,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_Modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Modal", true);
 
-  return $data.showModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Modal, {
+  return $data.showModal && $options.cartCount > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Modal, {
     key: 0,
     open: $data.showModal,
     onOnCloseModal: $options.closeModal
@@ -45438,9 +45450,6 @@ var _hoisted_8 = {
   key: 0,
   "class": "\n            rounded-md\n            text-sm\n            font-medium\n            bg-blue-100\n            text-blue-800\n\n            px-1\n            py-0.5\n            m-0.5\n        "
 };
-var _hoisted_9 = {
-  "class": "flex items-center justify-center cursor-pointer"
-};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_XCircleIcon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("XCircleIcon");
 
@@ -45463,7 +45472,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_XCircleIcon, {
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+    "class": "flex items-center justify-center cursor-pointer",
+    onClick: _cache[1] || (_cache[1] = function () {
+      return $options.removeItem && $options.removeItem.apply($options, arguments);
+    })
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_XCircleIcon, {
     "class": "w-6 h-6 text-red-600",
     "aria-hidden": "true"
   })])]);

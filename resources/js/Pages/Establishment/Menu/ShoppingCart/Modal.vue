@@ -1,5 +1,5 @@
 <template>
-    <Modal v-if="showModal" :open="showModal" @onCloseModal="closeModal">
+    <Modal v-if="showModal && cartCount > 0" :open="showModal" @onCloseModal="closeModal">
       <template v-slot:title>
        <div class="py-2">
             <span class="px-2 py-1 text-lg font-medium">
@@ -41,6 +41,8 @@
 import Modal from '@/Shared/Modal'
 import ProductsList from '@/Pages/Establishment/Menu/ShoppingCart/ProductList/Index'
 
+import { CART_COUNT } from '@/store/mutationsTypes/StoreCart'
+
 export default {
   name: 'ShoppingCartModal',
   components: {
@@ -48,6 +50,9 @@ export default {
     ProductsList
   },
   computed: {
+    cartCount() {
+      return this.$store.getters[CART_COUNT]
+    }
   },
   data() {
     return {

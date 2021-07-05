@@ -52,7 +52,7 @@
       </div>
     </div>
 
-    <div class="flex items-center justify-center cursor-pointer">
+    <div class="flex items-center justify-center cursor-pointer" @click="removeItem">
         <XCircleIcon class="w-6 h-6 text-red-600" aria-hidden="true" />
     </div>
 
@@ -62,6 +62,8 @@
 <script>
 import InputCounter from '@/Shared/InputCounter'
 import { XCircleIcon } from '@heroicons/vue/outline'
+
+import { REMOVE_ITEM } from '@/store/mutationsTypes/StoreCart'
 
 export default {
   name: 'ProductListItem',
@@ -75,6 +77,10 @@ export default {
   data() {
     return {}
   },
-  methods: {},
+  methods: {
+      removeItem(){
+        this.$store.dispatch(REMOVE_ITEM, this.product.id)
+      }
+  },
 }
 </script>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Product;
 
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\Product\CategoryResource;

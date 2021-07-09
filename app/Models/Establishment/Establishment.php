@@ -3,6 +3,7 @@
 namespace App\Models\Establishment;
 
 use App\Models\User\User;
+use App\Models\Order\Order;
 use App\Models\Establishment\Theme;
 use App\Models\Establishment\Address;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +19,11 @@ class Establishment extends Model
         'background_picture', 'delivery_time', 'min_value', 'need_confirm_order',
         'address_id', 'user_id'
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 
     public function address()
     {

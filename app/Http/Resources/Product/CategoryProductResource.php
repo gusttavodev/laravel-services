@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources\Product;
 
-use App\Http\Resources\ProductResource;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\Product\ProductResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryProductResource extends JsonResource

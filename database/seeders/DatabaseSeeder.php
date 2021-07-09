@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User\User;
 use Illuminate\Database\Seeder;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\UserSeeder;
+use Database\Seeders\OrderSeeder;
 use Database\Seeders\CategorySeeder;
 use Database\Seeders\AdditionalSeeder;
 use Database\Seeders\EstablishmentSeeder;
@@ -24,5 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorySeeder::class);
         $this->call(AdditionalSeeder::class);
         $this->call(EstablishmentSeeder::class);
+
+        $this->call(OrderSeeder::class);
     }
 }

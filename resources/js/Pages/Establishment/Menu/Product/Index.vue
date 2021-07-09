@@ -3,7 +3,7 @@
     <main class="flex-1 overflow-y-auto">
       <div class="px-4 pt-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex">
-          <h1 class="flex-1 text-2xl font-bold text-gray-900">Produtos</h1>
+          <h1 class="flex-1 text-2xl font-bold text-gray-900">Categorias</h1>
         </div>
 
         <div class="mt-3 sm:mt-2">

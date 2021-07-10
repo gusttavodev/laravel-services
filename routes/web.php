@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\CategoryController;
 use App\Http\Controllers\Product\AdditionalController;
@@ -108,4 +109,16 @@ Route::prefix('establishment')->group(function () {
 
 Route::prefix('menu')->group(function () {
     Route::get('/establishment/{public_link_name}', [EstablishmentController::class, 'showEstablishmentPublic'])->name('establishmentShowPublic');
+});
+
+Route::prefix('order')->group(function () {
+    Route::get('', [OrderController::class, 'index'])->name('orderIndex');
+
+    Route::get('create', [OrderController::class, 'create'])->name('orderCreate');
+    Route::post('create', [OrderController::class, 'store'])->name('orderStore');
+
+    Route::get('{order}', [OrderController::class, 'edit'])->name('orderEdit');
+    Route::post('{order}', [OrderController::class, 'update'])->name('orderUpdate');
+
+    Route::delete('{order}', [OrderController::class, 'destroy'])->name('orderDelete');
 });

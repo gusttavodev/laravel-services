@@ -36,8 +36,8 @@ class OrderFactory extends Factory
             'tracking_link' => $this->faker->uuid(),
 
             'payment_mode' => $paymentMode,
-            'status' => $deliveryMode,
-            'delivery_mode' => $status
+            'status' => $status,
+            'delivery_mode' => $deliveryMode
         ];
     }
 }

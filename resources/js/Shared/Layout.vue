@@ -232,10 +232,12 @@ import {
   OfficeBuildingIcon,
   ColorSwatchIcon,
   SearchIcon,
+  TruckIcon
 } from '@heroicons/vue/solid'
 import FlashMessages from '@/Shared/FlashMessages'
 const navigation = [
   { name: 'Dashboard', href: 'dashboardIndex', icon: HomeIcon, current: true },
+  { name: 'Pedidos', href: 'orderIndex', icon: TruckIcon, current: false },
   { name: 'Usuários', href: 'userIndex', icon: UserGroupIcon, current: false },
   { name: 'Categorias', href: 'categoryIndex', icon: ShoppingBagIcon, current: false },
   { name: 'Produtos', href: 'productIndex', icon: ShoppingCartIcon, current: false },

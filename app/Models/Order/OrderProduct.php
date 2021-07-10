@@ -9,4 +9,13 @@ class OrderProduct extends Model
 {
     use HasFactory;
     protected $table = 'order_products';
+
+    protected $fillable = [
+        'quantity'
+    ];
+
+    public function additionals()
+    {
+        return $this->belongsToMany(Additional::class, 'order_product_additionals')->withPivot('quantity');
+    }
 }

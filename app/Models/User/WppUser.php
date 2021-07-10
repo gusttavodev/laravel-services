@@ -9,6 +9,11 @@ class WppUser extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'phone',
+        'name'
+    ];
+
     public function orders()
     {
         return $this->hasMany(Order::class, 'wpp_user_id');

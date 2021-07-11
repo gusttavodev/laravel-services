@@ -18,7 +18,7 @@
 
     <div>
       <span class="px-2 py-1 text-sm font-medium text-green-800 bg-green-100 rounded-full">
-        {{additional.quantity > 0 ? additional.formatted_price.multiply(additional.quantity).toFormat() : additional.formatted_price.toFormat() }}
+        {{ additionalPrice }}
       </span>
     </div>
   </li>
@@ -26,6 +26,7 @@
 
 <script>
 import InputCounter from '@/Shared/InputCounter'
+import MoneyService from '@/Services/MoneyService'
 
 export default {
   name: 'AdditionalItem',
@@ -39,5 +40,14 @@ export default {
     return {}
   },
   methods: {},
+  computed: {
+    additionalPrice: function () {
+        let additionalPrice =  MoneyService.convertFloatToMoney(this.additional.price)
+
+        if(this.additional.quantity > 0) return additionalPrice.multiply(this.additional.quantity) .toFormat()
+
+        return additionalPrice.toFormat()
+    }
+  }
 }
 </script>

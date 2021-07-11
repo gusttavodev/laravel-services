@@ -37,6 +37,11 @@ CSRF token mismatch.
     Esse mesmo user cria um Estabelecimento que vai ter informações sobre a loja dele
     Cada loja tem uma pagina publica com suas informações, onde são renderizados os Produtos.
 
+    Existem duas formas de se criar uma order
+    # Wpp User -> somente vai informar seu telefone e nome, não vai ter um login no sistema
+    # User normal -> vai se cadastrar como um user do sistema normal
+
 # TODO(A parte de order ainda não está complete)
     - Na order preciso salvar os produtos da order e seus adicionais
+    Order 1 -> N Products 1 -> N Additionals
 

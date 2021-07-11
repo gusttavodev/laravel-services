@@ -11,11 +11,11 @@ export default {
             // Create a Copy of Value to not alter base Value
             state.product = {...product};
 
-            state.product.formatted_price = MoneyService.convertFloatToMoney(product.price)
+            state.product.formatted_price = MoneyService.convertFloatToMoney(product.price).toFormat()
             state.product.quantity = 1
             state.product.additionals = product.additionals.map(additionalValue => ({
                 ...additionalValue,
-                formatted_price: MoneyService.convertFloatToMoney(additionalValue.price)
+                formatted_price: MoneyService.convertFloatToMoney(additionalValue.price).toFormat()
             }))
         },
         [DELETE_PRODUCT]: (state) => {
@@ -33,17 +33,19 @@ export default {
             let product = state.product
             let additionals = product.additionals
 
-            let productPrice = product.quantity > 0 ? product.formatted_price.multiply(product.quantity) : product.formatted_price
+            let moneyProductPrice = MoneyService.convertFloatToMoney(product.price)
+            let productPrice = product.quantity > 0 ? moneyProductPrice.multiply(product.quantity) : moneyProductPrice
 
             let additionalsPrice = additionals.reduce((total, elemento) => {
-                if (elemento.quantity > 0) return total.add(elemento.formatted_price.multiply(elemento.quantity));
+                let moneyAdditionalsPrice = MoneyService.convertFloatToMoney(product.price)
+                if (elemento.quantity > 0) return total.add(moneyAdditionalsPrice.multiply(elemento.quantity));
                 else return total
             }, MoneyService.convertFloatToMoney("0.00"));
 
             return {
-                total: productPrice.add(additionalsPrice),
-                product: productPrice,
-                additionals: additionalsPrice
+                total: productPrice.add(additionalsPrice).toFormat(),
+                product: productPrice.toFormat(),
+                additionals: additionalsPrice.toFormat()
             }
         }
     },

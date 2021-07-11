@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { SET_PRODUCT, GET_PRODUCT } from '@/store/mutationsTypes/Product'
+import { SET_PRODUCT } from '@/store/mutationsTypes/Product'
 
 export default {
   name: 'ProductCard',

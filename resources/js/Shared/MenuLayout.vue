@@ -48,7 +48,10 @@
           {{$page.props.establishment.data.name}}
         </h1>
       </div>
-    </div>
+ </div>
+ <div>
+    <slot />
+ </div>
 </template>
 
 <script>

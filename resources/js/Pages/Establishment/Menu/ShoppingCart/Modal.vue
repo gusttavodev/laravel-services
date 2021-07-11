@@ -26,15 +26,10 @@
         </div>
       </template>
       <template v-slot:footer>
-        <button
-          type="button"
-          class="flex items-center justify-center w-full h-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        >
-            <inertia-link :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                Finalizar Compra
-            </inertia-link>
-
-        </button>
+        <inertia-link :href="route('password.request')"  type="button"
+        class="flex items-center justify-center w-full h-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Finalizar Compra
+        </inertia-link>
       </template>
     </Modal>
 </template>

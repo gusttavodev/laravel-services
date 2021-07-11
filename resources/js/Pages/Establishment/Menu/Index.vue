@@ -1,8 +1,4 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <div>
-    <MenuHeader :establishment="establishment.data" />
-
     <InfoCard :establishment="establishment.data" />
 
     <Products :categories="categories.data" />
@@ -10,7 +6,6 @@
     <ProductModal/>
 
     <ShoppingCart v-if="!hasProduct" />
-  </div>
 </template>
 
 <script>
@@ -23,6 +18,8 @@ import ShoppingCart from '@/Pages/Establishment/Menu/ShoppingCart/Index'
 
 import { HAS_PRODUCT } from '@/store/mutationsTypes/Product'
 
+import MenuLayout from '@/Shared/MenuLayout'
+
 export default {
   name: 'EstablishmentScreen',
   metaInfo: { title: 'establishment' },
@@ -33,6 +30,7 @@ export default {
     ShoppingCart,
     ProductModal
   },
+  layout: MenuLayout,
   props: {
     establishment: Object,
     categories: Object,

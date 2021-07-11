@@ -6,7 +6,11 @@ use Inertia\Inertia;
 use App\Models\Order\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Resources\Order\OrderResource;
+use App\Models\Establishment\Establishment;
+use App\Http\Requests\Order\EstablishmentOrderStoreRequest;
+use App\Http\Resources\Establishment\EstablishmentResource;
 
 class OrderController extends Controller
 {
@@ -26,54 +30,12 @@ class OrderController extends Controller
         ]);
     }
 
-    // public function create()
-    // {
-    //     return Inertia::render('Product/Category/Form');
-    // }
+    public function establishmentOrderCreate($public_link_name)
+    {
+        $establishment =  Establishment::where('public_link_name', $public_link_name)->firstOrFail();
 
-    // public function store(CategoryStoreRequest $request)
-    // {
-    //     $input = $request->validated();
-
-    //     $input['picture'] = Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/categoryPicture', $request->file('picture'));
-
-    //     $request->user()->categories()->create($input);
-
-    //     return Redirect::route('categoryIndex')->with('success', 'Categoria Criada.');
-    // }
-
-    // public function show(Category $category)
-    // {
-    //     //
-    // }
-
-    // public function edit(Request $request, Category $category)
-    // {
-    //     $category =  $request->user()->categories()->findOrFail($category->id);
-
-    //     return Inertia::render('Product/Category/Form', ['category' => new CategoryResource($category)]);
-    // }
-
-    // public function update(CategoryUpdateRequest $request, Category $category)
-    // {
-    //     $category =  $request->user()->categories()->findOrFail($category->id);
-
-    //     if ($request->picture) {
-    //         $category->picture =  Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/categoryPicture', $request->file('picture'));
-    //     }
-
-    //     $category->name = $request->name;
-    //     $category->priority = $request->priority;
-    //     $category->enable = $request->enable;
-    //     $category->save();
-
-    //     return Redirect::route('categoryIndex')->with('success', 'Categoria Atualizada.');
-    // }
-
-    // public function destroy(Request $request, Category $category)
-    // {
-    //    $request->user()->categories()->findOrFail($category->id)->delete();
-
-    //     return Redirect::back()->with('success', 'Categoria Removida.');
-    // }
+        return Inertia::render('Establishment/Menu/Order', [
+            'establishment' => new EstablishmentResource($establishment)
+        ]);
+    }
 }

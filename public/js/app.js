@@ -42250,8 +42250,9 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     additionalPrice: function additionalPrice() {
       var additionalPrice = _Services_MoneyService__WEBPACK_IMPORTED_MODULE_1__.default.convertFloatToMoney(this.additional.price);
+      if (this.additional.quantity == 0 || this.additional.quantity == null) return additionalPrice.multiply(1).toFormat();
       if (this.additional.quantity > 0) return additionalPrice.multiply(this.additional.quantity).toFormat();
-      return additionalPrice.toFormat();
+      return _Services_MoneyService__WEBPACK_IMPORTED_MODULE_1__.default.convertFloatToMoney("0.00").toFormat();
     }
   }
 });
@@ -43780,8 +43781,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     downCounter: function downCounter() {
       if (this.counter - 1 >= this.minValue) {
-        this.$emit('update:modelValue', this.counter);
         this.counter--;
+        this.$emit('update:modelValue', this.counter);
       }
     }
   }
@@ -46895,7 +46896,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [_hoisted_1];
     }),
     body: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ProductsList)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.totalPrice.toFormat()), 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ProductsList)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.totalPrice), 1
       /* TEXT */
       )])])];
     }),
@@ -47034,7 +47035,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.product.quantity) + " X ", 1
   /* TEXT */
-  )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.product.invoice.total.toFormat()), 1
+  )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.product.invoice.total), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.product.additionals, function (additional) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
@@ -50573,6 +50574,14 @@ var Money = dinero_js__WEBPACK_IMPORTED_MODULE_0__.default;
       currency: currency,
       precision: precision
     });
+  },
+  convertAmountToFloat: function convertAmountToFloat(amount) {
+    var currency = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'BRL';
+    return Money({
+      amount: amount,
+      currency: currency,
+      precision: 2
+    });
   }
 });
 
@@ -50693,12 +50702,9 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.createStore)({
   plugins: [new vuex_persist__WEBPACK_IMPORTED_MODULE_4__.default({
     storage: window.localStorage,
     // or window.sessionStorage or localForage instance.
-    // Function that passes the state and returns the state with only the objects you want to store.
     reducer: function reducer(state) {
       return {
-        keepThisModule: state.keepThisModule,
-        keepThisModuleToo: state.keepThisModuleToo // getRidOfThisModule: state.getRidOfThisModule (No one likes it.)
-
+        StoreCart: state.StoreCart
       };
     }
   }).plugin]
@@ -50775,6 +50781,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     state.product.quantity = 1;
     state.product.additionals = product.additionals.map(function (additionalValue) {
       return _objectSpread(_objectSpread({}, additionalValue), {}, {
+        quantity: 0,
         formatted_price: _Services_MoneyService__WEBPACK_IMPORTED_MODULE_0__.default.convertFloatToMoney(additionalValue.price).toFormat()
       });
     });
@@ -50791,8 +50798,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var moneyProductPrice = _Services_MoneyService__WEBPACK_IMPORTED_MODULE_0__.default.convertFloatToMoney(product.price);
     var productPrice = product.quantity > 0 ? moneyProductPrice.multiply(product.quantity) : moneyProductPrice;
     var additionalsPrice = additionals.reduce(function (total, elemento) {
-      var moneyAdditionalsPrice = _Services_MoneyService__WEBPACK_IMPORTED_MODULE_0__.default.convertFloatToMoney(product.price);
-      if (elemento.quantity > 0) return total.add(moneyAdditionalsPrice.multiply(elemento.quantity));else return total;
+      var moneyAdditionalsPrice = _Services_MoneyService__WEBPACK_IMPORTED_MODULE_0__.default.convertFloatToMoney(elemento.price);
+      return total.add(moneyAdditionalsPrice.multiply(elemento.quantity));
     }, _Services_MoneyService__WEBPACK_IMPORTED_MODULE_0__.default.convertFloatToMoney("0.00"));
     return {
       total: productPrice.add(additionalsPrice).toFormat(),
@@ -50832,19 +50839,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   state: {
-    storeCart: [],
-    total: _Services_MoneyService__WEBPACK_IMPORTED_MODULE_0__.default.convertFloatToMoney("0.00")
+    storeCart: []
   },
   mutations: (_mutations = {}, _defineProperty(_mutations, _store_mutationsTypes_StoreCart__WEBPACK_IMPORTED_MODULE_1__.ADD_ITEM, function (state, product) {
     var additionals = product.additionals;
-    var productPrice = product.quantity > 0 ? product.formatted_price.multiply(product.quantity) : product.formatted_price;
+    var productMoneyPrice = _Services_MoneyService__WEBPACK_IMPORTED_MODULE_0__.default.convertFloatToMoney(product.price);
+    var productPrice = product.quantity > 0 ? productMoneyPrice.multiply(product.quantity) : productMoneyPrice;
     var additionalsPrice = additionals.reduce(function (total, elemento) {
-      if (elemento.quantity > 0) return total.add(elemento.formatted_price.multiply(elemento.quantity));else return total;
+      var additionalsMoneyPrice = _Services_MoneyService__WEBPACK_IMPORTED_MODULE_0__.default.convertFloatToMoney(elemento.price);
+      if (elemento.quantity > 0) return total.add(additionalsMoneyPrice.multiply(elemento.quantity));else return total;
     }, _Services_MoneyService__WEBPACK_IMPORTED_MODULE_0__.default.convertFloatToMoney("0.00"));
     product.invoice = {
-      total: productPrice.add(additionalsPrice),
-      product: productPrice,
-      additionals: additionalsPrice
+      total_amount: productPrice.add(additionalsPrice).getAmount(),
+      product_amount: productPrice.toFormat(),
+      additionals_amount: additionalsPrice.toFormat(),
+      total: productPrice.add(additionalsPrice).toFormat(),
+      product: productPrice.toFormat(),
+      additionals: additionalsPrice.toFormat()
     };
     state.storeCart.push(product);
   }), _defineProperty(_mutations, _store_mutationsTypes_StoreCart__WEBPACK_IMPORTED_MODULE_1__.REMOVE_ITEM, function (state, index) {
@@ -50856,9 +50867,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return state.storeCart.length;
   }), _defineProperty(_getters, _store_mutationsTypes_StoreCart__WEBPACK_IMPORTED_MODULE_1__.GET_CART_TOTAL_PRICE, function (state) {
     var total = state.storeCart.reduce(function (initial, current) {
-      return initial.add(current.invoice.total);
+      console.log("current.invoice.total_amount ", current.invoice.total_amount);
+      var moneyTotal = _Services_MoneyService__WEBPACK_IMPORTED_MODULE_0__.default.convertAmountToFloat(current.invoice.total_amount);
+      return initial.add(moneyTotal);
     }, _Services_MoneyService__WEBPACK_IMPORTED_MODULE_0__.default.convertFloatToMoney("0.00"));
-    return total;
+    return total.toFormat();
   }), _getters),
   actions: (_actions = {}, _defineProperty(_actions, _store_mutationsTypes_StoreCart__WEBPACK_IMPORTED_MODULE_1__.ADD_ITEM, function (_ref, product) {
     var commit = _ref.commit;

@@ -6,6 +6,7 @@ use App\Models\User\User;
 use App\Models\User\WppUser;
 use App\Models\Product\Product;
 use App\Models\Order\OrderProduct;
+use App\Models\Product\Additional;
 use App\Models\Establishment\Address;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Establishment\Establishment;
@@ -72,14 +73,14 @@ class Order extends Model
         return $this->belongsTo(WppUser::class);
     }
 
-    public function products()
-    {
-        return $this->belongsToMany(Product::class, 'order_products')->withPivot('quantity');
-    }
-
     public function address()
     {
         return $this->hasOne(Address::class);
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'order_products')->withPivot('quantity');
     }
 
 }

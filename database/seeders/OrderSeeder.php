@@ -25,13 +25,20 @@ class OrderSeeder extends Seeder
             )->each(function ($order) {
                 $allProducts = $order->establishment->user->products()->take(3)->get();
                 $allAdditionals = $order->establishment->user->additionals()->take(3)->get();
+
                 foreach ($allProducts as $productKey => $productValue) {
                     $order->products()->save(
                         $productValue,
                         ['quantity' => 3]
                     );
-                    foreach ($allAdditionals as $additionalsKey => $additionalsValue) {
-                        if(isset($order->products[$productKey]))$order->products[$productKey]->order_additionals()->save($additionalsValue,  ['quantity' => 3]);
+                }
+
+                foreach ($allAdditionals as $additionalsKey => $additionalsValue) {
+                    foreach ($order->products as $orderProdKey => $orderProdValue) {
+                        $orderProdValue->order_additionals()->save($additionalsValue,  [
+                            'quantity' => 3,
+                            'order_id' => $order->id
+                        ]);
                     }
                 }
 
@@ -54,13 +61,20 @@ class OrderSeeder extends Seeder
             )->each(function ($order) {
                 $allProducts = $order->establishment->user->products()->take(3)->get();
                 $allAdditionals = $order->establishment->user->additionals()->take(3)->get();
+
                 foreach ($allProducts as $productKey => $productValue) {
                     $order->products()->save(
                         $productValue,
                         ['quantity' => 3]
                     );
-                    foreach ($allAdditionals as $additionalsKey => $additionalsValue) {
-                        if(isset($order->products[$productKey]))$order->products[$productKey]->order_additionals()->save($additionalsValue,  ['quantity' => 3]);
+                }
+
+                foreach ($allAdditionals as $additionalsKey => $additionalsValue) {
+                    foreach ($order->products as $orderProdKey => $orderProdValue) {
+                        $orderProdValue->order_additionals()->save($additionalsValue,  [
+                            'quantity' => 3,
+                            'order_id' => $order->id
+                        ]);
                     }
                 }
 

@@ -53,9 +53,9 @@ export default {
       }
     },
     downCounter() {
-      if (this.counter - 1 >= this.minValue) {
-        this.$emit('update:modelValue', this.counter)
+      if (this.counter -1 >= this.minValue) {
         this.counter--
+        this.$emit('update:modelValue', this.counter)
       }
     },
   },

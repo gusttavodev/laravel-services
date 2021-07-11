@@ -20,7 +20,7 @@
           Preço Total
         </span>
         <span class="px-2 py-1 text-lg font-medium text-green-800 bg-green-100 rounded-full">
-            {{ totalPrice.toFormat() }}
+            {{ totalPrice }}
         </span>
           </div>
         </div>

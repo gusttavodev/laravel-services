@@ -44,9 +44,10 @@ export default {
     additionalPrice: function () {
         let additionalPrice =  MoneyService.convertFloatToMoney(this.additional.price)
 
-        if(this.additional.quantity > 0) return additionalPrice.multiply(this.additional.quantity) .toFormat()
+        if(this.additional.quantity == 0 ||this.additional.quantity == null) return additionalPrice.multiply(1).toFormat()
+        if(this.additional.quantity > 0) return additionalPrice.multiply(this.additional.quantity).toFormat()
 
-        return additionalPrice.toFormat()
+        return MoneyService.convertFloatToMoney("0.00").toFormat()
     }
   }
 }

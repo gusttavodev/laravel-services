@@ -15,6 +15,7 @@ export default {
             state.product.quantity = 1
             state.product.additionals = product.additionals.map(additionalValue => ({
                 ...additionalValue,
+                quantity: 0,
                 formatted_price: MoneyService.convertFloatToMoney(additionalValue.price).toFormat()
             }))
         },
@@ -37,9 +38,8 @@ export default {
             let productPrice = product.quantity > 0 ? moneyProductPrice.multiply(product.quantity) : moneyProductPrice
 
             let additionalsPrice = additionals.reduce((total, elemento) => {
-                let moneyAdditionalsPrice = MoneyService.convertFloatToMoney(product.price)
-                if (elemento.quantity > 0) return total.add(moneyAdditionalsPrice.multiply(elemento.quantity));
-                else return total
+                let moneyAdditionalsPrice = MoneyService.convertFloatToMoney(elemento.price)
+                return total.add(moneyAdditionalsPrice.multiply(elemento.quantity));
             }, MoneyService.convertFloatToMoney("0.00"));
 
             return {

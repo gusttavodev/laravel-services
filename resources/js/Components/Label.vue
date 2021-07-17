@@ -6,7 +6,12 @@
 </template>
 
 <script>
+import { ExclamationCircleIcon } from '@heroicons/vue/solid'
+
     export default {
-        props: ['value']
+        props: ['value'],
+        components: {
+            ExclamationCircleIcon,
+        }
     }
 </script>

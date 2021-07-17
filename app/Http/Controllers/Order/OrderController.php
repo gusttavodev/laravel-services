@@ -14,7 +14,7 @@ use App\Http\Resources\Establishment\EstablishmentResource;
 
 class OrderController extends Controller
 {
-      public function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('verified');
@@ -34,7 +34,7 @@ class OrderController extends Controller
     {
         $establishment =  Establishment::where('public_link_name', $public_link_name)->firstOrFail();
 
-        return Inertia::render('Establishment/Menu/Order', [
+        return Inertia::render('Establishment/Menu/Order/Login', [
             'establishment' => new EstablishmentResource($establishment)
         ]);
     }

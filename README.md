@@ -41,7 +41,6 @@ CSRF token mismatch.
     # Wpp User -> somente vai informar seu telefone e nome, não vai ter um login no sistema
     # User normal -> vai se cadastrar como um user do sistema normal
 
-# TODO(A parte de order ainda não está complete)
-    - Na order preciso salvar os produtos da order e seus adicionais
-    Order 1 -> N Products 1 -> N Additionals
+# TODO
+    - [] Caso user seja do tipo client redirecionar para outra tela, de finalizar order
 

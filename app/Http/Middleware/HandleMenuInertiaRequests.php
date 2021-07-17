@@ -11,8 +11,9 @@ class HandleMenuInertiaRequests extends Middleware
 {
     public function share(Request $request)
     {
+        $establishment = Establishment::where('public_link_name', $request->public_link_name)->firstOrFail();
         return array_merge(parent::share($request), [
-            'establishment' => "AAAAAAAAAA"
+            'establishment' => $establishment
         ]);
     }
 }

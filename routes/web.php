@@ -109,7 +109,7 @@ Route::prefix('establishment')->group(function () {
 
 Route::middleware('inertia_request_establishment')->prefix('menu')->group(function () {
     Route::get('/establishment/{public_link_name}', [EstablishmentController::class, 'showEstablishmentPublic'])->name('establishmentShowPublic');
-    Route::get('/establishment/{public_link_name}/order', [EstablishmentController::class, 'establishmentOrderCreate'])->name('establishmentOrderCreate');
+    Route::get('/establishment/{public_link_name}/order', [OrderController::class, 'establishmentOrderCreate'])->name('establishmentOrderCreate');
 });
 
 Route::prefix('order')->group(function () {

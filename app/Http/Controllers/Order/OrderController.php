@@ -34,7 +34,7 @@ class OrderController extends Controller
     {
         $establishment =  Establishment::where('public_link_name', $public_link_name)->firstOrFail();
 
-        return Inertia::render('Establishment/Menu/Order/Login', [
+        return Inertia::render('Establishment/Menu/Order/Register', [
             'establishment' => new EstablishmentResource($establishment)
         ]);
     }

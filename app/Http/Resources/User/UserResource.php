@@ -4,6 +4,7 @@ namespace App\Http\Resources\User;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Establishment\AddressResource;
 
 class UserResource extends JsonResource
 {
@@ -18,13 +19,17 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'phone' => $this->phone,
             'picture' => Storage::url($this->picture),
             'email' => $this->email,
+
             'roles' => $this->roles->pluck('name'),
+
+            'address' => new  AddressResource($this->address),
 
             'email_verified_at' => $this->email_verified_at,
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'updated_at' => $this->updated_at,
         ];
     }
 }

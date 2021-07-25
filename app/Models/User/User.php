@@ -6,6 +6,7 @@ use App\Models\Product\Product;
 use App\Models\Product\Category;
 use App\Models\Product\Additional;
 use App\Models\Establishment\Theme;
+use App\Models\Establishment\Address;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Establishment\Establishment;
@@ -25,8 +26,12 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'password',
-        'picture'
+        'picture',
+        'first_name',
+        'last_name',
+        'phone'
     ];
 
     /**
@@ -70,5 +75,10 @@ class User extends Authenticatable
     public function themes()
     {
         return $this->hasMany(Theme::class, 'user_id');
+    }
+
+     public function address()
+    {
+        return $this->belongsTo(Address::class);
     }
 }

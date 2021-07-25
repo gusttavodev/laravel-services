@@ -43,4 +43,8 @@ CSRF token mismatch.
 
 # TODO
     - [] Caso user seja do tipo client redirecionar para outra tela, de finalizar order
+    - [] Adicionar autocomplete="name" props no componente de input
+    - [] Fazer input para telefone
+    - [] Componentizar o card com form send e tile/sub title
+    - [] Tirar o Model de Address de dentro de Establishment pois ele tbm pode ser de um user
 

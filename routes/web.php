@@ -6,6 +6,7 @@ use Illuminate\Foundation\Application;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Order\OrderController;
+use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\CategoryController;
 use App\Http\Controllers\Product\AdditionalController;
@@ -27,6 +28,13 @@ Route::get('/', function () {
 
 Route::prefix('dashboard')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboardIndex');
+});
+
+Route::prefix('profile')->group(function () {
+    Route::get('/', [ProfileController::class, 'index'])->name('profileIndex');
+
+    Route::put('/information', [ProfileController::class, 'updateProfile'])->name('profileUpdateInformation');
+    Route::put('/address', [ProfileController::class, 'updateAddress'])->name('profileUpdateAddress');
 });
 
 Route::prefix('user')->group(function () {

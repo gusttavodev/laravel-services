@@ -2,29 +2,71 @@
     <breeze-validation-errors class="mb-4" />
 
     <form @submit.prevent="submit">
-        <div>
-            <breeze-label for="name" value="Name" />
-            <breeze-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
+
+        <div class="mt-4">
+            <breeze-input
+                v-model="form.name"
+                :value="form.name"
+                :error="errors.name"
+                class="mt-10"
+                label="Nome"
+                type="text"
+                :required="true"
+            />
         </div>
 
         <div class="mt-4">
-            <breeze-label for="email" value="Email" />
-            <breeze-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autocomplete="username" />
+            <breeze-input
+                v-model="form.phone"
+                :value="form.phone"
+                :error="errors.phone"
+                class="mt-10"
+                label="Telefone de contato"
+                type="text"
+                :required="true"
+            />
         </div>
 
         <div class="mt-4">
-            <breeze-label for="password" value="Password" />
-            <breeze-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
+            <breeze-input
+                v-model="form.email"
+                :value="form.email"
+                :error="errors.email"
+                class="mt-10"
+                label="Email"
+                type="email"
+                :required="true"
+            />
         </div>
 
         <div class="mt-4">
-            <breeze-label for="password_confirmation" value="Confirm Password" />
-            <breeze-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
+            <breeze-input
+            v-model="form.password"
+            :value="form.password"
+            :error="errors.password"
+            class="mt-10"
+            label="Senha"
+            type="password"
+            :required="true"
+            />
         </div>
+
+        <div class="mt-4">
+            <breeze-input
+                v-model="form.password_confirmation"
+                :value="form.password_confirmation"
+                :error="errors.password_confirmation"
+                class="mt-10"
+                label="Confirme a Senha"
+                type="password"
+                :required="true"
+            />
+        </div>
+
 
         <div class="flex items-center justify-end mt-4">
             <inertia-link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                Already registered?
+                Já está registrado ?
             </inertia-link>
 
             <breeze-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
@@ -50,12 +92,17 @@
             BreezeLabel,
             BreezeValidationErrors,
         },
+        props: {
+            user: Object,
+            errors: Object,
+        },
 
         data() {
             return {
                 form: this.$inertia.form({
                     name: '',
                     email: '',
+                    phone: '',
                     password: '',
                     password_confirmation: '',
                     terms: false,

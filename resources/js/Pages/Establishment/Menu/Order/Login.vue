@@ -7,8 +7,8 @@
         <div class="bg-white shadow sm:rounded-lg">
           <div class="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
-              <h3 class="text-lg leading-6 font-medium text-gray-900">Personal Information</h3>
-              <p class="mt-1 text-sm text-gray-500">Use a permanent address where you can recieve mail.</p>
+              <h3 class="text-lg leading-6 font-medium text-gray-900">Complete o Registro</h3>
+              <p class="mt-1 text-sm text-gray-500">Complete seu registro para realizar o pedido.</p>
             </div>
 
             <div class="grid grid-cols-6 gap-6">

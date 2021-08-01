@@ -1,5 +1,9 @@
 import MoneyService from '@/Services/MoneyService'
-import { GET_CART, ADD_ITEM, REMOVE_ITEM, CART_COUNT, GET_CART_TOTAL_PRICE } from "@/store/mutationsTypes/StoreCart";
+import {
+    GET_CART, ADD_ITEM, REMOVE_ITEM,
+    CART_COUNT, GET_CART_TOTAL_PRICE,
+    GET_CART_PRODUCTS_LIST
+} from "@/store/mutationsTypes/StoreCart";
 
 export default {
     state: {
@@ -35,6 +39,21 @@ export default {
         }
     },
     getters: {
+        [GET_CART_PRODUCTS_LIST]: (state) => {
+            let list = state.storeCart.map(function (productElement) {
+                return {
+                    id: productElement.id,
+                    quantity: productElement.quantity,
+                    additionals: productElement.additionals.map(function (additionalsElement) {
+                        return {
+                            id: additionalsElement.id,
+                            quantity: additionalsElement.quantity,
+                        }
+                    }),
+                }
+            })
+            return list
+        },
         [GET_CART]: (state) => {
             return state.storeCart
         },

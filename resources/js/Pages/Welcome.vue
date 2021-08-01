@@ -58,7 +58,7 @@
           </div>
         </div>
 
-        <div class="hidden md:flex" v-if="$page.props.auth.user">
+        <div class="hidden md:flex" v-if="$page.props?.auth?.user?.data">
           <inertia-link
             :href="route('dashboardIndex')"
             class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-600 border border-transparent rounded-md hover:bg-gray-700"

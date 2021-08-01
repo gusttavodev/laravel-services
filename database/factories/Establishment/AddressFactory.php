@@ -22,16 +22,16 @@ class AddressFactory extends Factory
     public function definition()
     {
         return [
-            'zip_code' => "33030120",
-            'street' => "Rua alto do tanque",
-            'city' =>  "Santa Luzia",
-            'country' =>  "Brasil",
-            'district' => "Nossa Senhora das Graças",
-            'state' => "Minas Gerais",
-            'number' => "780",
-            'complement' => "Casa 7",
-            'latitude' => 19.7750216,
-            'longitude' => -43.872851,
+            'zip_code' => $this->faker->postcode(),
+            'street' => $this->faker->streetName(),
+            'city' =>  $this->faker->city(),
+            'country' =>  $this->faker->country(),
+            'district' => $this->faker->streetName(),
+            'state' => $this->faker->state(),
+            'number' => $this->faker->buildingNumber(),
+            'complement' => $this->faker->secondaryAddress(),
+            'latitude' => $this->faker->latitude(),
+            'longitude' => $this->faker->longitude(),
         ];
     }
 }

@@ -49,6 +49,8 @@ class Order extends Model
     ];
 
     protected $fillable = [
+        'contact_phone',
+        'contact_name',
         'need_change',
         'change_price',
         'total_price',
@@ -80,7 +82,25 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'order_products')->withPivot('quantity');
+        return $this->belongsToMany(Product::class, 'order_products')->withPivot('quantity', 'unity_price');
     }
 
+    public function additionals()
+    {
+        return $this->belongsToMany(Additional::class, 'order_product_additionals')->withPivot('quantity', 'unity_price');
+    }
+
+    public function getAdditionalsTotalPriceAttribute()
+    {
+        return $this->additionals->sum(function ($additional) {
+            return $additional->pivot->unity_price * $additional->pivot->quantity;
+        });
+    }
+
+    public function getProductsTotalPriceAttribute()
+    {
+        return $this->products->sum(function ($product) {
+            return $product->pivot->unity_price * $product->pivot->quantity;
+        });
+    }
 }

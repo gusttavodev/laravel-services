@@ -28,7 +28,8 @@
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
         "pestphp/pest": "^1.0",
-        "pestphp/pest-plugin-laravel": "^1.0",
+        "pestphp/pest-plugin-faker": "^1.0",
+        "pestphp/pest-plugin-laravel": "^1.1",
         "phpunit/phpunit": "^9.3.3"
     },
     "autoload": {
@@ -44,7 +45,7 @@
         }
     },
     "scripts": {
-        "test": "./vendor/bin/pest -c phpunit.xml",
+        "test": "./vendor/bin/pest --group=current",
         "coverage": "XDEBUG_MODE=coverage ./vendor/bin/pest --coverage",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

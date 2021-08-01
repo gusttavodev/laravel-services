@@ -17,6 +17,7 @@ class CreateOrderProductsTable extends Migration
             $table->id();
 
             $table->mediumInteger('quantity');
+            $table->decimal('unity_price', 8, 2);
 
             $table->foreignId('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreignId('product_id')->references('id')->on('products')->onDelete('cascade');

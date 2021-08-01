@@ -17,6 +17,9 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
 
+            $table->string('contact_phone')->nullable();
+            $table->string('contact_name')->nullable();
+
             // Change = Troco do pedido
             $table->boolean('need_change')->default(0);
             $table->decimal('change_price', 8, 2);

@@ -11,7 +11,7 @@ class OrderProduct extends Model
     protected $table = 'order_products';
 
     protected $fillable = [
-        'quantity'
+        'quantity', 'unity_price'
     ];
 
     public function additionals()

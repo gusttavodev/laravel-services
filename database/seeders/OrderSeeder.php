@@ -29,7 +29,10 @@ class OrderSeeder extends Seeder
                 foreach ($allProducts as $productKey => $productValue) {
                     $order->products()->save(
                         $productValue,
-                        ['quantity' => 3]
+                        [
+                            'quantity' => 3,
+                            'unity_price' => $productValue->price
+                        ]
                     );
                 }
 
@@ -37,7 +40,8 @@ class OrderSeeder extends Seeder
                     foreach ($order->products as $orderProdKey => $orderProdValue) {
                         $orderProdValue->order_additionals()->save($additionalsValue,  [
                             'quantity' => 3,
-                            'order_id' => $order->id
+                            'order_id' => $order->id,
+                            'unity_price' => $additionalsValue->price
                         ]);
                     }
                 }
@@ -65,15 +69,19 @@ class OrderSeeder extends Seeder
                 foreach ($allProducts as $productKey => $productValue) {
                     $order->products()->save(
                         $productValue,
-                        ['quantity' => 3]
+                        [
+                            'quantity' => 3,
+                            'unity_price' => $productValue->price
+                        ]
                     );
                 }
 
                 foreach ($allAdditionals as $additionalsKey => $additionalsValue) {
                     foreach ($order->products as $orderProdKey => $orderProdValue) {
-                        $orderProdValue->order_additionals()->save($additionalsValue,  [
+                        $orderProdValue->order_additionals()->save($additionalsValue,   [
                             'quantity' => 3,
-                            'order_id' => $order->id
+                            'order_id' => $order->id,
+                            'unity_price' => $additionalsValue->price
                         ]);
                     }
                 }

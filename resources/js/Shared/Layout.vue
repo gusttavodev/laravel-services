@@ -92,10 +92,10 @@
                     />
                   </div>
                   <div class="ml-3">
-                    <p class="text-base font-medium text-white">{{ $page.props.auth.user.name }}</p>
-                    <p class="text-sm font-medium text-gray-400 group-hover:text-gray-300">
-                      View profile
-                    </p>
+                    <p class="text-base font-medium text-white">{{ $page.props?.auth?.user?.data.name }}</p>
+                    <inertia-link :href="route('profileIndex')" class="text-sm font-medium text-gray-400 group-hover:text-gray-300">
+                        View profile
+                    </inertia-link>
                   </div>
                 </div>
               </a>
@@ -166,15 +166,15 @@
                 <div>
                   <img
                     class="inline-block rounded-full h-9 w-9"
-                    :src="$page.props.auth.user.picture"
+                    :src="$page.props?.auth?.user?.data.picture"
                     alt=""
                   />
                 </div>
                 <div class="ml-3">
-                  <p class="text-sm font-medium text-white">{{ $page.props.auth.user.name }}</p>
-                  <p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">
-                    View profile
-                  </p>
+                    <p class="text-sm font-medium text-white">{{ $page.props?.auth?.user?.data.name }}</p>
+                    <inertia-link :href="route('profileIndex')" class="text-xs font-medium text-gray-300 group-hover:text-gray-200">
+                        View profile
+                    </inertia-link>
                 </div>
               </div>
             </a>

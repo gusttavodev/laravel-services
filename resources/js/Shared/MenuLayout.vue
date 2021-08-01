@@ -16,9 +16,18 @@
           />
         </div>
         <div
-        v-if="$page.props.auth.user"
+        v-if="$page.props?.auth?.user?.data"
         class="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1"
         >
+            <inertia-link
+             type="button"
+            :href="route('profileIndex')"
+            method="post"
+            as="button"
+            class="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+            >
+               Meu Perfil
+            </inertia-link>
             <inertia-link
             type="button"
             :href="route('logout')"

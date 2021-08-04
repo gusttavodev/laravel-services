@@ -15,7 +15,7 @@ class Establishment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'public_link_name', 'name', 'description', 'phone', 'picture',
+        'public_link_name', 'name', 'description', 'phone', 'picture', 'default_delivery_tax',
         'background_picture', 'delivery_time', 'min_value', 'need_confirm_order',
         'address_id', 'user_id'
     ];

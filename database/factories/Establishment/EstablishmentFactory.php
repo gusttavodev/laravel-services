@@ -33,6 +33,7 @@ class EstablishmentFactory extends Factory
             'background_picture' => "images/establishment/NZ6ZBeZ2OkLUfffhqKU8lPdG5jIrmEWZ9PqtkHnS.jpg",
 
             'delivery_time' => "1H - 40M",
+            'default_delivery_tax' => 10,
             'min_value' => 10.12,
         ];
     }

@@ -111,6 +111,7 @@ class EstablishmentController extends Controller
         $establishment->description = $request->description;
         $establishment->phone = $request->phone;
         $establishment->delivery_time = $request->delivery_time;
+        $establishment->default_delivery_tax = $request->default_delivery_tax;
         $establishment->min_value = $request->min_value;
         $establishment->need_confirm_order = $request->need_confirm_order;
 

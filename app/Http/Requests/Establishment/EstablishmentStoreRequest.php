@@ -28,6 +28,7 @@ class EstablishmentStoreRequest extends FormRequest
             'phone' => ['required'],
             'description' => ['required'],
             'delivery_time' => ['required'],
+            'default_delivery_tax' => ['required'],
             'min_value' => ['required'],
             'picture' => ['required','image','mimes:jpg,png,jpeg,gif,svg','max:2048'],
             'background_picture' => ['required','image','mimes:jpg,png,jpeg,gif,svg','max:2048']

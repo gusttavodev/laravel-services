@@ -26,6 +26,8 @@ class CreateEstablishmentsTable extends Migration
             $table->string('delivery_time')->nullable();
             $table->decimal('min_value', 8, 2)->nullable();
 
+            $table->decimal('default_delivery_tax', 8, 2)->default(0);
+
             $table->boolean('need_confirm_order')->default(0);
 
             $table->foreignId('theme_id')->nullable()->references('id')->on('themes');

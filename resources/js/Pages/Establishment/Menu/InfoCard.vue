@@ -41,6 +41,13 @@
                   }}
                 </dd>
               </div>
+               <div class="sm:col-span-1">
+                <dt class="text-sm font-medium text-gray-500">Taxa de entrega</dt>
+                <dd class="flex flex-row mt-1 text-sm text-gray-900">
+                  <ClockIcon class="w-5 h-5 mr-2 -ml-1 text-gray-400" aria-hidden="true" />
+                  {{ establishment.default_delivery_tax }}
+                </dd>
+              </div>
               <div class="sm:col-span-1">
                 <dt class="text-sm font-medium text-gray-500">Tempo médio de entrega</dt>
                 <dd class="flex flex-row mt-1 text-sm text-gray-900">

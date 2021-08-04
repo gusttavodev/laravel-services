@@ -2,7 +2,8 @@ import MoneyService from '@/Services/MoneyService'
 import {
     GET_CART, ADD_ITEM, REMOVE_ITEM,
     CART_COUNT, GET_CART_TOTAL_PRICE,
-    GET_CART_PRODUCTS_LIST
+    GET_CART_PRODUCTS_LIST,
+    GET_CART_TOTAL_MONEY
 } from "@/store/mutationsTypes/StoreCart";
 
 export default {
@@ -62,13 +63,20 @@ export default {
         },
         [GET_CART_TOTAL_PRICE]: (state) => {
             let total = state.storeCart.reduce(function (initial, current) {
-                console.log("current.invoice.total_amount ", current.invoice.total_amount);
                 let moneyTotal =  MoneyService.convertAmountToFloat(current.invoice.total_amount)
                 return initial.add(moneyTotal);
             }, MoneyService.convertFloatToMoney("0.00"));
 
             return total.toFormat()
-        }
+        },
+        [GET_CART_TOTAL_MONEY]: (state) => {
+            let total = state.storeCart.reduce(function (initial, current) {
+                let moneyTotal =  MoneyService.convertAmountToFloat(current.invoice.total_amount)
+                return initial.add(moneyTotal);
+            }, MoneyService.convertFloatToMoney("0.00"));
+
+            return total
+        },
     },
     actions: {
         [ADD_ITEM]: ({ commit }, product) => {

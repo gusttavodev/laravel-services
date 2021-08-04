@@ -13,7 +13,7 @@
                 <ContactInformation v-show="currentStep.id == 0" :user="user" :errors="errors" :step="currentStep"/>
             </transition>
             <transition name="slide-fade">
-               <AddressInformation v-show="currentStep.id == 1" :user="user" :errors="errors" :step="currentStep" :delivery_mode_options="delivery_mode_options"/>
+               <AddressInformation v-show="currentStep.id == 1" :establishment="establishment" :user="user" :errors="errors" :step="currentStep" :delivery_mode_options="delivery_mode_options"/>
             </transition>
             <transition name="slide-fade">
                <PaymentInformation v-show="currentStep.id == 2" :user="user" :errors="errors" :step="currentStep" :payment_mode_options="payment_mode_options"/>
@@ -47,7 +47,8 @@ export default {
   props: {
     errors: Object,
     delivery_mode_options: Array,
-    payment_mode_options: Array
+    payment_mode_options: Array,
+    establishment: Array
   },
   created() {
 

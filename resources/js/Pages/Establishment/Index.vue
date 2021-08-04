@@ -36,6 +36,12 @@
                   scope="col"
                   class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                 >
+                  Taxa de entrega padrão
+                </th>
+                 <th
+                  scope="col"
+                  class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                >
                   Precisa Confirmar Entrega
                 </th>
                 <th
@@ -81,9 +87,14 @@
                     {{ establishment.min_value }}
                   </span>
                 </td>
-                 <td class="px-6 py-4 text-left whitespace-nowrap">
+                <td class="px-6 py-4 text-left whitespace-nowrap">
                   <span class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full">
                     {{ establishment.delivery_time }}
+                  </span>
+                </td>
+                <td class="px-6 py-4 text-left whitespace-nowrap">
+                  <span class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full">
+                    {{ establishment.default_delivery_tax }}
                   </span>
                 </td>
                  <td class="px-6 py-4 text-left whitespace-nowrap">

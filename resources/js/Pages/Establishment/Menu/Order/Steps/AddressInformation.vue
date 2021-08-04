@@ -1,13 +1,13 @@
 <template>
       <form @submit.prevent="submit" class="px-4 mt-6 sm:px-6 lg:px-8">
         <div class="px-4 py-6 space-y-6 bg-white sm:p-6">
-          <p class="mt-1 text-sm text-gray-500">Confirme suas informações de contato</p>
+          <p class="mt-1 text-sm text-gray-500">Confirme suas informações para entrega</p>
+          <h3 v-if="delivery_mode == 1">Taxa de Entrega: R$ {{ establishment.data.default_delivery_tax  }}</h3>
            <div class="grid grid-cols-6 gap-6">
-
             <div class="col-span-6 sm:col-span-3">
                 <select-input-basic
                     v-model="delivery_mode"
-                    :value="0"
+                    :value="1"
                     :options="delivery_mode_options"
                     :error="errors.delivery_mode"
                     class="mt-10"
@@ -141,6 +141,7 @@ import {
 
     SET_ADDRESS_INFORMATION,
     SET_DELIVERY_MODE,
+    SET_DELIVERY_TAX,
 
     NEXT_STEP,
     PREVIOUS_STEP
@@ -156,7 +157,8 @@ export default {
     user: Object,
     errors: Object,
     step: Object,
-    delivery_mode_options: Array
+    delivery_mode_options: Array,
+    establishment: Array
   },
   computed: {
     form() {
@@ -170,7 +172,7 @@ export default {
   },
   data() {
      return {
-        delivery_mode: 0
+        delivery_mode: 1
      }
   },
   methods: {
@@ -181,6 +183,8 @@ export default {
         this.$store.dispatch(SET_ADDRESS_INFORMATION, this.form)
         this.$store.dispatch(SET_DELIVERY_MODE, this.delivery_mode)
         this.$store.dispatch(NEXT_STEP, this.step)
+
+        if(this.delivery_mode == 1) this.$store.dispatch(SET_DELIVERY_TAX, this.establishment.data.default_delivery_tax)
     }
   },
 }

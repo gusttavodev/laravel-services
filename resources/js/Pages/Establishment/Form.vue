@@ -59,6 +59,18 @@
             :required="true"
           />
 
+           <text-input
+            v-model="form.default_delivery_tax"
+            :value="form.default_delivery_tax"
+            :error="errors.default_delivery_tax"
+            class="mt-10"
+            label="Taxa de entrega padrão"
+            type="number"
+            id="default_delivery_tax"
+            name="default_delivery_tax"
+            :required="true"
+          />
+
           <text-input
             v-model="form.min_value"
             :value="form.min_value"
@@ -141,6 +153,7 @@ export default {
         picture: null,
         background_picture: null,
         delivery_time: null,
+        default_delivery_tax: null,
         min_value: null,
         need_confirm_order: null
       },
@@ -183,6 +196,7 @@ export default {
       data.append('name', form.name)
       data.append('min_value', form.min_value)
       data.append('delivery_time', form.delivery_time)
+      data.append('default_delivery_tax', form.default_delivery_tax)
       data.append('phone', form.phone)
       data.append('description', form.description)
       data.append('picture', picture)

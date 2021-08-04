@@ -18,6 +18,16 @@
 
             <ProductsList class="px-5 py-10 lg:w-1/2 "/>
 
+            <span class="mx-2 my-2 px-2 py-2 text-sm font-medium text-green-800 bg-green-100 rounded-full">
+                Total no Carrinho {{ totalPrice }}
+            </span>
+               <span class="mx-2 my-2 px-2 py-2 text-sm font-medium text-green-800 bg-green-100 rounded-full">
+                Taxa de Entrega {{ deliveryTax }}
+            </span>
+               <span class="mx-2 my-2 px-2 py-2 text-sm font-medium text-green-800 bg-green-100 rounded-full">
+               Valor Final {{ cartTotalPriceWithTax }}
+            </span>
+
           </div>
         </div>
 
@@ -53,8 +63,8 @@ import {
     PREVIOUS_STEP
 } from '@/store/mutationsTypes/Order'
 
-import { GET_CART_PRODUCTS_LIST } from '@/store/mutationsTypes/StoreCart'
-import { GET_ORDER } from '@/store/mutationsTypes/Order'
+import { GET_CART_PRODUCTS_LIST, GET_CART_TOTAL_PRICE, GET_CART_TOTAL_MONEY } from '@/store/mutationsTypes/StoreCart'
+import { GET_ORDER, GET_DELIVERY_MODE, GET_DELIVERY_TAX } from '@/store/mutationsTypes/Order'
 
 export default {
   components: {
@@ -70,11 +80,25 @@ export default {
     payment_mode_options: Array
   },
   computed: {
+    deliveryMode() {
+      return this.$store.getters[GET_DELIVERY_MODE]
+    },
     order() {
       return this.$store.getters[GET_ORDER]
     },
     cartProducts() {
       return this.$store.getters[GET_CART_PRODUCTS_LIST]
+    },
+    totalPrice() {
+      return this.$store.getters[GET_CART_TOTAL_PRICE]
+    },
+    deliveryTax() {
+      return this.$store.getters[GET_DELIVERY_TAX].toFormat()
+    },
+    cartTotalPriceWithTax() {
+        let total = this.$store.getters[GET_CART_TOTAL_MONEY]
+        let deliveryTax = this.$store.getters[GET_DELIVERY_TAX]
+        return total.add(deliveryTax).toFormat()
     },
   },
   data() {

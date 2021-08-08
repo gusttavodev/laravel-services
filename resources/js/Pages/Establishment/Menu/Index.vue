@@ -10,11 +10,11 @@
 
 <script>
 
-import MenuHeader from '@/Pages/Establishment/Menu/MenuHeader'
-import InfoCard from '@/Pages/Establishment/Menu/InfoCard'
-import Products from '@/Pages/Establishment/Menu/Product/Index'
-import ProductModal from '@/Pages/Establishment/Menu/Product/Modal'
-import ShoppingCart from '@/Pages/Establishment/Menu/ShoppingCart/Index'
+import MenuHeader from '@Establishment/Menu/MenuHeader'
+import InfoCard from '@Establishment/Menu/InfoCard'
+import Products from '@Establishment/Menu/Product/Index'
+import ProductModal from '@Establishment/Menu/Product/Modal'
+import ShoppingCart from '@Establishment/Menu/ShoppingCart/Index'
 
 import { HAS_PRODUCT } from '@/store/mutationsTypes/Product'
 

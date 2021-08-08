@@ -21,8 +21,8 @@
 <script>
 import Layout from '@/Shared/Layout'
 import Header from '@/Layouts/Header'
-import OpeningHourForm from '@/Pages/Establishment/OpeningHour/Form'
-import AddressForm from '@/Pages/Establishment/Address/Form'
+import OpeningHourForm from '@Establishment/OpeningHour/Form'
+import AddressForm from '@Establishment/Address/Form'
 
 export default {
   metaInfo: { title: 'establishment' },

@@ -25,7 +25,7 @@ import { ShoppingCartIcon } from '@heroicons/vue/solid'
 
 import { CART_COUNT } from '@/store/mutationsTypes/StoreCart'
 
-import ShoppingCartModal from '@/Pages/Establishment/Menu/ShoppingCart/Modal'
+import ShoppingCartModal from '@Establishment/Menu/ShoppingCart/Modal'
 
 export default {
     name: 'ShoppingCart',

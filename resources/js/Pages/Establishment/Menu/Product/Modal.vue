@@ -57,7 +57,7 @@
 import Modal from '@/Shared/Modal'
 import InputCounter from '@/Shared/InputCounter'
 
-import AdditionalList from '@/Pages/Establishment/Menu/Additional/AdditionalList'
+import AdditionalList from '@Establishment/Menu/Additional/AdditionalList'
 
 import { GET_PRODUCT, DELETE_PRODUCT, HAS_PRODUCT, GET_TOTAL_PRICE } from '@/store/mutationsTypes/Product'
 

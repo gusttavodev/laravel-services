@@ -36,7 +36,7 @@
 
 <script>
 import Modal from '@/Shared/Modal'
-import ProductsList from '@/Pages/Establishment/Menu/ShoppingCart/ProductList/Index'
+import ProductsList from '@Establishment/Menu/ShoppingCart/ProductList/Index'
 
 import { CART_COUNT, GET_CART_TOTAL_PRICE } from '@/store/mutationsTypes/StoreCart'
 

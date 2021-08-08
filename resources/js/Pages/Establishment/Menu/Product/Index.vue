@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import ProductCard from '@/Pages/Establishment/Menu/Product/Card'
-import ProductTab from '@/Pages/Establishment/Menu/Product/Tab'
+import ProductCard from '@Establishment/Menu/Product/Card'
+import ProductTab from '@Establishment/Menu/Product/Tab'
 
 export default {
   name: 'MenuHeader',

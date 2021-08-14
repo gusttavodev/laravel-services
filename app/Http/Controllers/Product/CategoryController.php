@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Product;
 
-use Inertia\Inertia;
-use Illuminate\Http\Request;
-use App\Models\Product\Category;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Redirect;
-use App\Http\Resources\Product\CategoryResource;
 use App\Http\Requests\Product\CategoryStoreRequest;
 use App\Http\Requests\Product\CategoryUpdateRequest;
+use App\Http\Resources\Product\CategoryResource;
+use App\Models\Product\Category;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class CategoryController extends Controller
 {
@@ -30,7 +30,7 @@ class CategoryController extends Controller
         $categories = $request->user()->categories();
 
         return Inertia::render('Product/Category/Index', [
-            'categories' => CategoryResource::collection($categories->paginate(5))
+            'categories' => CategoryResource::collection($categories->paginate(5)),
         ]);
     }
 
@@ -47,7 +47,8 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryStoreRequest $request)
@@ -64,18 +65,15 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Category  $category
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Category  $category
      * @return \Illuminate\Http\Response
      */
     public function edit(Request $request, Category $category)
@@ -88,8 +86,6 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  CategoryUpdateRequest  $request
-     * @param  Category  $category
      * @return \Illuminate\Http\Response
      */
     public function update(CategoryUpdateRequest $request, Category $category)
@@ -100,9 +96,9 @@ class CategoryController extends Controller
             $category->picture =  Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/categoryPicture', $request->file('picture'));
         }
 
-        $category->name = $request->name;
+        $category->name     = $request->name;
         $category->priority = $request->priority;
-        $category->enable = $request->enable;
+        $category->enable   = $request->enable;
         $category->save();
 
         return Redirect::route('categoryIndex')->with('success', 'Categoria Atualizada.');
@@ -111,12 +107,11 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Category  $category
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, Category $category)
     {
-       $request->user()->categories()->findOrFail($category->id)->delete();
+        $request->user()->categories()->findOrFail($category->id)->delete();
 
         return Redirect::back()->with('success', 'Categoria Removida.');
     }

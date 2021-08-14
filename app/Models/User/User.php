@@ -2,22 +2,23 @@
 
 namespace App\Models\User;
 
-use App\Models\Order\Order;
-use App\Models\Product\Product;
-use App\Models\Product\Category;
-use App\Models\Product\Additional;
-use App\Models\Establishment\Theme;
 use App\Models\Establishment\Address;
-use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Notifications\Notifiable;
 use App\Models\Establishment\Establishment;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Establishment\Theme;
+use App\Models\Order\Order;
+use App\Models\Product\Additional;
+use App\Models\Product\Category;
+use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory;
+    use Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -32,7 +33,7 @@ class User extends Authenticatable
         'picture',
         'first_name',
         'last_name',
-        'phone'
+        'phone',
     ];
 
     /**
@@ -69,7 +70,8 @@ class User extends Authenticatable
         return $this->HasMany(Order::class);
     }
 
-    public function additionals(){
+    public function additionals()
+    {
         return $this->HasMany(Additional::class);
     }
 
@@ -83,7 +85,7 @@ class User extends Authenticatable
         return $this->hasMany(Theme::class, 'user_id');
     }
 
-     public function address()
+    public function address()
     {
         return $this->belongsTo(Address::class);
     }

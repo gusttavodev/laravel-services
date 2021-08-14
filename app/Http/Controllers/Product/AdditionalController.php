@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers\Product;
 
-use Inertia\Inertia;
-use Illuminate\Http\Request;
-use App\Models\Product\Additional;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ProductResource;
-use Illuminate\Support\Facades\Redirect;
-use App\Http\Resources\Product\CategoryResource;
-use App\Http\Resources\Product\AdditionalResource;
 use App\Http\Requests\Product\Additional\AdditionalStoreRequest;
 use App\Http\Requests\Product\Additional\AdditionalUpdateRequest;
+use App\Http\Resources\Product\AdditionalResource;
+use App\Http\Resources\ProductResource;
+use App\Models\Product\Additional;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 
 class AdditionalController extends Controller
 {
     public function index(Request $request)
     {
         $additionals = $request->user()->additionals();
+
         return Inertia::render('Product/Additional/Index', [
-            'additionals' => AdditionalResource::collection($additionals->paginate(5))
+            'additionals' => AdditionalResource::collection($additionals->paginate(5)),
         ]);
     }
 
@@ -32,21 +32,21 @@ class AdditionalController extends Controller
         ]);
     }
 
-
     public function store(AdditionalStoreRequest $request)
     {
         $input = $request->validated();
 
         $additional = $request->user()->additionals()->create($input);
 
-        if(!empty($input['products'])) $additional->products()->sync($input['products']);
+        if (!empty($input['products'])) {
+            $additional->products()->sync($input['products']);
+        }
 
         return Redirect::route('additionalIndex')->with('success', 'Adicional criado com sucesso !!!.');
     }
 
     public function show($id)
     {
-        //
     }
 
     public function edit(Request $request, Additional $additional)
@@ -57,7 +57,7 @@ class AdditionalController extends Controller
 
         return Inertia::render('Product/Additional/Form', [
             'additional' => new AdditionalResource($additional),
-            'products' => ProductResource::collection($products)
+            'products'   => ProductResource::collection($products),
         ]);
     }
 

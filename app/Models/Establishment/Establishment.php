@@ -2,13 +2,10 @@
 
 namespace App\Models\Establishment;
 
-use App\Models\User\User;
 use App\Models\Order\Order;
-use App\Models\Establishment\Theme;
-use App\Models\Establishment\Address;
-use Illuminate\Database\Eloquent\Model;
-use App\Models\Establishment\OpeningHour;
+use App\Models\User\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Establishment extends Model
 {
@@ -17,7 +14,7 @@ class Establishment extends Model
     protected $fillable = [
         'public_link_name', 'name', 'description', 'phone', 'picture', 'default_delivery_tax',
         'background_picture', 'delivery_time', 'min_value', 'need_confirm_order',
-        'address_id', 'user_id'
+        'address_id', 'user_id',
     ];
 
     public function orders()

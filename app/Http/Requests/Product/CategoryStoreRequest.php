@@ -24,10 +24,10 @@ class CategoryStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
+            'name'     => 'required|string|max:255',
             'priority' => 'required|numeric|min:0|max:1000',
-            'enable' => 'required|boolean',
-            'picture' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048'
+            'enable'   => 'required|boolean',
+            'picture'  => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ];
     }
 }

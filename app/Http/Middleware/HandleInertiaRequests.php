@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use Inertia\Middleware;
+use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Resources\User\UserResource;
+use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -19,7 +19,6 @@ class HandleInertiaRequests extends Middleware
     /**
      * Determine the current asset version.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
     public function version(Request $request)
@@ -30,25 +29,25 @@ class HandleInertiaRequests extends Middleware
     /**
      * Define the props that are shared by default.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function share(Request $request)
     {
         $user = null;
-        if(!empty($request->user())) {
+        if (!empty($request->user())) {
             $request->user()->picture = Storage::url($request->user()->picture);
-            $user = new UserResource($request->user());
+            $user                     = new UserResource($request->user());
             // $user = $user['data'];
         }
+
         return array_merge(parent::share($request), [
             'auth' => [
-                'user' => $user
+                'user' => $user,
             ],
             'flash' => function () use ($request) {
                 return [
                     'success' => $request->session()->get('success'),
-                    'error' => $request->session()->get('error'),
+                    'error'   => $request->session()->get('error'),
                 ];
             },
         ]);

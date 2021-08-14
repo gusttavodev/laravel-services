@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Establishment;
 
-use Inertia\Inertia;
 use App\Enums\DaysOfWeek;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Redirect;
-use App\Models\Establishment\Establishment;
-use App\Http\Resources\Product\CategoryProductResource;
-use App\Http\Resources\Establishment\EstablishmentResource;
 use App\Http\Requests\Establishment\EstablishmentStoreRequest;
+use App\Http\Resources\Establishment\EstablishmentResource;
+use App\Http\Resources\Product\CategoryProductResource;
+use App\Models\Establishment\Establishment;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class EstablishmentController extends Controller
 {
@@ -31,7 +31,7 @@ class EstablishmentController extends Controller
         $establishments = $request->user()->establishments();
 
         return Inertia::render('Establishment/Index', [
-            'establishments' => EstablishmentResource::collection($establishments->paginate(5))
+            'establishments' => EstablishmentResource::collection($establishments->paginate(5)),
         ]);
     }
 
@@ -48,16 +48,17 @@ class EstablishmentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\EstablishmentStoreRequest  $request
+     * @param \Illuminate\Http\EstablishmentStoreRequest $request
+     *
      * @return \Illuminate\Http\Response
-    */
+     */
     public function store(EstablishmentStoreRequest $request)
     {
         $input = $request->validated();
 
-        $input['picture'] = Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/establishmentPicture', $request->file('picture'));
+        $input['picture']            = Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/establishmentPicture', $request->file('picture'));
         $input['background_picture'] = Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/establishmentPicture', $request->file('background_picture'));
-        $input['public_link_name'] = strtolower(str_replace(' ', '_', $input['name']));
+        $input['public_link_name']   = strtolower(str_replace(' ', '_', $input['name']));
 
         $request->user()->establishments()->create($input);
 
@@ -67,18 +68,19 @@ class EstablishmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Establishment  $establishment
+     * @param \App\Models\Establishment $establishment
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Establishment $establishment)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Establishment  $establishment
+     * @param \App\Models\Establishment $establishment
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Request $request, Establishment $establishment)
@@ -91,13 +93,12 @@ class EstablishmentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Establishment  $establishment
+     * @param \App\Models\Establishment $establishment
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Establishment $establishment)
     {
-
         $establishment =  $request->user()->establishments()->findOrFail($establishment->id);
 
         if ($request->picture) {
@@ -107,13 +108,13 @@ class EstablishmentController extends Controller
             $establishment->background_picture =  Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/establishmentPicture', $request->file('background_picture'));
         }
 
-        $establishment->name = $request->name;
-        $establishment->description = $request->description;
-        $establishment->phone = $request->phone;
-        $establishment->delivery_time = $request->delivery_time;
+        $establishment->name                 = $request->name;
+        $establishment->description          = $request->description;
+        $establishment->phone                = $request->phone;
+        $establishment->delivery_time        = $request->delivery_time;
         $establishment->default_delivery_tax = $request->default_delivery_tax;
-        $establishment->min_value = $request->min_value;
-        $establishment->need_confirm_order = $request->need_confirm_order;
+        $establishment->min_value            = $request->min_value;
+        $establishment->need_confirm_order   = $request->need_confirm_order;
 
         $establishment->public_link_name = strtolower(str_replace(' ', '_', $request->name));
 
@@ -125,7 +126,8 @@ class EstablishmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Establishment  $establishment
+     * @param \App\Models\Establishment $establishment
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, Establishment $establishment)
@@ -146,7 +148,7 @@ class EstablishmentController extends Controller
 
         return Inertia::render('Establishment/Customize', [
             'establishment' => new EstablishmentResource($establishment),
-            'daysOfWeek' => $daysOfWeek
+            'daysOfWeek'    => $daysOfWeek,
         ]);
     }
 
@@ -156,10 +158,9 @@ class EstablishmentController extends Controller
 
         $categories = $establishment->user->categories;
 
-
         return Inertia::render('Establishment/Menu/Index', [
             'establishment' => new EstablishmentResource($establishment),
-            'categories' => CategoryProductResource::collection($categories)
+            'categories'    => CategoryProductResource::collection($categories),
         ]);
     }
 }

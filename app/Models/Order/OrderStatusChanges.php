@@ -11,13 +11,13 @@ class OrderStatusChanges extends Model
 
     protected $fillable = [
         'order_id',
-        'status'
+        'status',
     ];
 
     protected $casts = [
         'date'                    => 'datetime:m/d/Y',
         'created_at'              => 'datetime:d/m/Y H:i',
-        'updated_at'              => 'datetime:d/m/Y H:i'
+        'updated_at'              => 'datetime:d/m/Y H:i',
     ];
 
     protected $appends  = [

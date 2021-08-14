@@ -119,6 +119,9 @@ Route::middleware('inertia_request_establishment')->prefix('menu')->group(functi
     Route::get('/establishment/{public_link_name}', [EstablishmentController::class, 'showEstablishmentPublic'])->name('establishmentShowPublic');
     Route::get('/establishment/{public_link_name}/order', [OrderController::class, 'establishmentOrderCreate'])->name('establishmentOrderCreate');
 });
+Route::prefix('menu')->group(function () {
+    Route::get('/order/{tracking_link}', [OrderController::class, 'establishmentOrderShow'])->name('establishmentOrderShow');
+});
 
 Route::prefix('order')->group(function () {
     Route::get('', [OrderController::class, 'index'])->name('orderIndex');
@@ -130,4 +133,6 @@ Route::prefix('order')->group(function () {
     Route::post('{order}', [OrderController::class, 'update'])->name('orderUpdate');
 
     Route::delete('{order}', [OrderController::class, 'destroy'])->name('orderDelete');
+
+    // Route::post('step/contact-information', [OrderController::class, 'stepContactInformation'])->name('orderStepContactInformation');
 });

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Establishment;
 
-use Inertia\Inertia;
-use Illuminate\Http\Request;
-use App\Models\Establishment\Theme;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Redirect;
-use App\Http\Resources\Establishment\ThemeResource;
 use App\Http\Requests\Establishment\Theme\ThemeStoreRequest;
 use App\Http\Requests\Establishment\Theme\ThemeUpdateRequest;
+use App\Http\Resources\Establishment\ThemeResource;
+use App\Models\Establishment\Theme;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 
 class ThemeController extends Controller
 {
@@ -24,7 +24,7 @@ class ThemeController extends Controller
         $themes = $request->user()->themes();
 
         return Inertia::render('Establishment/Theme/Index', [
-            'themes' => ThemeResource::collection($themes->paginate(5))
+            'themes' => ThemeResource::collection($themes->paginate(5)),
         ]);
     }
 
@@ -44,14 +44,13 @@ class ThemeController extends Controller
 
     public function show($id)
     {
-        //
     }
 
     public function edit(Request $request, Theme $theme)
     {
         $theme =  $request->user()->themes()->findOrFail($theme->id);
 
-        return Inertia::render('Establishment/Theme/Form', [ 'theme' => new ThemeResource($theme) ]);
+        return Inertia::render('Establishment/Theme/Form', ['theme' => new ThemeResource($theme)]);
     }
 
     public function update(ThemeUpdateRequest $request, Theme $theme)

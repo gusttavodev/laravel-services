@@ -2,36 +2,34 @@
 
 namespace App\Http\Resources\Product;
 
-use Illuminate\Support\Facades\Storage;
-use App\Http\Resources\Product\CategoryResource;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\Product\AdditionalWithNotProductResource;
 
 class ProductResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'picture' =>   asset('/imagecache/large/'.$this->picture),
+            'id'       => $this->id,
+            'name'     => $this->name,
+            'picture'  => asset('/imagecache/large/' . $this->picture),
             'priority' => $this->priority,
-            'enable' => $this->enable,
+            'enable'   => $this->enable,
 
-            'price' => number_format((float)$this->price, 2, '.', ''),
+            'price'       => number_format((float) $this->price, 2, '.', ''),
             'description' => $this->description,
 
-            'categories' => CategoryResource::collection($this->categories),
+            'categories'  => CategoryResource::collection($this->categories),
             'additionals' => AdditionalWithNotProductResource::collection($this->additionals),
 
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'updated_at' => $this->updated_at,
         ];
     }
 }

@@ -3,8 +3,8 @@
 namespace App\Http\Resources\Order;
 
 use App\Models\Order\Order;
-use Illuminate\Support\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Carbon;
 
 class OrderStatusChangesResource extends JsonResource
 {
@@ -20,7 +20,7 @@ class OrderStatusChangesResource extends JsonResource
             'time' => Carbon::parse($this->created_at)->format('H:i'),
 
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'updated_at' => $this->updated_at,
         ];
     }
 }

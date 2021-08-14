@@ -2,46 +2,49 @@
 
 namespace App\Http\Controllers\User;
 
-use Inertia\Inertia;
-use App\Models\User\User;
-use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Redirect;
-use App\Http\Resources\User\UserResource;
 use App\Http\Requests\User\UserStoreRequest;
+use App\Http\Resources\User\UserResource;
+use App\Models\User\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
         $this->middleware('verified');
         // $this->middleware('verified')->only('store');
         // $this->middleware('subscribed')->except('store');
     }
 
-    public function index(){
+    public function index()
+    {
         $users = UserResource::collection(User::paginate(5));
+
         return Inertia::render('User/Index', [
-            'users' => $users
+            'users' => $users,
         ]);
     }
 
-    public function create(){
+    public function create()
+    {
         $roles =  Role::all();
 
         return Inertia::render('User/Form', [
-            'roles' => $roles
+            'roles' => $roles,
         ]);
     }
 
-    public function store(UserStoreRequest $request){
-
+    public function store(UserStoreRequest $request)
+    {
         $input = $request->validated();
 
-        $input['picture'] = Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/userPicture', $request->file('picture'));
+        $input['picture']  = Storage::disk(env('FILESYSTEM_DRIVER'))->put('images/userPicture', $request->file('picture'));
         $input['password'] = Hash::make($input['password']);
 
         User::create($input)->assignRole('user');
@@ -49,16 +52,18 @@ class UserController extends Controller
         return Redirect::route('userIndex')->with('success', 'User updated.');
     }
 
-    public function edit(User $user){
+    public function edit(User $user)
+    {
         $roles =  Role::all();
 
         return Inertia::render('User/Form', [
             'roles' => $roles,
-            'user' => new UserResource($user)
+            'user'  => new UserResource($user),
         ]);
     }
 
-    public function update(User $user){
+    public function update(User $user)
+    {
         // $roles =  Role::all();
 
         // return Inertia::render('User/Form', [

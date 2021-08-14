@@ -11,7 +11,7 @@ class WppUser extends Model
 
     protected $fillable = [
         'phone',
-        'name'
+        'name',
     ];
 
     public function orders()

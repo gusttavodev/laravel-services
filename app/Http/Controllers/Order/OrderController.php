@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers\Order;
 
-use Inertia\Inertia;
-use App\Models\Order\Order;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use App\Services\OrderService;
-use Illuminate\Support\Carbon;
-use App\Models\Product\Product;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Redirect;
-use App\Http\Resources\Order\OrderResource;
-use App\Models\Establishment\Establishment;
 use App\Http\Requests\Order\StoreOrderRequest;
 use App\Http\Resources\Establishment\EstablishmentResource;
+use App\Http\Resources\Order\OrderResource;
+use App\Models\Establishment\Establishment;
+use App\Models\Order\Order;
+use App\Models\Product\Product;
+use App\Services\OrderService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class OrderController extends Controller
 {
@@ -34,7 +32,7 @@ class OrderController extends Controller
         $orders = Order::where('id', '>', 0);
 
         return Inertia::render('Order/Index', [
-            'orders' => OrderResource::collection($orders->paginate(5))
+            'orders' => OrderResource::collection($orders->paginate(5)),
         ]);
     }
 
@@ -43,20 +41,20 @@ class OrderController extends Controller
         $establishment =  Establishment::where('public_link_name', $public_link_name)->firstOrFail();
 
         // If User Not Registered go to register
-        if(empty($request->user())){
+        if (empty($request->user())) {
             return Inertia::render('Establishment/Menu/Order/Register', [
-                'establishment' => new EstablishmentResource($establishment)
+                'establishment' => new EstablishmentResource($establishment),
             ]);
         }
 
-        $deliveryOptions = Order::DELIVERY_MODES;
+        $deliveryOptions    = Order::DELIVERY_MODES;
         $paymentModeOptions = Order::PAYMENT_MODES;
-        return Inertia::render('Establishment/Menu/Order/Steps/Index', [
-            'establishment' => new EstablishmentResource($establishment),
-            'delivery_mode_options' =>  $deliveryOptions,
-            'payment_mode_options' =>  $paymentModeOptions
-        ]);
 
+        return Inertia::render('Establishment/Menu/Order/Steps/Index', [
+            'establishment'         => new EstablishmentResource($establishment),
+            'delivery_mode_options' => $deliveryOptions,
+            'payment_mode_options'  => $paymentModeOptions,
+        ]);
     }
 
     public function store(StoreOrderRequest $request)
@@ -66,13 +64,13 @@ class OrderController extends Controller
         $establishment = Establishment::find($input['establishment_id']);
 
         $input['change_price'] = 0;
-        $input['total_price'] = 0;
-        $input['user_id'] = $request->user()->id;
+        $input['total_price']  = 0;
+        $input['user_id']      = $request->user()->id;
 
         $order = $establishment->orders()->create($input);
 
-        # TODO link product to establishment
-        # TODO validate establishment has this products
+        // TODO link product to establishment
+        // TODO validate establishment has this products
 
         $this->orderService->storeOrderProducts($input['products'], $order);
 
@@ -90,8 +88,6 @@ class OrderController extends Controller
         ]);
     }
 
-
-
     public function establishmentOrderShow(Request $request, $tracking_link)
     {
         $order              =  Order::where('tracking_link', $tracking_link)->firstOrFail();
@@ -99,16 +95,16 @@ class OrderController extends Controller
         $orderStatusChanges =  $this->orderService->formatOrderStatusChanges($order->statusChanges);
 
         // If User Not Registered go to register Middleware to this
-        if(empty($request->user())){
+        if (empty($request->user())) {
             return Inertia::render('Establishment/Menu/Order/Register', [
-                'establishment' => new EstablishmentResource($establishment)
+                'establishment' => new EstablishmentResource($establishment),
             ]);
         }
 
         return Inertia::render('Establishment/Menu/Order/Tracking/Index', [
-            'order' => new OrderResource($order),
-            'establishment' => new EstablishmentResource($establishment),
-            'orderStatusChanges' =>  $orderStatusChanges
+            'order'              => new OrderResource($order),
+            'establishment'      => new EstablishmentResource($establishment),
+            'orderStatusChanges' => $orderStatusChanges,
         ]);
     }
 }

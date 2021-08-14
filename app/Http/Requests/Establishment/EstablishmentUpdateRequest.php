@@ -24,7 +24,6 @@ class EstablishmentUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
         ];
     }
 }

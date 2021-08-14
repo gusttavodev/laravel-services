@@ -24,10 +24,10 @@ class AdditionalUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'price' => 'required|numeric|min:0',
+            'name'           => 'required',
+            'price'          => 'required|numeric|min:0',
             'quantity_limit' => 'required|integer|digits_between:0,999',
-            'products' => 'required',
+            'products'       => 'required',
         ];
     }
 }

@@ -55,7 +55,7 @@ it('should be create order', function () {
             ]);
         }
     }
-})->group('current');
+});
 
 it('should be create order with money', function () {
     $user = createUser();
@@ -90,4 +90,4 @@ it('should be create order with money', function () {
         'need_change'   => true,
         'change_price'  => floatval($calculatedChange)
     ]);
-})->group('current');
+});

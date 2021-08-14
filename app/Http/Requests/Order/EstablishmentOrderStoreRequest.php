@@ -24,7 +24,6 @@ class EstablishmentOrderStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
         ];
     }
 }

@@ -2,9 +2,8 @@
 
 namespace App\Models\Establishment;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Models\Establishment\Establishment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Theme extends Model
 {
@@ -15,7 +14,7 @@ class Theme extends Model
         'title_text_hover_color', 'background_color', 'button_background_color',
         'button_hover_color', 'button_text_color', 'button_count_color',
         'card_background_color', 'card_text_color', 'card_price_color',
-        'user_id'
+        'user_id',
     ];
 
     public function establishment()

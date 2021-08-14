@@ -2,9 +2,8 @@
 
 namespace App\Models\Product;
 
-use App\Models\Product\Product;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Additional extends Model
 {
@@ -12,12 +11,11 @@ class Additional extends Model
     protected $hidden = ['pivot'];
 
     protected $fillable = [
-        'name', 'price', 'quantity_limit'
+        'name', 'price', 'quantity_limit',
     ];
 
     public function products()
     {
         return $this->belongsToMany(Product::class, 'product_additionals');
     }
-
 }

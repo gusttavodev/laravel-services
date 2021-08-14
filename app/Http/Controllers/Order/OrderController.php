@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Order;
 
 use Inertia\Inertia;
 use App\Models\Order\Order;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Services\OrderService;
+use Illuminate\Support\Carbon;
 use App\Models\Product\Product;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -12,15 +15,17 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Resources\Order\OrderResource;
 use App\Models\Establishment\Establishment;
 use App\Http\Requests\Order\StoreOrderRequest;
-use App\Http\Requests\Order\EstablishmentOrderStoreRequest;
 use App\Http\Resources\Establishment\EstablishmentResource;
 
 class OrderController extends Controller
 {
-    public function __construct()
+    private OrderService $orderService;
+
+    public function __construct(OrderService $orderService)
     {
-        $this->middleware('auth');
-        $this->middleware('verified');
+        $this->orderService = $orderService;
+        // $this->middleware('auth');
+        // $this->middleware('verified');
     }
 
     public function index(Request $request)
@@ -58,43 +63,52 @@ class OrderController extends Controller
     {
         $input = $request->validated();
 
-        /*
-            TODO  Implementar Troco cao seja dinheiro
-            $table->boolean('need_change')->default(0);
-            $table->decimal('change_price', 8, 2);
-        */
+        $establishment = Establishment::find($input['establishment_id']);
 
         $input['change_price'] = 0;
         $input['total_price'] = 0;
 
-        $order = Order::create($input);
+        $order = $establishment->orders()->create($input);
 
-        foreach ($input['products'] as $productKey => $productValue) {
-            $selectedProduct = Product::find($productValue['id']);
-            $orderProduct = $order->products()->save(
-                $selectedProduct,
-                [
-                    'quantity' => $productValue['quantity'],
-                    'unity_price' => $selectedProduct->price
-                ]
-            );
-            foreach ($productValue['additionals'] as $additionalKey => $additionalValue) {
-                $selectedAdditional = $selectedProduct->additionals()->find($additionalValue["id"]);
-                $orderProduct->order_additionals()->save($selectedAdditional,  [
-                    'quantity' => $additionalValue['quantity'],
-                    'unity_price' => $selectedAdditional->price,
-                    'order_id' => $order->id
-                ]);
-            }
+        # TODO link product to establishment
+        # TODO validate establishment has this products
+
+        $this->orderService->storeOrderProducts($input['products'], $order);
+
+        $this->orderService->storeOrderPrice(
+            $order,
+            $input['payment_mode'],
+            $input['need_change'],
+            floatval($input['value_paid_cash'])
+        );
+
+        $order->update(['tracking_link' =>  Str::random(20)]);
+
+        return Redirect::route('establishmentOrderShow', [
+            'public_link_name' => $establishment->public_link_name,
+            'tracking_link' => $order->tracking_link,
+        ]);
+    }
+
+
+
+    public function establishmentOrderShow(Request $request, $tracking_link)
+    {
+        $order              =  Order::where('tracking_link', $tracking_link)->firstOrFail();
+        $establishment      =  $order->establishment;
+        $orderStatusChanges =  $this->orderService->formatOrderStatusChanges($order->statusChanges);
+
+        // If User Not Registered go to register Middleware to this
+        if(empty($request->user())){
+            return Inertia::render('Establishment/Menu/Order/Register', [
+                'establishment' => new EstablishmentResource($establishment)
+            ]);
         }
 
-        $additionalsPrice = $order->additionals_total_price;
-        $productsPrice = $order->products_total_price;
-
-        $order->update([
-            'total_price' => $productsPrice + $additionalsPrice
+        return Inertia::render('Establishment/Menu/Order/Tracking/Index', [
+            'order' => new OrderResource($order),
+            'establishment' => new EstablishmentResource($establishment),
+            'orderStatusChanges' =>  $orderStatusChanges
         ]);
-
-        response()->json(["data" => $order]);
     }
 }

@@ -2,7 +2,7 @@ import {
     GET_SHOW_ORDER, GET_STEPS, GET_CURRENT_STEP, GET_CONTACT_INFORMATION,
     GET_ADDRESS_INFORMATION, GET_DELIVERY_MODE, GET_DELIVERY_TAX, GET_CHANGE_PRICE,
     SET_SHOW_ORDER, SET_CONTACT_INFORMATION, SET_ADDRESS_INFORMATION,
-    SET_PAYMENT_MODE, SET_DELIVERY_MODE, SET_DELIVERY_TAX, SET_CHANGE_PRICE,
+    SET_PAYMENT_MODE, SET_DELIVERY_MODE,
     NEXT_STEP, PREVIOUS_STEP,
     CREATE_ORDER, GET_ORDER
 } from "@/store/mutationsTypes/Order";
@@ -18,6 +18,7 @@ export default {
                 { id: 0 , name: 'Informações de Contato',   status: 'current' },
                 { id: 1 , name: 'Informações de Entrega',   status: 'upcoming' },
                 { id: 2 , name: 'Informações de Pagamento', status: 'upcoming' },
+                { id: 2 , name: 'Compra Realizada Com Sucesso', status: 'upcoming' },
             ],
             form: {
                 contact_phone: "",
@@ -40,8 +41,10 @@ export default {
                 delivery_tax: "0.00",
 
                 payment_mode: 0,
+
                 need_change: false,
                 change_price: "0.00",
+                value_paid_cash: "0.00"
             }
         }
     },
@@ -57,21 +60,19 @@ export default {
         [SET_ADDRESS_INFORMATION]: (state, address) => {
             state.order.form.address = address
         },
-        [SET_DELIVERY_MODE]: (state, delivery_mode) => {
-            state.order.form.delivery_mode = delivery_mode
+        [SET_DELIVERY_MODE]: (state, data) => {
+            state.order.form.delivery_tax = "0.00"
+            state.order.form.delivery_mode = data.delivery_mode
+            if(state.order.form.delivery_mode == 1)  state.order.form.delivery_tax = data.delivery_tax
         },
-        [SET_DELIVERY_TAX]: (state, delivery_tax) => {
-            console.log("delivery_tax => ", delivery_tax)
-            state.order.form.delivery_tax = delivery_tax
-            console.log("state.order.form.delivery_tax => ", state.order.form.delivery_tax)
-        },
-        [SET_CHANGE_PRICE]: (state, change_price) => {
-            state.order.form.change_price = change_price
-        },
-        [SET_PAYMENT_MODE]: (state, payment_mode) => {
+
+        [SET_PAYMENT_MODE]: (state, form) => {
             state.order.form.need_change = false
-            if (payment_mode == 0) state.order.form.need_change = true
-            state.order.form.payment_mode = payment_mode
+            if (form.payment_mode == 0 && form.need_change) {
+                state.order.form.value_paid_cash = form.value_paid_cash
+                state.order.form.need_change = true
+            }
+            state.order.form.payment_mode = form.payment_mode
         },
 
         [NEXT_STEP]: (state, step) => {
@@ -116,8 +117,10 @@ export default {
                         delivery_tax: "0.00",
 
                         payment_mode: 0,
+
                         need_change: false,
                         change_price: "0.00",
+                        value_paid_cash: "0.00"
                     }
                 }
             }
@@ -125,6 +128,7 @@ export default {
     },
     getters: {
         [GET_DELIVERY_TAX]: (state) => {
+            console.log("state.order.form.delivery_tax ", state.order.form.delivery_tax)
             return MoneyService.convertFloatToMoney(state.order.form.delivery_tax)
         },
         [GET_CHANGE_PRICE]: (state) => {
@@ -192,15 +196,8 @@ export default {
         [SET_ADDRESS_INFORMATION]: ({ commit }, address) => {
             commit(SET_ADDRESS_INFORMATION, address)
         },
-        [SET_DELIVERY_MODE]: ({ commit }, delivery_mode) => {
-            commit(SET_DELIVERY_MODE, delivery_mode)
-        },
-
-        [SET_DELIVERY_TAX]: ({ commit }, delivery_tax) => {
-            commit(SET_DELIVERY_TAX, delivery_tax)
-        },
-        [SET_CHANGE_PRICE]: ({ commit }, change_price) => {
-            commit(SET_CHANGE_PRICE, change_price)
+        [SET_DELIVERY_MODE]: ({ commit }, data) => {
+            commit(SET_DELIVERY_MODE, data)
         },
 
         [SET_PAYMENT_MODE]: ({ commit }, payment_mode) => {

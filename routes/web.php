@@ -127,6 +127,7 @@ Route::prefix('order')->group(function () {
 
     Route::get('{order}', [OrderController::class, 'edit'])->name('orderEdit');
     Route::post('{order}', [OrderController::class, 'update'])->name('orderUpdate');
+    Route::post('{order}/next-status', [OrderController::class, 'orderNextStatus'])->name('orderNextStatus');
 
     Route::delete('{order}', [OrderController::class, 'destroy'])->name('orderDelete');
 

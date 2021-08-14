@@ -24,7 +24,7 @@ class OrderFactory extends Factory
     {
         $paymentMode  = array_search(Arr::random(Order::PAYMENT_MODES), Order::PAYMENT_MODES);
         $deliveryMode = array_search(Arr::random(Order::DELIVERY_MODES), Order::DELIVERY_MODES);
-        $status       = array_search(Arr::random(Order::STATUSES), Order::STATUSES);
+        // $status       = array_search(Arr::random(Order::STATUSES), Order::STATUSES);
 
         return [
             'contact_name'  => $this->faker->name(),
@@ -39,7 +39,7 @@ class OrderFactory extends Factory
             'tracking_link' => $this->faker->uuid(),
 
             'payment_mode'  => $paymentMode,
-            'status'        => $status,
+            'status'        => Order::CREATED,
             'delivery_mode' => $deliveryMode,
         ];
     }

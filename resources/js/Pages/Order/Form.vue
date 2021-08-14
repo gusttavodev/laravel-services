@@ -2,10 +2,11 @@
 
     <Header title="Produtos" buttonText="Voltar" :buttonAction="route('productIndex')" />
 
-    <ChangeStatus
+    <OrderNextStatus
+        v-if="order.data.status <  4"
         class="px-4 mt-6 sm:px-6 lg:px-8"
         :order="order"
-        :statusOptions="statusOptions"
+        :orderStatusChanges="orderStatusChanges"
         :errors="errors"
     />
 
@@ -26,7 +27,7 @@
 
 <script>
 import Layout from '@/Shared/Layout'
-import ChangeStatus from '@/Pages/Order/ChangeStatus'
+import OrderNextStatus from '@/Pages/Order/OrderNextStatus'
 import OrderAddressInformation from '@/Pages/Order/OrderAddressInformation'
 import OrderContactInformation from '@/Pages/Order/OrderContactInformation'
 
@@ -34,14 +35,14 @@ export default {
   metaInfo: { title: 'product' },
   layout: Layout,
   components: {
-    ChangeStatus,
+    OrderNextStatus,
     OrderContactInformation,
     OrderAddressInformation
   },
   props: {
     errors: Object,
     order: Object,
-    statusOptions: Array
+    orderStatusChanges: Array
   },
   data() {
     return {

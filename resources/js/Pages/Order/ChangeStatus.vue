@@ -17,6 +17,7 @@
                 valueName="id"
                 label="Status do Pedido"
             />
+
         <p class="px-2 py-2 mt-1 text-sm text-gray-500">Atenção! ao alterar o status do pedido isso será informao ao cliente</p>
         </div>
 

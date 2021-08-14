@@ -114,9 +114,11 @@ class OrderController extends Controller
     {
         $statusOptions = Order::STATUSES;
 
+        $orderStatusChanges =  $this->orderService->formatOrderStatusChanges($order->statusChanges);
+
         return Inertia::render('Order/Form', [
-            'order'          => new OrderResource($order),
-            'statusOptions'  => $statusOptions,
+            'order'               => new OrderResource($order),
+            'orderStatusChanges'  => $orderStatusChanges,
         ]);
     }
 
@@ -127,5 +129,14 @@ class OrderController extends Controller
         $order->update($input);
 
         return Redirect::route('orderEdit', $order->id)->with('success', 'Pedido atualizado com sucesso !!!.');
+    }
+
+    public function orderNextStatus(Order $order)
+    {
+        if ($order->status + 1 < 5) {
+            $order->update(['status' => $order->status + 1]);
+
+            return Redirect::route('orderEdit', $order->id)->with('success', 'Status do Pedido Atualizado com sucesso !!!.');
+        }
     }
 }

@@ -1,15 +1,15 @@
 <?php
-use App\Models\Order\Order;
 
-use Inertia\Testing\Assert;
-use App\Services\OrderService;
-use function Pest\Laravel\get;
-use App\Http\Resources\Order\OrderResource;
 use App\Http\Resources\Establishment\EstablishmentResource;
+use App\Http\Resources\Order\OrderResource;
+use App\Models\Order\Order;
+use App\Services\OrderService;
+use Inertia\Testing\Assert;
+use function Pest\Laravel\get;
 
 it('should be show order with tracking link', function () {
-    $orderService        = new OrderService();
-    $user                = createUser();
+    $orderService   = new OrderService();
+    $user  = createUser();
     $firstEstablishment  = createEstablishment($user);
     $firstEstablishment->orders()->saveMany(
         Order::factory(1)->create()
@@ -18,14 +18,13 @@ it('should be show order with tracking link', function () {
     $firstOrder = $firstEstablishment->orders()->first();
 
     get(route('establishmentOrderShow', [
-        'tracking_link' => $firstOrder->tracking_link
+        'tracking_link' => $firstOrder->tracking_link,
     ]))
         ->assertStatus(200)
         ->assertInertia(fn (Assert $page) => $page
             ->component('Establishment/Menu/Order/Tracking/Index')
-            ->where("order", new OrderResource($firstOrder))
-            ->where("establishment", new EstablishmentResource($firstEstablishment))
-            ->where("orderStatusChanges", $orderService->formatOrderStatusChanges($firstOrder->statusChanges))
+            ->where('order', new OrderResource($firstOrder))
+            ->where('establishment', new EstablishmentResource($firstEstablishment))
+            ->where('orderStatusChanges', $orderService->formatOrderStatusChanges($firstOrder->statusChanges))
         );
-
 })->group('current');

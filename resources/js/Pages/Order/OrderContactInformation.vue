@@ -51,7 +51,6 @@ export default {
     errors: Object,
   },
   created() {
-    console.log("ORDER ", this.order.data)
     if (this.order) this.form = this.order.data
   },
   data() {

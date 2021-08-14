@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Order;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Order\OrderUpdateRequest;
 use App\Http\Requests\Order\StoreOrderRequest;
 use App\Http\Resources\Establishment\EstablishmentResource;
 use App\Http\Resources\Order\OrderResource;
@@ -107,5 +108,24 @@ class OrderController extends Controller
             'establishment'      => new EstablishmentResource($establishment),
             'orderStatusChanges' => $orderStatusChanges,
         ]);
+    }
+
+    public function edit(Order $order)
+    {
+        $statusOptions = Order::STATUSES;
+
+        return Inertia::render('Order/Form', [
+            'order'          => new OrderResource($order),
+            'statusOptions'  => $statusOptions,
+        ]);
+    }
+
+    public function update(OrderUpdateRequest $request, Order $order)
+    {
+        $input = $request->validated();
+
+        $order->update($input);
+
+        return Redirect::route('orderEdit', $order->id)->with('success', 'Pedido atualizado com sucesso !!!.');
     }
 }

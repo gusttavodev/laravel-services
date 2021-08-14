@@ -29,6 +29,8 @@ class OrderResource extends JsonResource
             'delivery_tax'  => $this->delivery_tax,
             'tracking_link' => $this->tracking_link,
 
+            'status'        => $this->status,
+
             'status_label'        => Order::STATUSES[$this->status],
             'payment_mode_label'  => Order::PAYMENT_MODES[$this->payment_mode],
             'delivery_mode_label' => Order::DELIVERY_MODES[$this->delivery_mode],

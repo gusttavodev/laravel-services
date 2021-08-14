@@ -67,6 +67,7 @@ class OrderController extends Controller
 
         $input['change_price'] = 0;
         $input['total_price'] = 0;
+        $input['user_id'] = $request->user()->id;
 
         $order = $establishment->orders()->create($input);
 
@@ -85,7 +86,6 @@ class OrderController extends Controller
         $order->update(['tracking_link' =>  Str::random(20)]);
 
         return Redirect::route('establishmentOrderShow', [
-            'public_link_name' => $establishment->public_link_name,
             'tracking_link' => $order->tracking_link,
         ]);
     }

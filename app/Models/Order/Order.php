@@ -85,7 +85,9 @@ class Order extends Model
         'tracking_link',
         'payment_mode',
         'status',
-        'delivery_mode'
+        'delivery_mode',
+
+        'user_id'
     ];
 
     public function establishment()

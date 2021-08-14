@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\Models\Order\Order;
 use App\Models\Product\Product;
 use App\Models\Product\Category;
 use App\Models\Product\Additional;
@@ -61,6 +62,11 @@ class User extends Authenticatable
     public function products()
     {
         return $this->HasMany(Product::class);
+    }
+
+    public function orders()
+    {
+        return $this->HasMany(Order::class);
     }
 
     public function additionals(){

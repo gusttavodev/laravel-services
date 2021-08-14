@@ -1,49 +1,46 @@
 <?php
-use App\Models\User\User;
 use App\Models\Order\Order;
-use App\Models\Establishment\Address;
 
-use Illuminate\Support\Arr;
-
-use function Pest\Faker\faker;
 use function Pest\Laravel\post;
 use function Pest\Laravel\seed;
-use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
 
 it('should be create order', function () {
-    seed(RoleSeeder::class);
-
-    $user = User::factory()->create();
-    $user->assignRole('admin');
-    actingAs($user);
+    $user = createUser();
 
     seed(CategorySeeder::class);
-    seed(EstablishmentSeeder::class);
     seed(AdditionalSeeder::class);
 
-    $expectedData = getProductsWithAdditionals(5, 3);
-    $products = $expectedData['products'];
+    $firstEstablishment     = createEstablishment($user);
 
-    $order['contact_phone'] = faker()->phoneNumber;
-    $order['contact_name']  = faker()->name;
-    $order['delivery_mode'] = Arr::random(array_keys(Order::DELIVERY_MODES));
-    $order['payment_mode']  = Arr::random(array_keys(Order::PAYMENT_MODES));
-    $order['products']      =   $products;
-    $order['address']       = Address::factory()->make()->toArray();
+    $productData           = getProductsWithAdditionals(5, 3);
+    $order                  = createOrder($firstEstablishment);
+    $order['products']      = $productData['products'];
 
-    $response = post(route('orderStore'), $order);
+    post(route('orderStore'), $order)
+        ->assertStatus(302)
+        ->assertRedirect(route('establishmentOrderShow', [
+            'tracking_link'    => $user->orders()->first()->tracking_link
+        ]));
 
-    $response->assertStatus(200);
+    $createdOrder = $user->orders()->first();
+
     assertDatabaseHas('orders', [
-        'id'            => 1,
+        'user_id' => $user->id,
+        'establishment_id' => $firstEstablishment->id,
+
         'contact_phone' => $order['contact_phone'],
         'contact_name'  => $order['contact_name'],
         'payment_mode'  => $order['payment_mode'],
-        'total_price'  => $expectedData['total_price']
+        'total_price'   => $productData['total_price']
     ]);
 
-    foreach ($products as $keyProduct => $valueProduct) {
+    assertDatabaseHas('order_status_changes', [
+        'status'    => $createdOrder->status,
+        'order_id'  => $createdOrder->id
+    ]);
+
+    foreach ($productData['products'] as $keyProduct => $valueProduct) {
         assertDatabaseHas('order_products', [
             'order_id'   => 1,
             'product_id' => $valueProduct["id"],
@@ -58,6 +55,39 @@ it('should be create order', function () {
             ]);
         }
     }
+})->group('current');
 
+it('should be create order with money', function () {
+    $user = createUser();
+    seed(CategorySeeder::class);
+    seed(AdditionalSeeder::class);
+    $firstEstablishment         = createEstablishment($user);
+    $productData                = getProductsWithAdditionals(5, 3);
+    $orderData                  = createOrder($firstEstablishment);
+    $orderData['payment_mode']  = Order::MONEY;
+    $orderData['need_change']   = true;
 
+    // #TODO DEVE SER MAIOR QUE O TOTAL
+    $orderData['value_paid_cash']   = 50.00;
+    $orderData['products']          = $productData['products'];
+
+    post(route('orderStore'), $orderData)
+        ->assertStatus(302)
+        ->assertRedirect(route('establishmentOrderShow', [
+            'tracking_link'    => $user->orders()->first()->tracking_link
+        ]));
+
+    $order = $user->orders()->first();
+
+    $totalPrice = $order->additionals_total_price + $order->products_total_price;
+    $calculatedChange = $totalPrice - $orderData['value_paid_cash'];
+
+    assertDatabaseHas('orders', [
+        'user_id' => $user->id,
+        'establishment_id' => $firstEstablishment->id,
+
+        'total_price' => floatval($totalPrice),
+        'need_change'   => true,
+        'change_price'  => floatval($calculatedChange)
+    ]);
 })->group('current');

@@ -9,6 +9,7 @@
                 @onPreviusStep="previusStep"
                 @onJumpToStep="jumpToStep"
             />
+
             <transition name="slide-fade">
                 <ContactInformation v-show="currentStep.id == 0" :user="user" :errors="errors" :step="currentStep"/>
             </transition>
@@ -16,11 +17,10 @@
                <AddressInformation v-show="currentStep.id == 1" :establishment="establishment" :user="user" :errors="errors" :step="currentStep" :delivery_mode_options="delivery_mode_options"/>
             </transition>
             <transition name="slide-fade">
-               <PaymentInformation v-show="currentStep.id == 2" :user="user" :errors="errors" :step="currentStep" :payment_mode_options="payment_mode_options"/>
+               <PaymentInformation v-show="currentStep.id == 2" :establishment="establishment" :user="user" :errors="errors" :step="currentStep" :payment_mode_options="payment_mode_options"/>
             </transition>
         </div>
     </form>
-
 </template>
 
 <script>
@@ -28,9 +28,10 @@ import MenuLayout from '@/Shared/MenuLayout'
 
 import Steps from '@/Layouts/Steps'
 
-import ContactInformation from '@/Pages/Establishment/Menu/Order/Steps/ContactInformation'
-import AddressInformation from '@/Pages/Establishment/Menu/Order/Steps/AddressInformation'
-import PaymentInformation from '@/Pages/Establishment/Menu/Order/Steps/PaymentInformation'
+import ContactInformation from '@Establishment/Menu/Order/Steps/ContactInformation'
+import AddressInformation from '@Establishment/Menu/Order/Steps/AddressInformation'
+import PaymentInformation from '@Establishment/Menu/Order/Steps/PaymentInformation'
+
 
 import { GET_STEPS, GET_CURRENT_STEP } from '@/store/mutationsTypes/Order'
 

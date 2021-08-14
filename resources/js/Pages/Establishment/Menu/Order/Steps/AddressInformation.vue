@@ -141,7 +141,6 @@ import {
 
     SET_ADDRESS_INFORMATION,
     SET_DELIVERY_MODE,
-    SET_DELIVERY_TAX,
 
     NEXT_STEP,
     PREVIOUS_STEP
@@ -181,10 +180,9 @@ export default {
     },
     submit() {
         this.$store.dispatch(SET_ADDRESS_INFORMATION, this.form)
-        this.$store.dispatch(SET_DELIVERY_MODE, this.delivery_mode)
+        this.$store.dispatch(SET_DELIVERY_MODE, {delivery_mode: this.delivery_mode, delivery_tax: this.establishment.data.default_delivery_tax})
         this.$store.dispatch(NEXT_STEP, this.step)
 
-        if(this.delivery_mode == 1) this.$store.dispatch(SET_DELIVERY_TAX, this.establishment.data.default_delivery_tax)
     }
   },
 }

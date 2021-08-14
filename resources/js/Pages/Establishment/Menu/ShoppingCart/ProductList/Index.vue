@@ -8,7 +8,12 @@
         "
         @click="toggleCartProductsList"
     >
-   <h3>Produtos No Carrinho</h3>
+   <div class="flex items-center justify-center">
+        <h3>Produtos No Carrinho </h3>
+        <span class="mx-2 my-2 px-1 py-1 text-sm font-medium text-green-800 bg-green-100 rounded-full">
+            {{ totalPrice }}
+        </span>
+   </div>
 
     </div>
     <nav class="block overflow-y-auto h-80 md:max-h-screen md:h-80 lg:h-80" aria-label="Directory" v-if="showProductdList">
@@ -27,10 +32,10 @@
 </template>
 
 <script>
-import ProductItem from '@/Pages/Establishment/Menu/ShoppingCart/ProductList/Item'
+import ProductItem from '@Establishment/Menu/ShoppingCart/ProductList/Item'
 
 import { HAS_PRODUCT } from '@/store/mutationsTypes/Product'
-import { GET_CART } from '@/store/mutationsTypes/StoreCart'
+import { GET_CART, GET_CART_TOTAL_PRICE } from '@/store/mutationsTypes/StoreCart'
 
 export default {
   name: 'ProductList',
@@ -41,6 +46,9 @@ export default {
     additionals: Array,
   },
    computed: {
+    totalPrice() {
+      return this.$store.getters[GET_CART_TOTAL_PRICE]
+    },
     hasProduct() {
       return this.$store.getters[HAS_PRODUCT]
     },

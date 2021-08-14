@@ -23,7 +23,7 @@ $finder = Finder::create()->in([
 ]);
 
 $config = new Config();
-$config->setIndent("    ");
+$config->setIndent('    ');
 $config->setRiskyAllowed(false)
     ->setRules($rules)
     ->setFinder($finder);

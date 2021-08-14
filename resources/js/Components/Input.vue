@@ -4,16 +4,16 @@
     </label>
     <div class="mt-1 relative rounded-md shadow-sm">
       <input
-        :class="[error ?
-            'border-red-300 text-red-900 placeholder-red-300  focus:ring-red-500 focus:border-red-500' :
-            'border-indigo-300 text-indigo-900 placeholder-indigo-300  focus:ring-indigo-500 focus:border-indigo-500'
-        ]"
+        :class="computedClass"
         class="block w-full pr-10 focus:outline-none sm:text-sm rounded-md"
         :id="id"
         :name="name"
         :type="type"
         :value="value"
         :required="required"
+
+        :disabled="disabled"
+
         ref="input"
         @input="$emit('update:modelValue', $event.target.value)"
       />
@@ -31,7 +31,20 @@ import { ExclamationCircleIcon } from '@heroicons/vue/solid'
 export default {
   inheritAttrs: false,
   components: {ExclamationCircleIcon},
+  computed: {
+    computedClass() {
+      if(this.error) return 'border-red-300 text-red-900 placeholder-red-300  focus:ring-red-500 focus:border-red-500'
+      if(this.disabled) return 'border-gray-300 text-gray-900 placeholder-gray-300  focus:ring-gray-500 focus:border-gray-500 cursor-not-allowed '
+      return 'border-indigo-300 text-indigo-900 placeholder-indigo-300  focus:ring-indigo-500 focus:border-indigo-500'
+    }
+  },
   props: {
+    disabled: {
+      type: Boolean,
+      default() {
+        return false
+      },
+    },
     id: {
       type: String,
       default() {

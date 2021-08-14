@@ -48,6 +48,34 @@ class Order extends Model
         self::COMPLETED => 'Peido Completo',
     ];
 
+    const STATUSES_LIST = [
+        self::CREATED   => [
+            "label" => self::STATUSES[self::CREATED],
+            "value" => self::CREATED,
+            "completed" => false
+        ],
+        self::ACCEPTED   => [
+            "label" => self::STATUSES[self::ACCEPTED],
+            "value" => self::ACCEPTED,
+            "completed" => false
+        ],
+        self::STARTED   => [
+            "label" => self::STATUSES[self::STARTED],
+            "value" => self::STARTED,
+            "completed" => false
+        ],
+         self::DELIVERY   => [
+            "label" => self::STATUSES[self::DELIVERY],
+            "value" => self::DELIVERY,
+            "completed" => false
+        ],
+        self::COMPLETED   => [
+            "label" => self::STATUSES[self::COMPLETED],
+            "value" => self::COMPLETED,
+            "completed" => false
+        ]
+    ];
+
     protected $fillable = [
         'contact_phone',
         'contact_name',
@@ -88,6 +116,11 @@ class Order extends Model
     public function additionals()
     {
         return $this->belongsToMany(Additional::class, 'order_product_additionals')->withPivot('quantity', 'unity_price');
+    }
+
+    public function statusChanges()
+    {
+        return $this->hasMany(OrderStatusChanges::class);
     }
 
     public function getAdditionalsTotalPriceAttribute()

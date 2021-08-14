@@ -84,11 +84,12 @@ class OrderController extends Controller
         $order->update(['tracking_link' =>  Str::random(20)]);
 
         return Redirect::route('establishmentOrderShow', [
-            'tracking_link' => $order->tracking_link,
+            'tracking_link'    => $order->tracking_link,
+            'public_link_name' => $establishment->public_link_name,
         ]);
     }
 
-    public function establishmentOrderShow(Request $request, $tracking_link)
+    public function establishmentOrderShow(Request $request, $public_link_name, $tracking_link)
     {
         $order              =  Order::where('tracking_link', $tracking_link)->firstOrFail();
         $establishment      =  $order->establishment;

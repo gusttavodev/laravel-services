@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Order;
 
+use App\Http\Resources\Establishment\EstablishmentResource;
 use App\Http\Resources\User\UserResource;
 use App\Http\Resources\User\WppUserResource;
 use App\Models\Order\Order;
@@ -42,6 +43,8 @@ class OrderResource extends JsonResource
             'user'     => !empty($this->user) ? $this->user : null,
 
             'date' => Carbon::parse($this->created_at)->format('d/m/Y'),
+
+            'establishment' => new EstablishmentResource($this->establishment),
 
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

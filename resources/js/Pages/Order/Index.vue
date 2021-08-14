@@ -50,6 +50,20 @@
                   Forma de Pagamento
                 </th>
 
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                >
+                  Forma de Entrega
+                </th>
+
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                >
+                  Ações
+                </th>
+
 
 
               </tr>
@@ -58,9 +72,16 @@
             <tbody class="bg-white divide-y divide-gray-200">
               <tr v-for="order in orders.data" :key="order.id">
                 <td class="px-6 py-4 text-left whitespace-nowrap">
-                  <span class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full">
-                    {{ order.id }}
-                  </span>
+                    <inertia-link
+                        :href="route('establishmentOrderShow',{
+                            public_link_name: order.establishment.public_link_name,
+                            tracking_link: order.tracking_link
+                        })"
+                        type="button"
+                        class="text-sm font-medium text-gray-900"
+                    >
+                        {{ order.id }}
+                    </inertia-link>
                 </td>
 
                 <td class="px-6 py-4 text-left whitespace-nowrap">
@@ -88,9 +109,55 @@
                     <span
                     class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full text-yellow-800 bg-yellow-100"
                     >
+                        {{ order.status_label }}
+                    </span>
+                </td>
+
+                <td class="px-6 py-4 text-left whitespace-nowrap">
+                    <span
+                        class="text-sm font-medium text-gray-900"
+                    >
                         {{ order.total_price }}
                     </span>
                 </td>
+
+                <td class="px-6 py-4 text-left whitespace-nowrap">
+                    <inertia-link
+                        :href="route('establishmentShowPublic', order.establishment.public_link_name)"
+                        type="button"
+                        class="text-sm font-medium text-gray-900"
+                    >
+                        {{ order.establishment.name }}
+                    </inertia-link>
+                </td>
+                <td class="px-6 py-4 text-left whitespace-nowrap">
+                    <span
+                        class="text-sm font-medium text-gray-900"
+                    >
+                        {{ order.payment_mode_label }}
+                    </span>
+                </td>
+                 <td class="px-6 py-4 text-left whitespace-nowrap">
+                    <span
+                        class="text-sm font-medium text-gray-900"
+                    >
+                        {{ order.delivery_mode_label }}
+                    </span>
+                </td>
+
+                 <td class="px-6 py-4 text-left whitespace-nowrap">
+                   <inertia-link
+                    :href="route('establishmentOrderShow',{
+                            public_link_name: order.establishment.public_link_name,
+                            tracking_link: order.tracking_link
+                        })"
+                    type="button"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-sys_primary-600 order-0 hover:bg-sys_primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3"
+                    >Editar
+                  </inertia-link>
+                </td>
+
+
 
 
               </tr>

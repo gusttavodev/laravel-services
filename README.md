@@ -48,3 +48,40 @@ CSRF token mismatch.
     - [] Componentizar o card com form send e tile/sub title
     - [] Tirar o Model de Address de dentro de Establishment pois ele tbm pode ser de um user
 
+# TODO ORDER
+    - [X] Informar Taxa de entrega
+        - [x] Adicionar o campo no establishment
+        - [] Validar os Form 
+        - [] Informar nas Steps de Order
+        - [] Aplicar ao Criar a Order
+    - [] Caso seja dinheiro pedir para informar o troco, salvar o troco e que vai ter troco na Order
+    - [] Validar se o valor do pedido é maior que o valor minimo para entrega do establishment
+    - [] Mostrar o preço final na etapa de pagamento com a taxa de entrega se tiver
+    - [] Tela de Tracking
+    - [] Possibilidade de Remove taxa de entrega de um pedido já criado como admin
+
+# TODO FUTURO
+    - [] Definir taxas de entrega por distancia
+    - O Vuex Sempre Deve fazer uma instancia do Dinero e retornar ela
+
+
+# ADD ESTABLISHMENT ID AT ORDER
+
+# Deploy com GitHub Actions
+https://philo.dev/how-to-use-github-actions-build-matrix-to-deploy-artifacts-to-multiple-servers/
+https://www.youtube.com/watch?v=2zduPKmszmI
+
+
+
+# ESTLINT 
+eslint init 
+
+babel-eslint
+@vue/cli-plugin-babel/preset
+
+
+Configurar para o index.vue ser o primeiro acessado na pasta
+
+
+# TODO 
+Usar casting nos models para dinheiro

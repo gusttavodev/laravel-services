@@ -28,9 +28,9 @@ class EstablishmentResource extends JsonResource
             'picture' => Storage::url($this->picture),
             'background_picture' => Storage::url($this->background_picture),
             'delivery_time' => $this->delivery_time,
-            'default_delivery_tax' => $this->default_delivery_tax,
 
-            'min_value' => $this->min_value,
+            'default_delivery_tax' => number_format((float)$this->default_delivery_tax, 2, '.', ''),
+            'min_value' => number_format((float)$this->min_value, 2, '.', ''),
 
             'address' => new  AddressResource($this->address),
             'opening_hours' => OpeningHoursResource::collection($this->openingHours),

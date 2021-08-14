@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Order;
 
 use App\Models\Order\Order;
+use Illuminate\Support\Carbon;
 use App\Http\Resources\User\UserResource;
 use App\Http\Resources\User\WppUserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -38,6 +39,8 @@ class OrderResource extends JsonResource
 
             'wpp_user' => !empty($this->wppUser) ? $this->wppUser : null,
             'user' => !empty($this->user) ? $this->user : null,
+
+            'date' => Carbon::parse($this->created_at)->format('d/m/Y'),
 
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at

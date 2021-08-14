@@ -26,6 +26,13 @@ class StoreOrderRequest extends FormRequest
     public function rules()
     {
         return [
+            'establishment_id' =>  'required|exists:establishments,id',
+
+            'need_change' => 'required',
+
+            # TODO need most then total price
+            'value_paid_cash' =>  Rule::requiredIf($this->need_change && $this->payment_mode == Order::MONEY),
+
             'contact_phone' => 'required|min:3|max:255',
             'contact_name' => 'required|min:3|max:255',
 

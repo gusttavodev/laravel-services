@@ -1,28 +1,28 @@
 <?php
 
-use Inertia\Inertia;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Application;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\Order\OrderController;
-use App\Http\Controllers\User\ProfileController;
-use App\Http\Controllers\Product\ProductController;
-use App\Http\Controllers\Product\CategoryController;
-use App\Http\Controllers\Product\AdditionalController;
-use App\Http\Controllers\Establishment\ThemeController;
 use App\Http\Controllers\Establishment\AddressController;
-use App\Http\Controllers\Establishment\OpeningHourController;
 use App\Http\Controllers\Establishment\EstablishmentController;
+use App\Http\Controllers\Establishment\OpeningHourController;
+use App\Http\Controllers\Establishment\ThemeController;
+use App\Http\Controllers\Order\OrderController;
+use App\Http\Controllers\Product\AdditionalController;
+use App\Http\Controllers\Product\CategoryController;
+use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\UserController;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
+        'canLogin'       => Route::has('login'),
+        'canRegister'    => Route::has('register'),
         'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'phpVersion'     => PHP_VERSION,
     ]);
 });
 
@@ -94,8 +94,6 @@ Route::prefix('theme')->group(function () {
     Route::delete('{theme}', [ThemeController::class, 'destroy'])->name('themeDelete');
 });
 
-
-
 Route::prefix('establishment')->group(function () {
     Route::get('', [EstablishmentController::class, 'index'])->name('establishmentIndex');
 
@@ -118,9 +116,7 @@ Route::prefix('establishment')->group(function () {
 Route::middleware('inertia_request_establishment')->prefix('menu')->group(function () {
     Route::get('/establishment/{public_link_name}', [EstablishmentController::class, 'showEstablishmentPublic'])->name('establishmentShowPublic');
     Route::get('/establishment/{public_link_name}/order', [OrderController::class, 'establishmentOrderCreate'])->name('establishmentOrderCreate');
-});
-Route::prefix('menu')->group(function () {
-    Route::get('/order/{tracking_link}', [OrderController::class, 'establishmentOrderShow'])->name('establishmentOrderShow');
+    Route::get('/establishment/{public_link_name}/order/{tracking_link}', [OrderController::class, 'establishmentOrderShow'])->name('establishmentOrderShow');
 });
 
 Route::prefix('order')->group(function () {

@@ -18,7 +18,8 @@ it('should be show order with tracking link', function () {
     $firstOrder = $firstEstablishment->orders()->first();
 
     get(route('establishmentOrderShow', [
-        'tracking_link' => $firstOrder->tracking_link,
+        'tracking_link'    => $firstOrder->tracking_link,
+        'public_link_name' => $firstEstablishment->public_link_name,
     ]))
         ->assertStatus(200)
         ->assertInertia(fn (Assert $page) => $page
@@ -27,4 +28,4 @@ it('should be show order with tracking link', function () {
             ->where('establishment', new EstablishmentResource($firstEstablishment))
             ->where('orderStatusChanges', $orderService->formatOrderStatusChanges($firstOrder->statusChanges))
         );
-})->group('current');
+});

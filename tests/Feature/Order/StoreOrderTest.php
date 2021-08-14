@@ -20,6 +20,7 @@ it('should be create order', function () {
     post(route('orderStore'), $order)
         ->assertStatus(302)
         ->assertRedirect(route('establishmentOrderShow', [
+            'public_link_name' => $firstEstablishment->public_link_name,
             'tracking_link'    => $user->orders()->first()->tracking_link,
         ]));
 
@@ -74,7 +75,8 @@ it('should be create order with money', function () {
     post(route('orderStore'), $orderData)
         ->assertStatus(302)
         ->assertRedirect(route('establishmentOrderShow', [
-            'tracking_link'    => $user->orders()->first()->tracking_link,
+            'public_link_name'  => $firstEstablishment->public_link_name,
+            'tracking_link'     => $user->orders()->first()->tracking_link,
         ]));
 
     $order = $user->orders()->first();

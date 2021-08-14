@@ -1,9 +1,9 @@
 <?php
-use App\Models\Order\Order;
 
+use App\Models\Order\Order;
+use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\post;
 use function Pest\Laravel\seed;
-use function Pest\Laravel\assertDatabaseHas;
 
 it('should be create order', function () {
     $user = createUser();
@@ -20,38 +20,38 @@ it('should be create order', function () {
     post(route('orderStore'), $order)
         ->assertStatus(302)
         ->assertRedirect(route('establishmentOrderShow', [
-            'tracking_link'    => $user->orders()->first()->tracking_link
+            'tracking_link'    => $user->orders()->first()->tracking_link,
         ]));
 
     $createdOrder = $user->orders()->first();
 
     assertDatabaseHas('orders', [
-        'user_id' => $user->id,
+        'user_id'          => $user->id,
         'establishment_id' => $firstEstablishment->id,
 
         'contact_phone' => $order['contact_phone'],
         'contact_name'  => $order['contact_name'],
         'payment_mode'  => $order['payment_mode'],
-        'total_price'   => $productData['total_price']
+        'total_price'   => $productData['total_price'],
     ]);
 
     assertDatabaseHas('order_status_changes', [
         'status'    => $createdOrder->status,
-        'order_id'  => $createdOrder->id
+        'order_id'  => $createdOrder->id,
     ]);
 
     foreach ($productData['products'] as $keyProduct => $valueProduct) {
         assertDatabaseHas('order_products', [
-            'order_id'   => 1,
-            'product_id' => $valueProduct["id"],
-            'quantity'   => $valueProduct["quantity"]
+            'order_id'   => $createdOrder->id,
+            'product_id' => $valueProduct['id'],
+            'quantity'   => $valueProduct['quantity'],
         ]);
-        foreach ($valueProduct["additionals"] as $keyAdditional => $valueAdditional) {
+        foreach ($valueProduct['additionals'] as $keyAdditional => $valueAdditional) {
             assertDatabaseHas('order_product_additionals', [
-                'order_id'      => 1,
-                'product_id'    => $valueProduct["id"],
-                'additional_id' => $valueAdditional["id"],
-                'quantity'      => $valueAdditional["quantity"]
+                'order_id'      => $createdOrder->id,
+                'product_id'    => $valueProduct['id'],
+                'additional_id' => $valueAdditional['id'],
+                'quantity'      => $valueAdditional['quantity'],
             ]);
         }
     }
@@ -74,7 +74,7 @@ it('should be create order with money', function () {
     post(route('orderStore'), $orderData)
         ->assertStatus(302)
         ->assertRedirect(route('establishmentOrderShow', [
-            'tracking_link'    => $user->orders()->first()->tracking_link
+            'tracking_link'    => $user->orders()->first()->tracking_link,
         ]));
 
     $order = $user->orders()->first();
@@ -83,11 +83,11 @@ it('should be create order with money', function () {
     $calculatedChange = $totalPrice - $orderData['value_paid_cash'];
 
     assertDatabaseHas('orders', [
-        'user_id' => $user->id,
+        'user_id'          => $user->id,
         'establishment_id' => $firstEstablishment->id,
 
-        'total_price' => floatval($totalPrice),
+        'total_price'   => floatval($totalPrice),
         'need_change'   => true,
-        'change_price'  => floatval($calculatedChange)
+        'change_price'  => floatval($calculatedChange),
     ]);
 });

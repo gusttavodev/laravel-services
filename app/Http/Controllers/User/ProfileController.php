@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Profile\UpdateAddressRequest;
 use App\Http\Requests\User\Profile\UpdateProfileRequest;
+use App\Http\Resources\Order\OrderResource;
 use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -20,10 +21,11 @@ class ProfileController extends Controller
 
     public function index(Request $request)
     {
-        $user = new UserResource($request->user());
+        $user   = new UserResource($request->user());
 
         return Inertia::render('User/Profile/Index', [
-            'user' => $user,
+            'user'   => $user,
+            'orders' => OrderResource::collection($request->user()->orders()->paginate(5)),
         ]);
     }
 

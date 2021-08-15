@@ -10,6 +10,9 @@
             <Information v-show="currentTab == 0" :user="user" :errors="errors" />
 
             <Address v-show="currentTab == 1" :user="user" :errors="errors" />
+
+            <Orders v-show="currentTab == 2" :user="user" :errors="errors" :orders="orders" />
+
         </div>
     </div>
 
@@ -22,6 +25,7 @@ import Tabs from '@/Layouts/Tabs'
 
 import Information from '@/Pages/User/Profile/Form/Information'
 import Address from '@/Pages/User/Profile/Form/Address'
+import Orders from '@/Pages/User/Profile/Form/Orders'
 
 export default {
   metaInfo: { title: 'User Profile' },
@@ -29,20 +33,23 @@ export default {
   components: {
     Tabs,
     Information,
-    Address
+    Address,
+    Orders
   },
   props: {
     user: Object,
+    orders: Array,
     errors: Object,
   },
   created() {
   },
   data() {
     return {
-       currentTab: 0,
+       currentTab: 2,
        tabs: [
             { name: 'Informações de Acesso', href: '#', current: true },
             { name: 'Endereço de Entrega', href: '#', current: false },
+            { name: 'Pedidos', href: '#', current: false },
        ]
     }
   },

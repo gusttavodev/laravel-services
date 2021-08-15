@@ -26,7 +26,7 @@
         class="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1"
         >
             <inertia-link
-                v-if="route().current() != 'profileIndex'"
+                v-if="route().current() != 'profileIndex' && route().current() !='establishmentOrderShow'"
                 type="button"
                 :href="route('profileIndex')"
                 method="get"

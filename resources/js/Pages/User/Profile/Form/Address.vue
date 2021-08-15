@@ -130,7 +130,7 @@ export default {
     errors: Object,
   },
   created() {
-    if (this.user) this.form = this.user.data.address
+    if (this.user.data.address) this.form = this.user.data.address
   },
   data() {
     return {

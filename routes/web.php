@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthClient\RegisteredUserClientController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Establishment\AddressController;
 use App\Http\Controllers\Establishment\EstablishmentController;
@@ -30,9 +31,8 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboardIndex');
 });
 
-Route::prefix('profile')->group(function () {
+Route::prefix('profile')->middleware('inertia_request_establishment')->group(function () {
     Route::get('/', [ProfileController::class, 'index'])->name('profileIndex');
-
     Route::put('/information', [ProfileController::class, 'updateProfile'])->name('profileUpdateInformation');
     Route::put('/address', [ProfileController::class, 'updateAddress'])->name('profileUpdateAddress');
 });
@@ -117,6 +117,14 @@ Route::middleware('inertia_request_establishment')->prefix('menu')->group(functi
     Route::get('/establishment/{public_link_name}', [EstablishmentController::class, 'showEstablishmentPublic'])->name('establishmentShowPublic');
     Route::get('/establishment/{public_link_name}/order', [OrderController::class, 'establishmentOrderCreate'])->name('establishmentOrderCreate');
     Route::get('/establishment/{public_link_name}/order/{tracking_link}', [OrderController::class, 'establishmentOrderShow'])->name('establishmentOrderShow');
+
+    Route::get('/establishment/{public_link_name}/register', [RegisteredUserClientController::class, 'create'])
+            ->middleware('guest')
+            ->name('client.create');
+
+    Route::post('/establishment/{public_link_name}/register', [RegisteredUserClientController::class, 'store'])
+            ->middleware('guest')
+            ->name('client.store');
 });
 
 Route::prefix('order')->group(function () {

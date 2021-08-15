@@ -9,25 +9,43 @@
     <div class="max-w-5xl px-4 mx-auto mb-2 sm:px-6 lg:px-8">
       <div class="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
         <div class="flex">
-          <img
-            class="w-24 h-24 rounded-full sm:h-32 sm:w-32"
-            :src="$page.props.establishment.data.picture"
-            alt=""
-          />
+             <inertia-link
+                :href="route('establishmentShowPublic', $page.props.establishment.data.public_link_name)"
+                method="get"
+
+            >
+                <img
+                    class="w-24 h-24 rounded-full sm:h-32 sm:w-32"
+                    :src="$page.props.establishment.data.picture"
+                    alt=""
+                />
+            </inertia-link>
         </div>
         <div
         v-if="$page.props?.auth?.user?.data"
         class="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1"
         >
             <inertia-link
-             type="button"
-            :href="route('profileIndex')"
-            method="post"
-            as="button"
-            class="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                v-if="route().current() != 'profileIndex'"
+                type="button"
+                :href="route('profileIndex')"
+                method="get"
+                as="button"
+                class="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
             >
                Meu Perfil
             </inertia-link>
+            <inertia-link
+                v-else
+                type="button"
+                :href="route('establishmentShowPublic', $page.props.establishment.data.public_link_name)"
+                method="get"
+                as="button"
+                class="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+            >
+               Voltar
+            </inertia-link>
+
             <inertia-link
             type="button"
             :href="route('logout')"
@@ -35,7 +53,6 @@
             as="button"
             class="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
             >
-            <!-- <MailIcon class="w-5 h-5 mr-2 -ml-1 text-gray-400" aria-hidden="true" /> -->
             <span>Sair</span>
             </inertia-link>
         </div>
@@ -59,13 +76,16 @@
               <MailIcon class="w-5 h-5 mr-2 -ml-1 text-gray-400" aria-hidden="true" />
               <span>Login</span>
             </button>
-            <button
-              type="button"
-              class="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+
+            <inertia-link
+                :href="route('client.create', $page.props.establishment.data.public_link_name)"
+                type="button"
+                class="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
             >
               <UserAddIcon class="w-5 h-5 mr-2 -ml-1 text-gray-400" aria-hidden="true" />
               <span>Registrar</span>
-            </button>
+            </inertia-link>
+
           </div>
         </div>
       </div>

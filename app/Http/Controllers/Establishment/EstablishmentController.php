@@ -10,6 +10,7 @@ use App\Http\Resources\Product\CategoryProductResource;
 use App\Models\Establishment\Establishment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -155,6 +156,8 @@ class EstablishmentController extends Controller
     public function showEstablishmentPublic($public_link_name)
     {
         $establishment =  Establishment::where('public_link_name', $public_link_name)->firstOrFail();
+
+        session()->put('current_establishment', $establishment->id);
 
         $categories = $establishment->user->categories;
 

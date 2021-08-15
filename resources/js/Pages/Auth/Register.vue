@@ -95,6 +95,8 @@
         props: {
             user: Object,
             errors: Object,
+            type: String,
+            establishment: Object
         },
 
         data() {
@@ -112,6 +114,14 @@
 
         methods: {
             submit() {
+                console.log("this.establishment.data.id => ", this.establishment.data.id)
+
+                if(this.type == 'client'){
+                    this.form.post(this.route('client.store', this.establishment.data.public_link_name), {
+                        onFinish: () => this.form.reset('password', 'password_confirmation'),
+                    })
+                    return
+                }
                 this.form.post(this.route('register'), {
                     onFinish: () => this.form.reset('password', 'password_confirmation'),
                 })

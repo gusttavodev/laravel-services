@@ -34,6 +34,7 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'phone',
+        'establishment_id',
     ];
 
     /**
@@ -88,5 +89,10 @@ class User extends Authenticatable
     public function address()
     {
         return $this->belongsTo(Address::class);
+    }
+
+    public function establishmentOnRegister()
+    {
+        return $this->belongsTo(Establishment::class);
     }
 }

@@ -33,13 +33,16 @@
               <MailIcon class="w-5 h-5 mr-2 -ml-1 text-gray-400" aria-hidden="true" />
               <span>Login</span>
             </button>
-            <button
-              type="button"
+
+            <inertia-link
+                :href="route('client.create', $page.props.establishment.data.public_link_name)"
+                type="button"
               class="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
             >
-              <UserAddIcon class="w-5 h-5 mr-2 -ml-1 text-gray-400" aria-hidden="true" />
+               <UserAddIcon class="w-5 h-5 mr-2 -ml-1 text-gray-400" aria-hidden="true" />
               <span>Registrar</span>
-            </button>
+            </inertia-link>
+
           </div>
         </div>
       </div>

@@ -85,3 +85,8 @@ Configurar para o index.vue ser o primeiro acessado na pasta
 
 # TODO 
 Usar casting nos models para dinheiro
+
+
+
+# INSTALR O PHP 8 E FAZER O UPGRADE 
+https://www.cloudbooklet.com/how-to-install-php-8-on-ubuntu/

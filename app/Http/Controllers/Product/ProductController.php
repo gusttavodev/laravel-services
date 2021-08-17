@@ -47,8 +47,8 @@ class ProductController extends Controller
         $additionals = $request->user()->additionals();
 
         return Inertia::render('Product/Form', [
-            'categories'  => CategoryResource::collection($categories->paginate(5)),
-            'additionals' => AdditionalResource::collection($additionals->paginate(5)),
+            'categories'  => CategoryResource::collection($categories->paginate(20)),
+            'additionals' => AdditionalResource::collection($additionals->paginate(20)),
         ]);
     }
 

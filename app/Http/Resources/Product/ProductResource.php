@@ -26,6 +26,7 @@ class ProductResource extends JsonResource
             'description' => $this->description,
 
             'categories'  => CategoryResource::collection($this->categories),
+
             'additionals' => AdditionalWithNotProductResource::collection($this->additionals),
 
             'created_at' => $this->created_at,

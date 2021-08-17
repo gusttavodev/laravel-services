@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\Additional\AdditionalStoreRequest;
 use App\Http\Requests\Product\Additional\AdditionalUpdateRequest;
 use App\Http\Resources\Product\AdditionalResource;
-use App\Http\Resources\ProductResource;
+use App\Http\Resources\Product\ProductResource;
 use App\Models\Product\Additional;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;

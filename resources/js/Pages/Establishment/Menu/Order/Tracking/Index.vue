@@ -123,12 +123,6 @@ export default {
     },
     user() {
       return this.$page.props?.auth?.user?.data
-    },
-    steps() {
-      return this.$store.getters[GET_STEPS]
-    },
-    currentStep() {
-      return this.$store.getters[GET_CURRENT_STEP]
     }
   },
   data() {

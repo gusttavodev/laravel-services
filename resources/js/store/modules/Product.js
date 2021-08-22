@@ -18,7 +18,6 @@ export default {
                 quantity: 0,
                 formatted_price: MoneyService.convertFloatToMoney(additionalValue.price).toFormat()
             }))
-            console.log("PRODUTO SETADO => ", state.product)
         },
         [DELETE_PRODUCT]: (state) => {
             state.product = {}

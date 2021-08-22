@@ -17,7 +17,7 @@ class Order extends Model
 
     public const MONEY       = 0;
     public const CREDIT_CARD = 1;
-    public const DEBIT_CARD  = 3;
+    public const DEBIT_CARD  = 2;
 
     public const PAYMENT_MODES = [
         self::MONEY       => 'Dinheiro',
@@ -25,12 +25,12 @@ class Order extends Model
         self::DEBIT_CARD  => 'Cartão de Débito',
     ];
 
-    public const ON_ESTABLISHMENT   = 0;
-    public const ON_MY_ADDRESS      = 1;
+    public const ON_MY_ADDRESS      = 0;
+    public const ON_ESTABLISHMENT   = 1;
 
     public const DELIVERY_MODES = [
-        self::ON_ESTABLISHMENT   => 'Retirar No Local',
         self::ON_MY_ADDRESS      => 'Receber No Meu Endereço',
+        self::ON_ESTABLISHMENT   => 'Retirar No Local',
     ];
 
     public const CREATED   = 0;

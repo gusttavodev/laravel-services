@@ -1,11 +1,11 @@
 <template>
     <div
-        v-if="cartCount > 0"
+        v-if="cartCount > 0 && showFinishOrderButton"
         class="fixed bottom-0 flex flex-wrap items-center justify-center w-3/4 pt-2 text-center rounded-t-lg cursor-pointer lg:w-2/4 sm:w-2/4 md:w-2/4 bg-sys_primary-300 hover:bg-sys_primary-600 text-button-text"
         style="z-index: 9999999999999999999999999; left: 50%; transform: translateX(-50%);"
         @click="showOrder"
     >
-        <h1 class="p-2 text-2xl">Finalize Sua Compra</h1>
+        <h1 class="p-2 text-2xl">Finalize Sua Compra {{showFinishOrderButton ? "TRUE" : "FALSE" }}</h1>
 
         <div class="relative">
             <div
@@ -17,7 +17,13 @@
         </div>
     </div>
 
-    <ShoppingCartModal ref="ShoppingCartModal" />
+    <!-- <ShoppingCartModal ref="ShoppingCartModal" /> -->
+
+    <Cart
+        ref="ShoppingCartModal"
+        @onClose="showFinishOrderButton = true"
+        @onOpen="showFinishOrderButton = false"
+    />
 </template>
 
 <script>
@@ -26,13 +32,15 @@ import { ShoppingCartIcon } from '@heroicons/vue/solid'
 import { CART_COUNT } from '@/store/mutationsTypes/StoreCart'
 
 import ShoppingCartModal from '@Establishment/Menu/ShoppingCart/Modal'
+import Cart from '@Establishment/Menu/Cart'
 
 export default {
     name: 'ShoppingCart',
     props: {},
     components: {
         ShoppingCartIcon,
-        ShoppingCartModal
+        ShoppingCartModal,
+        Cart
     },
     computed: {
         cartCount() {
@@ -41,6 +49,7 @@ export default {
     },
     data() {
         return {
+            showFinishOrderButton: true
         };
     },
     mounted() {

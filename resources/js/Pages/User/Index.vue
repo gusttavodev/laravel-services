@@ -1,10 +1,45 @@
 <template>
   <Header title="Usuários" buttonText="Criar" :buttonAction="route('userCreate')" />
 
+
   <div class="px-4 mt-6 sm:px-6 lg:px-8">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+               <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-t-lg ">
+            <div class="grid grid-cols-12 gap-4 w-full px-5 py-5 min-w-full bg-white divide-y divide-gray-200">
+                <basic-input
+                    v-model="form.name"
+                    :value="form.name"
+                    class="col-span-12 lg:col-span-4"
+                    label="Nome"
+                    type="text"
+                />
+                <basic-input
+                    v-model="form.email"
+                    :value="form.email"
+                    class="col-span-12 lg:col-span-4"
+                    label="Email"
+                    type="text"
+                />
+                <basic-input
+                    v-model="form.role"
+                    :value="form.role"
+                    class="col-span-12 lg:col-span-4"
+                    label="Função"
+                    type="text"
+                />
+            </div>
+        </div>
+        <div class="flex items-center justify-between px-4 py-3 bg-white sm:px-6 sm:rounded-b-lg">
+            <basic-button
+                type="submit"
+            >
+                Pesquisar
+            </basic-button>
+        </div>
+        </div>
       <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-        <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-t-lg">
+        <div class="overflow-hidden border-b bord:rounded-er-gray-200 shadow smt-lg">
           <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
               <tr>
@@ -97,6 +132,9 @@ import Header from '@/Layouts/Header'
 import Paginate from '@/Layouts/Paginate'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid'
 
+import BasicInput from '@/Components/Input'
+import BasicButton from '@/Components/Button'
+
 export default {
   metaInfo: { title: 'Users' },
   layout: Layout,
@@ -105,9 +143,38 @@ export default {
     ChevronRightIcon,
     Header,
     Paginate,
+
+    BasicInput,
+    BasicButton,
   },
   props: {
     users: Object,
   },
+  data() {
+    return {
+      form: {
+        name: null,
+        email: null
+      },
+    }
+  },
+  computed: {
+    queryBuilderString() {
+     const qs = new URLSearchParams(this.form);
+     return qs
+    },
+  },
+//   watch: {
+//     queryBuilderData: {
+//       deep: true,
+//       handler() {
+//         if (this.$inertia) {
+//           const query = this.queryBuilderString;
+
+//           this.$inertia.get(location.pathname + `?${query}`, {}, { replace: true, preserveState: true });
+//         }
+//       },
+//     },
+//   },
 }
 </script>

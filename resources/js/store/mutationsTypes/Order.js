@@ -20,3 +20,5 @@ export const PREVIOUS_STEP = "PREVIOUS_STEP"
 
 export const CREATE_ORDER = "CREATE_ORDER"
 export const GET_ORDER = "GET_ORDER"
+
+export const GET_VALUE_PAID_CASH = "GET_VALUE_PAID_CASH"

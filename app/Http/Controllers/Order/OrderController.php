@@ -72,6 +72,7 @@ class OrderController extends Controller
 
         // TODO link product to establishment
         // TODO validate establishment has this products
+        // TODO store address
 
         $this->orderService->storeOrderProducts($input['products'], $order);
 

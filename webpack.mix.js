@@ -16,6 +16,7 @@ mix
   .vue({
     version: 3,
   })
+  .sass('resources/sass/custom.scss', 'public/css')
   .postCss('resources/css/app.css', 'public/css', [
     require('postcss-import'),
     require('tailwindcss'),

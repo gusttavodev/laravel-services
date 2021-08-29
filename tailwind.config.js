@@ -14,19 +14,13 @@ module.exports = {
     },
     extend: {
       textColor: {
-        'content-color': "var(--text-color)",
-        'title-color': "var(--title-text-color)",
-        'title-hover-color': "var(--title-text-hover-color)",
-        'button-text': "var(--button-text-color)",
-        'card-text': "var(--card-text-color)",
-        'price-text': "var(--card-price-color)",
-
-        'info-card': {
-            'title': "var(--primary-color)",
-            'subtitle': "var(--secondary-color)",
-            'text': "var(--background-color)",
-
-            'hours-text': "var(--button-background-color)"
+        'info': {
+            'title':        "var(--info-title)",
+            'txt':          "var(--info-txt)",
+            'icon':         "var(--info-icon)",
+        },
+        'time': {
+            'txt':          "var(--time-txt)",
         },
       },
       colors: {
@@ -35,24 +29,12 @@ module.exports = {
         sys_success: colors.emerald,
         sys_error: colors.red,
         sys_alert: colors.amber,
-
-        'personal-colors': {
-            'primary': "var(--primary-color)",
-            'secondary': "var(--secondary-color)",
-            'background': "var(--background-color)",
-
-            'button-background': "var(--button-background-color)",
-            'button-hover': "var(--button-hover-color)",
-            'button-count': "var(--button-count-color)",
-            'card-background': "var(--card-background-color)",
+        'info': {
+            'bg':           "var(--info-bg)",
+            'separator':    "var(--info-separator)",
         },
-
-        'info-card': {
-            'background': "var(--info-card-background)",
-            'separators': "var(--info-card-separators)",
-            'icon':       "var(--info-card-icon)",
-
-            'hours-background': "var(--info-card-hours-background)"
+        'time': {
+            'bg':           "var(--time-bg)"
         },
 
       },

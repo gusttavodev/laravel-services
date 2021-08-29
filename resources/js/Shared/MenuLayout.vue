@@ -28,35 +28,45 @@ export default {
   mounted(){
         const theme = this.$page.props.establishment.data.theme
 
-        document.documentElement.style.setProperty('--primary-color', theme.primary_color);
-        document.documentElement.style.setProperty('--secondary-color', theme.secondary_color);
-        document.documentElement.style.setProperty('--text-color', theme.text_color);
-        document.documentElement.style.setProperty('--title-text-color', theme.title_text_color);
-        document.documentElement.style.setProperty('--title-text-hover-color', theme.title_text_hover_color);
-        document.documentElement.style.setProperty('--background-color', theme.background_color);
-        document.documentElement.style.setProperty('--button-background-color', theme.button_background_color);
-        document.documentElement.style.setProperty('--button-hover-color', theme.button_hover_color);
-        document.documentElement.style.setProperty('--button-text-color', theme.button_text_color);
-        document.documentElement.style.setProperty('--button-count-color', theme.button_count_color);
-        document.documentElement.style.setProperty('--card-background-color', theme.card_background_color);
-        document.documentElement.style.setProperty('--card-text-color', theme.card_text_color);
-        document.documentElement.style.setProperty('--card-price-color', theme.card_price_color);
+        // document.documentElement.style.setProperty('--general-title', theme.general_title);
+        // document.documentElement.style.setProperty('--general-txt', theme.general_txt);
+        // document.documentElement.style.setProperty('--general-bg', theme.general_bg);
+        // document.documentElement.style.setProperty('--general-icon', theme.general_icon);
 
-        document.documentElement.style.setProperty('--info-card-background', theme.primary_color);
-        document.documentElement.style.setProperty('--info-card-separators', theme.secondary_color);
-        document.documentElement.style.setProperty('--info-card-icon', theme.text_color);
-        document.documentElement.style.setProperty('--info-card-hours-title', theme.title_text_color);
-        document.documentElement.style.setProperty('--info-card-subtitle', theme.title_text_hover_color);
-        document.documentElement.style.setProperty('--info-card-text', theme.background_color);
-        document.documentElement.style.setProperty('--info-card-hours-text', theme.button_background_color);
+        // document.documentElement.style.setProperty('--header-title', theme.header_title);
+        // document.documentElement.style.setProperty('--header-txt', theme.header_txt);
+        // document.documentElement.style.setProperty('--header-bg', theme.header_bg);
+        // document.documentElement.style.setProperty('--header-icon', theme.header_icon);
 
+        // document.documentElement.style.setProperty('--info-title', theme.info_title);
+        // document.documentElement.style.setProperty('--info-txt', theme.info_txt);
+        // document.documentElement.style.setProperty('--info-bg', theme.info_bg);
+        // document.documentElement.style.setProperty('--info-icon', theme.info_icon);
+        // document.documentElement.style.setProperty('--info-separator', theme.info_separator);
 
-        document.documentElement.style.setProperty('--button-hover-color', theme.button_hover_color);
-        document.documentElement.style.setProperty('--button-text-color', theme.button_text_color);
-        document.documentElement.style.setProperty('--button-count-color', theme.button_count_color);
-        document.documentElement.style.setProperty('--card-background-color', theme.card_background_color);
-        document.documentElement.style.setProperty('--card-text-color', theme.card_text_color);
-        document.documentElement.style.setProperty('--card-price-color', theme.card_price_color);
+        // document.documentElement.style.setProperty('--product-title', theme.product_title);
+        // document.documentElement.style.setProperty('--product-txt', theme.product_txt);
+        // document.documentElement.style.setProperty('--product-bg', theme.product_bg);
+        // document.documentElement.style.setProperty('--product-icon', theme.product_icon);
+        // document.documentElement.style.setProperty('--product-separator', theme.products_separator);
+
+        // document.documentElement.style.setProperty('--footer-title', theme.footer_title);
+        // document.documentElement.style.setProperty('--footer-txt', theme.footer_txt);
+        // document.documentElement.style.setProperty('--footer-bg', theme.footer_bg);
+        // document.documentElement.style.setProperty('--footer-icon', theme.footer_icon);
+
+        // document.documentElement.style.setProperty('--time-txt', theme.time_txt);
+        // document.documentElement.style.setProperty('--time-bg', theme.time_bg);
+
+        // document.documentElement.style.setProperty('--button-txt', theme.button_txt);
+        // document.documentElement.style.setProperty('--button-bg', theme.button_bg);
+        // document.documentElement.style.setProperty('--button-hover', theme.button_hover);
+
+        // document.documentElement.style.setProperty('--counter-bg', theme.counter_hover);
+        // document.documentElement.style.setProperty('--counter-txt', theme.counter_txt);
+
+        // document.documentElement.style.setProperty('--price-bg', theme.price_hover);
+        // document.documentElement.style.setProperty('--price-txt', theme.price_txt);
   }
 }
 </script>

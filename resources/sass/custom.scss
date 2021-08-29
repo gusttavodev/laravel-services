@@ -1,48 +1,41 @@
-@import "node_modules/bootstrap/scss/bootstrap.scss";
-
 :root {
-    --primary-color: #F9FAFB;
-    --secondary-color: #F9FAFB;
-    --text-color: #F9FAFB;
-    --title-text-color: #F9FAFB;
-    --title-text-hover-color: #F9FAFB;
-    --background-color: #F9FAFB;
+    --general-title: #1d2125;
+    --general-txt: #F9FAFB;
+    --general-bg: #ababac;
+    --general-icon: #4b4b4b;
 
-    --button-background-color: #162FA1;
-    --button-hover-color: #1ca4e6;
+    --header-title: #1d2125;
+    --header-txt: #F9FAFB;
+    --header-bg: #1ca4e6;
+    --header-icon: #4b4b4b;
 
-    --button-text-color: #162FA1;
-    --button-count-color: #ff0000;
+    --info-title: #1d2125;
+    --info-txt: #F9FAFB;
+    --info-bg: #1ca4e6;
+    --info-icon: #162FA1;
+    --info-separator: #162FA1;
 
-    --card-background-color: #6600cc;
-    --card-text-color: #ff0000;
-    --card-price-color: #fffb00;
+    --product-title: #1d2125;
+    --product-txt: #F9FAFB;
+    --product-bg: #1ca4e6;
+    --product-icon: #162FA1;
+    --product-separator: #162FA1;
 
-    --primary-color: #F9FAFB;
-    --secondary-color: #F9FAFB;
-    --text-color: #F9FAFB;
-    --title-text-color: #F9FAFB;
-    --title-text-hover-color: #F9FAFB;
-    --background-color: #F9FAFB;
+    --footer-title: #1d2125;
+    --footer-txt: #F9FAFB;
+    --footer-bg: #1ca4e6;
+    --footer-icon: #162FA1;
 
-    --button-background-color: #162FA1;
-    --button-hover-color: #1ca4e6;
+    --time-txt: #F9FAFB;
+    --time-bg: #6600cc;
 
-    --button-text-color: #162FA1;
-    --button-count-color: #ff0000;
+    --button-txt: #F9FAFB;
+    --button-bg: #6600cc;
+    --button-hover: #162FA1;
 
-    --card-background-color: #6600cc;
-    --card-text-color: #ff0000;
-    --card-price-color: #fffb00;
+    --counter-txt: #F9FAFB;
+    --counter-bg: #6600cc;
 
-
-    //
-    --info-card-background: #6600cc;
-    --info-card-separators: #ff0000;
-    --info-card-icon: #fffb00;
-
-    --info-card-hours-title: #6600cc;
-    --info-card-subtitle: #ff0000;
-    --info-card-text: #fffb00;
-    --info-card-hours-text: #fffb00;
+    --price-txt: #F9FAFB;
+    --price-bg: #6600cc;
 }

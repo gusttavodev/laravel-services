@@ -35,16 +35,12 @@
                   </div>
                   <p class="mt-0.5 text-sm text-gray-500">Finalize sua compra para conferir as taxas de entrega.</p>
                   <div class="mt-6">
-                    <inertia-link
+                    <establishment-button
                         :href="route('establishmentOrderCreate', $page.props.establishment.data.public_link_name)"
-                        type="button"
-                        class="
-                            flex justify-center items-center px-6 py-3 border border-transparent rounded-md
-                            shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700
-                        "
+                        type="redirect"
                     >
                         Finalizar
-                    </inertia-link>
+                    </establishment-button>
                   </div>
                   <div class="mt-6 flex justify-center text-sm text-center text-gray-500">
                     <p>

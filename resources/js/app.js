@@ -28,3 +28,8 @@ app.use(colorPicker)
 app.mixin({ methods: { route } }).use(InertiaPlugin).mount(el)
 
 InertiaProgress.init({ color: '#4B5563' })
+
+import EstablishmentButton from "./Establishment/Button.vue"
+app.component('establishment-button', EstablishmentButton)
+
+

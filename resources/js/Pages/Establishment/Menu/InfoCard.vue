@@ -1,25 +1,28 @@
 <template>
- <div class="flex items-stretch flex-1 overflow-hidden bg-gray-100">
-      <section
+<div class="flex items-stretch flex-1 overflow-hidden bg-gray-100">
+    <section
         aria-labelledby="applicant-information-title"
         class="px-4 pt-8 mx-auto max-w-7xl sm:px-6 lg:px-8"
-      >
-        <div class="bg-white shadow sm:rounded-lg">
-          <div class="px-4 py-5 sm:px-6">
-            <h2
-              id="applicant-information-title"
-              class="text-lg font-medium leading-6 text-gray-900"
-            >
-              Sobre
-            </h2>
+    >
+        <div class="bg-white shadow sm:rounded-lg p-5">
+            <div class="sm:flex">
+                <div class="mb-4 flex-shrink-0 sm:mb-0 sm:mr-4">
+                    <img
+                        class="h-32 w-full sm:w-32"
+                        :src="$page.props.establishment.data.picture"
+                        alt=""
+                    />
 
-            <div class="flex flex-row">
-              <InformationCircleIcon class="w-5 h-5 mr-2 -ml-1 text-gray-400" aria-hidden="true" />
-              <p class="max-w-2xl mt-1 text-sm text-gray-500">
-                {{ establishment.description }}
-              </p>
+                </div>
+                <div>
+                <h4 class="text-lg font-bold">{{ $page.props.establishment.data.name }}</h4>
+                <p class="max-w-2xl mt-1 text-sm text-gray-500">
+                    {{ $page.props.establishment.data.description }}
+                </p>
             </div>
-          </div>
+        </div>
+
+
           <div class="px-4 py-5 border-t border-gray-200 sm:px-6">
             <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
               <div class="sm:col-span-1">
@@ -112,9 +115,6 @@
 
 <script>
 import {
-  UserAddIcon,
-  MailIcon,
-  ShoppingCartIcon,
   LocationMarkerIcon,
   CurrencyDollarIcon,
   ClockIcon,

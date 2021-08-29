@@ -42,13 +42,12 @@
         </div>
       </template>
       <template v-slot:footer>
-        <button
-          @click="addToCart()"
-          type="button"
-          class="flex items-center justify-center w-full h-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        <establishment-button
+            class="w-full"
+            @click="addToCart()"
         >
-          Adicionar Ao Carrinho
-        </button>
+            Adicionar Ao Carrinho
+        </establishment-button>
       </template>
     </Modal>
 </template>

@@ -15,7 +15,7 @@
           <h2 id="gallery-heading" class="sr-only">Lista de Produtos</h2>
           <ul
             role="list"
-            class="grid grid-cols-1  gap-x-4 gap-y-8 sm:grid-cols-1 sm:gap-x-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 xl:gap-x-8"
+            class="grid grid-cols-1  gap-x-4 gap-y-12 sm:grid-cols-1 sm:gap-x-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 xl:gap-x-8"
           >
             <ProductCard v-for="product in selectedProducts" :key="product.id" :product="product" />
           </ul>

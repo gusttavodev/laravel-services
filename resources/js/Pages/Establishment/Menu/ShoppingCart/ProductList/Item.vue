@@ -20,9 +20,7 @@
     </div>
 
     <div class="flex items-center justify-center">
-        <span class="text-center px-2 py-1 text-sm font-medium text-green-800 bg-green-100 rounded-full">
-            {{ product.invoice.total }}
-        </span>
+        <establishment-price>{{ product.invoice.total }}</establishment-price>
     </div>
 
     <div>

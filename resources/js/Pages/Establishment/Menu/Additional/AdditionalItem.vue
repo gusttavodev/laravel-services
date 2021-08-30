@@ -17,9 +17,7 @@
     </div>
 
     <div>
-      <span class="px-2 py-1 text-sm font-medium text-green-800 bg-green-100 rounded-full">
-        {{ additionalPrice }}
-      </span>
+        <establishment-price>{{ additionalPrice }}</establishment-price>
     </div>
   </li>
 </template>

@@ -5,9 +5,7 @@
             <span class="px-2 py-1 text-lg font-medium">
           {{ selectedProduct.name }}
         </span>
-        <span class="px-2 py-1 text-lg font-medium text-green-800 bg-green-100 rounded-full">
-        {{ selectedProduct.formatted_price}}
-        </span>
+        <establishment-price>{{ selectedProduct.formatted_price }}</establishment-price>
        </div>
       </template>
       <template v-slot:body>
@@ -35,10 +33,8 @@
           <span class="px-2 py-1 text-lg font-medium">
           Preço Total
         </span>
-        <span class="px-2 py-1 text-lg font-medium text-green-800 bg-green-100 rounded-full">
-            {{ totalPrice.total }}
-        </span>
-          </div>
+        <establishment-price> {{ totalPrice.total }}</establishment-price>
+        </div>
         </div>
       </template>
       <template v-slot:footer>

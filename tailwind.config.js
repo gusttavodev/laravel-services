@@ -37,6 +37,11 @@ module.exports = {
                 'txt':          "var(--product-txt)",
                 'icon':         "var(--product-icon)",
             },
+            'footer': {
+                'title':        "var(--footer-title)",
+                'txt':          "var(--footer-txt)",
+                'icon':         "var(--footer-icon)",
+            },
 
             'time': {
                 'txt':          "var(--time-txt)",
@@ -73,6 +78,9 @@ module.exports = {
                 'separator':    "var(--product-separator)",
                 'bg-button':    "var(--product-bg-button)"
             },
+            'footer': {
+                'bg':           "var(--footer-bg)"
+            },
 
             'time': {
                 'bg':           "var(--time-bg)"
@@ -82,7 +90,7 @@ module.exports = {
             },
             'button': {
                 'bg':           "var(--button-bg)",
-                'hover':           "var(--button-hover)"
+                'hover':        "var(--button-hover)"
             },
             'counter': {
                 'bg':           "var(--counter-bg)"

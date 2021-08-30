@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-stretch flex-1 overflow-hidden bg-gray-100">
+  <div class="flex items-stretch flex-1 overflow-hidden">
     <main class="flex-1 overflow-y-auto">
       <div class="px-4 pt-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex">

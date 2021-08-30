@@ -1,7 +1,7 @@
 <template>
     <Modal v-if="hasProduct" :open="hasProduct" @onCloseModal="closeModal">
       <template v-slot:title>
-       <div class="py-2">
+       <div class="py-2 ">
             <span class="px-2 py-1 text-lg font-medium">
           {{ selectedProduct.name }}
         </span>

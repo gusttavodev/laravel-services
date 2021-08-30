@@ -1,10 +1,10 @@
 <template >
     <Header/>
 
-    <div>
+    <div class="bg-general-bg text-general-txt">
         <slot />
-
     </div>
+
    <Footer/>
 </template>
 

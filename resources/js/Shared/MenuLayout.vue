@@ -48,7 +48,8 @@ export default {
         // document.documentElement.style.setProperty('--product-txt', theme.product_txt);
         // document.documentElement.style.setProperty('--product-bg', theme.product_bg);
         // document.documentElement.style.setProperty('--product-icon', theme.product_icon);
-        // document.documentElement.style.setProperty('--product-separator', theme.products_separator);
+        // document.documentElement.style.setProperty('--product-separator', theme.product_separator);
+        document.documentElement.style.setProperty('--product-button', theme.product_button);
 
         // document.documentElement.style.setProperty('--footer-title', theme.footer_title);
         // document.documentElement.style.setProperty('--footer-txt', theme.footer_txt);

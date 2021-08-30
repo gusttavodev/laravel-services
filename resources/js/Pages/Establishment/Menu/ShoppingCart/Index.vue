@@ -2,7 +2,8 @@
     <div
         v-if="cartCount > 0 && showFinishOrderButton"
         class="
-            text-button-text bg-personal-colors-button-background hover:bg-personal-colors-button-hover  focus:ring-personal-colors-button-background
+            text-button-txt
+            bg-button-bg hover:bg-button-hover
             fixed bottom-0 flex flex-wrap items-center justify-center w-3/4 pt-2
             text-center rounded-t-lg cursor-pointer lg:w-2/4 sm:w-2/4 md:w-2/4
         "
@@ -13,7 +14,7 @@
 
         <div class="relative">
             <div
-                class="absolute top-0 right-0 px-1 -mt-1 -mr-2 text-xs font-bold rounded-full bg-personal-colors-button-count"
+                class="absolute top-0 right-0 px-1 -mt-1 -mr-2 text-xs font-bold rounded-full bg-counter-bg text-counter-txt"
             >
                 {{ cartCount }}
             </div>

@@ -17,6 +17,11 @@ module.exports = {
         },
         extend: {
         textColor: {
+            'general': {
+                'title':        "var(--general-title)",
+                'txt':          "var(--general-txt)",
+                'icon':         "var(--general-icon)",
+            },
             'header': {
                 'title':        "var(--header-title)",
                 'txt':          "var(--header-txt)",
@@ -27,6 +32,12 @@ module.exports = {
                 'txt':          "var(--info-txt)",
                 'icon':         "var(--info-icon)",
             },
+            'product': {
+                'title':        "var(--product-title)",
+                'txt':          "var(--product-txt)",
+                'icon':         "var(--product-icon)",
+            },
+
             'time': {
                 'txt':          "var(--time-txt)",
             },
@@ -37,6 +48,9 @@ module.exports = {
             'button': {
                 'txt':          "var(--button-txt)"
             },
+            'counter': {
+                'txt':          "var(--counter-txt)"
+            }
         },
         colors: {
             sys_primary: colors.indigo,
@@ -44,6 +58,9 @@ module.exports = {
             sys_success: colors.emerald,
             sys_error: colors.red,
             sys_alert: colors.amber,
+            'general': {
+                'bg':           "var(--general-bg)",
+            },
             'header': {
                 'bg':           "var(--header-bg)",
             },
@@ -51,18 +68,25 @@ module.exports = {
                 'bg':           "var(--info-bg)",
                 'separator':    "var(--info-separator)",
             },
+            'product': {
+                'bg':           "var(--product-bg)",
+                'separator':    "var(--product-separator)",
+                'bg-button':    "var(--product-bg-button)"
+            },
+
             'time': {
                 'bg':           "var(--time-bg)"
             },
             'price': {
                 'bg':           "var(--price-bg)"
             },
-
             'button': {
                 'bg':           "var(--button-bg)",
                 'hover':           "var(--button-hover)"
             },
-
+            'counter': {
+                'bg':           "var(--counter-bg)"
+            }
         },
         fontFamily: {
             sans: ['Nunito', ...defaultTheme.fontFamily.sans],

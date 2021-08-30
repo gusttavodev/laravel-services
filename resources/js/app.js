@@ -32,4 +32,7 @@ InertiaProgress.init({ color: '#4B5563' })
 import EstablishmentButton from "./Establishment/Button.vue"
 app.component('establishment-button', EstablishmentButton)
 
+import EstablishmentPrice from "./Establishment/Price.vue"
+app.component('establishment-price', EstablishmentPrice)
+
 

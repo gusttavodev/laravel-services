@@ -37,7 +37,13 @@
                 </div>
             </div>
             <div class="col-span-4">
-                <h1 class="pt-5 text-center text-header-title"> {{$page.props.establishment.data.name}} </h1>
+                <h1
+                    class="
+                        flex-1 text-2xl font-bold
+                        pt-5 text-center text-header-title"
+                >
+                    {{$page.props.establishment.data.name}}
+                </h1>
             </div>
             <div class="col-span-4">
                 <div

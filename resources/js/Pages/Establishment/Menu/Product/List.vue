@@ -1,6 +1,6 @@
 <template>
     <div class="flow-root">
-        <ul role="list" class="-my-6 divide-y divide-gray-200">
+        <ul role="list" class="-my-6 divide-y divide-product-separator">
             <Item
                 v-for="product in cartProducts"
                 :key="product.id"

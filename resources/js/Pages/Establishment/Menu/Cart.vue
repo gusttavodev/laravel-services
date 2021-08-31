@@ -9,10 +9,10 @@
         <div class="fixed inset-y-0 right-0 pl-10 max-w-full flex">
           <TransitionChild as="template" enter="transform transition ease-in-out duration-500 sm:duration-700" enter-from="translate-x-full" enter-to="translate-x-0" leave="transform transition ease-in-out duration-500 sm:duration-700" leave-from="translate-x-0" leave-to="translate-x-full">
             <div class="w-screen max-w-md">
-              <div class="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
+              <div class="h-full flex flex-col bg-general-bg shadow-xl overflow-y-scroll">
                 <div class="flex-1 py-6 overflow-y-auto px-4 sm:px-6">
                   <div class="flex items-start justify-between">
-                    <DialogTitle class="text-lg font-medium text-gray-900">
+                    <DialogTitle class="text-lg font-medium  text-general-title">
                       Carrinho De Compras
                     </DialogTitle>
                     <div class="ml-3 h-7 flex items-center">
@@ -28,12 +28,12 @@
                   </div>
                 </div>
 
-                <div class="border-t border-gray-200 py-6 px-4 sm:px-6">
-                  <div class="flex justify-between text-base font-medium text-gray-900">
-                    <p>Sub Total</p>
-                    <p>R$ 262.00</p>
+                <div class="border-t border-product-separator py-6 px-4 sm:px-6">
+                  <div class="flex justify-between text-base font-medium  text-general-title">
+                    <p class="bg-general-title">Sub Total</p>
+                    <p><establishment-price>{{ totalPrice }}</establishment-price></p>
                   </div>
-                  <p class="mt-0.5 text-sm text-gray-500">Finalize sua compra para conferir as taxas de entrega.</p>
+                  <p class="mt-0.5 text-sm">Finalize sua compra para conferir as taxas de entrega.</p>
                   <div class="mt-6">
                     <establishment-button
                         :href="route('establishmentOrderCreate', $page.props.establishment.data.public_link_name)"
@@ -44,7 +44,7 @@
                   </div>
                   <div class="mt-6 flex justify-center text-sm text-center text-gray-500">
                     <p>
-                      ou <button type="button" class="text-indigo-600 font-medium hover:text-indigo-500" @click="closeMenu">Continuar Comprando<span aria-hidden="true"> &rarr;</span></button>
+                      ou <button type="button" class="text-general-title" @click="closeMenu">Continuar Comprando<span aria-hidden="true"> &rarr;</span></button>
                     </p>
                   </div>
                 </div>
@@ -102,30 +102,7 @@ export default {
   },
   data() {
     return {
-        open: false,
-        products: [
-            {
-                id: 1,
-                name: 'Throwback Hip Bag',
-                href: '#',
-                color: 'Salmon',
-                price: '$90.00',
-                quantity: 1,
-                imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-                imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
-            },
-            {
-                id: 2,
-                name: 'Medium Stuff Satchel',
-                href: '#',
-                color: 'Blue',
-                price: '$32.00',
-                quantity: 1,
-                imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-                imageAlt:
-                'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-            },
-        ]
+        open: false
     }
   },
 }

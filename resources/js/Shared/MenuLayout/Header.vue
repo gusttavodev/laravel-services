@@ -62,6 +62,7 @@
                         v-else
                         :href="route('establishmentShowPublic', $page.props.establishment.data.public_link_name)"
                         type="redirect"
+                        class="mx-3 invisible lg:visible md:visible"
                     >
                         Voltar
                     </establishment-button>

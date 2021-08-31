@@ -1,5 +1,5 @@
 <template>
-    <header class="relative bg-header-bg text-header-txt">
+    <header class="w-full bg-header-bg text-header-txt fixed top-0 z-40">
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-4">
                 <div class="visible lg:invisible md:invisible">

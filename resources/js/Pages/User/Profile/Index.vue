@@ -1,22 +1,17 @@
 <template>
-    <div class="px-4 py-2 mt-6 sm:px-6 lg:px-8 bg-gray-200">
-        <div class="mx-4 my-6 space-y-6 bg-white sm:p-6 shadow sm:rounded-md sm:overflow-hidden px-5 py-5">
-            <Tabs
-                title="Editar informações do perfil"
-                :tabs="tabs"
-                @onChangeTab="changeTab"
-            />
+    <div class="mx-4 space-y-6 sm:p-6">
+        <Tabs
+            title="Editar informações do perfil"
+            :tabs="tabs"
+            @onChangeTab="changeTab"
+        />
 
-            <Information v-show="currentTab == 0" :user="user" :errors="errors" />
+        <Information v-show="currentTab == 0" :user="user" :errors="errors" />
 
-            <Address v-show="currentTab == 1" :user="user" :errors="errors" />
+        <Address v-show="currentTab == 1" :user="user" :errors="errors" />
 
-            <Orders v-show="currentTab == 2" :user="user" :errors="errors" :orders="orders" />
-
-        </div>
+        <Orders v-show="currentTab == 2" :user="user" :errors="errors" :orders="orders" />
     </div>
-
-
 </template>
 
 <script>
@@ -47,8 +42,8 @@ export default {
     return {
        currentTab: 2,
        tabs: [
-            { name: 'Informações de Acesso', href: '#', current: true },
-            { name: 'Endereço de Entrega', href: '#', current: false },
+            { name: 'Informações de acesso', href: '#', current: true },
+            { name: 'Endereço de entrega', href: '#', current: false },
             { name: 'Pedidos', href: '#', current: false },
        ]
     }

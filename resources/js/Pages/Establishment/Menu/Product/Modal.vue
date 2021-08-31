@@ -42,7 +42,7 @@
             class="w-full"
             @click="addToCart()"
         >
-            Adicionar Ao Carrinho
+            Adicionar ao carrinho
         </establishment-button>
       </template>
     </Modal>

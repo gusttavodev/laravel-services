@@ -1,11 +1,11 @@
 <template >
+<div class="bg-general-bg text-general-txt flex flex-col h-screen justify-between">
     <Header/>
-
     <div class="bg-general-bg text-general-txt">
         <slot />
     </div>
-
-   <Footer/>
+    <Footer/>
+</div>
 </template>
 
 <script>

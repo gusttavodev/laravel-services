@@ -12,7 +12,7 @@
     </div>
 
     <div class="hidden sm:block">
-        <div class="px-4 py-2 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+        <div class="px-4 py-10 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
             <div class="sm:flex sm:items-baseline">
                 <div class="mt-4 sm:mt-0 sm:ml-10">
                 <nav class="-mb-px flex space-x-8">

@@ -4,7 +4,7 @@
         aria-labelledby="applicant-information-title"
         class="px-4 pt-8 mx-auto max-w-7xl sm:px-6 lg:px-8"
     >
-        <div class="shadow sm:rounded-lg p-5 bg-info-bg">
+        <div class="shadow rounded-lg bg-info-bg px-5 lg:mt-15 mt-20">
             <div class="sm:flex">
                 <div class="mb-4 flex-shrink-0 sm:mb-0 sm:mr-4">
                     <img
@@ -15,7 +15,7 @@
 
                 </div>
                 <div>
-                <h4 class="text-info-title text-lg font-bold">{{ $page.props.establishment.data.name }}</h4>
+                <h4 class="pt-10 text-center text-info-title text-lg font-bold">{{ $page.props.establishment.data.name }}</h4>
                 <p class="max-w-2xl mt-1 text-sm text-info-txt">
                     {{ $page.props.establishment.data.description }}
                 </p>

@@ -27,10 +27,10 @@
     <div>
       <div class="flex -mt-px divide-x border-t border-product-separator">
         <button
-          class="bg-product-bg-button relative inline-flex items-center justify-center flex-1 w-0 py-4 -mr-px text-sm font-mediu border border-transparent rounded-bl-lg"
+          class=" bg-product-bg-button relative inline-flex items-center justify-center flex-1 w-0 py-4 -mr-px text-sm font-medium border border-transparent rounded-b-lg"
         >
           <ShoppingCartIcon class="w-5 h-5" aria-hidden="true" />
-          <span class="ml-3">Adicionar ao Carrinho</span>
+          <span class="ml-3">Adicionar ao carrinho</span>
         </button>
       </div>
     </div>

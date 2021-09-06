@@ -22,11 +22,6 @@ class ProductController extends Controller
         $this->middleware('verified');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $products = $request->user()->products();
@@ -36,11 +31,6 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(Request $request)
     {
         $categories  = $request->user()->categories();
@@ -52,11 +42,6 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function store(ProductStoreRequest $request)
     {
         $input = $request->validated();
@@ -77,24 +62,10 @@ class ProductController extends Controller
         return Redirect::route('productIndex')->with('success', 'Categoria Criada.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\Product $product
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function show(Product $product)
     {
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\Product $product
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Request $request, Product $product)
     {
         $product     =  $request->user()->products()->findOrFail($product->id);
@@ -108,14 +79,6 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Product      $product
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function update(ProductUpdateRequest $request, Product $product)
     {
         $product =  $request->user()->products()->findOrFail($product->id);
@@ -145,13 +108,6 @@ class ProductController extends Controller
         return Redirect::route('productIndex')->with('success', 'Produto Atualizado.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Models\Product $product
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request, Product $product)
     {
         $request->user()->products()->findOrFail($product->id)->delete();

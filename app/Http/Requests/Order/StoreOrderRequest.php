@@ -4,8 +4,8 @@ namespace App\Http\Requests\Order;
 
 use App\Models\Order\Order;
 use App\Rules\ChangePriceRule;
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreOrderRequest extends FormRequest
 {
@@ -18,18 +18,18 @@ class StoreOrderRequest extends FormRequest
     {
         return [
             'contact_phone.required' => 'Preencha o telefone de contato',
-            'contact_name.required' => 'Preencha o nome de contato',
+            'contact_name.required'  => 'Preencha o nome de contato',
 
             'zip_code.required' => 'Preencha o CEP',
-            'street.required' => 'Preencha a Rua',
-            'city.required' => 'Preencha a Cidade',
-            'state.required' => 'Preencha a Estado',
-            'country.required' => 'Preencha o Pais',
+            'street.required'   => 'Preencha a Rua',
+            'city.required'     => 'Preencha a Cidade',
+            'state.required'    => 'Preencha a Estado',
+            'country.required'  => 'Preencha o Pais',
             'district.required' => 'Preencha o Bairro',
-            'number.required' => 'Preencha o Número',
+            'number.required'   => 'Preencha o Número',
 
             'delivery_mode.required' => 'Preencha a Forma de Entrega',
-            'payment_mode.required' => 'Preencha o Forma de pagamento',
+            'payment_mode.required'  => 'Preencha o Forma de pagamento',
         ];
     }
 
@@ -43,7 +43,7 @@ class StoreOrderRequest extends FormRequest
             // TODO need most then total price
             'value_paid_cash' => [
                 Rule::requiredIf($this->need_change && $this->payment_mode == Order::MONEY),
-                new ChangePriceRule($this->need_change, $this->payment_mode, $this->amount_total_price, $this->amount_value_paid_cash)
+                new ChangePriceRule($this->need_change, $this->payment_mode, $this->amount_total_price, $this->amount_value_paid_cash),
             ],
 
             'contact_phone' => 'required|min:3|max:255',
@@ -65,7 +65,7 @@ class StoreOrderRequest extends FormRequest
             'country'  => 'required|min:3|max:255',
             'district' => 'required|min:3|max:655',
             'state'    => 'required|max:255',
-            'number'   => 'required|max:255'
+            'number'   => 'required|max:255',
         ];
     }
 }

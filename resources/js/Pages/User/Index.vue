@@ -5,54 +5,9 @@
   <div class="px-4 mt-6 sm:px-6 lg:px-8 ">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
 
-        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-
-                <div class="grid grid-cols-12 gap-4 px-5 py-5 bg-gray-50 border-t border-y bord:rounded-er-gray-200 shadow">
-                    <div class="col-span-12 sm:col-span-4">
-                        <basic-input
-                            :value="search.name"
-                            v-model="search.name"
-                            label="Nome"
-                            type="text"
-                        />
-                    </div>
-                     <div class="col-span-12 sm:col-span-4">
-                        <basic-input
-                            :value="search.email"
-                            v-model="search.email"
-                            label="Email"
-                            type="text"
-                        />
-                    </div>
-                    <div class="col-span-12 sm:col-span-4">
-                        <v-select
-                            v-model="search.roles"
-                            :value="search.roles"
-                            :options="roles.data"
-                            labelName="name"
-                            valueName="id"
-                            label="Funções"
-                        />
-                    </div>
-                </div>
-
-
-            <div
-                class="flex items-center justify-between py-3 bg-gray-50 border-t border-y bord:rounded-er-gray-200 shadow smt-lg px-4 sm:rounded-b-lg">
-                <basic-button
-                    className="text-white bg-sys_error-600 hover:bg-sys_error-700 focus:ring-sys_error-500"
-                    @click="clearSearchData"
-                >
-                    <TrashIcon class="h-5 w-5" aria-hidden="true" />
-                </basic-button>
-                <basic-button
-                className="text-white bg-sys_success-600 hover:bg-sys_success-700 focus:ring-sys_success-500"
-                    @click="searchData"
-                >
-                    <SearchIcon class="h-5 w-5" aria-hidden="true" />
-                </basic-button>
-            </div>
-        </div>
+      <Search
+        :roles="roles"
+      />
 
       <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
         <div class="overflow-hidden border-b bord:rounded-er-gray-200 shadow smt-lg">
@@ -145,6 +100,7 @@
 <script>
 import Layout from '@/Shared/Layout'
 import Header from '@/Layouts/Header'
+import Search from '@/Pages/User/Search'
 import Paginate from '@/Layouts/Paginate'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid'
 
@@ -152,7 +108,7 @@ import BasicInput from '@/Components/Input'
 import BasicButton from '@/Components/Button'
 
 import { SearchIcon } from '@heroicons/vue/outline'
-import {  TrashIcon } from '@heroicons/vue/solid'
+import { TrashIcon } from '@heroicons/vue/solid'
 
 export default {
   metaInfo: { title: 'Users' },
@@ -167,7 +123,9 @@ export default {
     BasicButton,
 
     SearchIcon,
-    TrashIcon
+    TrashIcon,
+
+    Search
   },
   props: {
     roles: Array,

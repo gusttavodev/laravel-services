@@ -44,7 +44,7 @@ class Order extends Model
         self::ACCEPTED  => 'Pedido Aceito',
         self::STARTED   => 'Pedido Em Preparo',
         self::DELIVERY  => 'Pedido Saiu Para Entrega',
-        self::COMPLETED => 'Peido Completo',
+        self::COMPLETED => 'Pedido Completo',
     ];
 
     public const STATUSES_LIST = [

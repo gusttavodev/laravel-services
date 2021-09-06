@@ -4,40 +4,53 @@
 
   <div class="px-4 mt-6 sm:px-6 lg:px-8">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+
         <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-               <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-t-lg ">
-            <div class="grid grid-cols-12 gap-4 w-full px-5 py-5 min-w-full bg-white divide-y divide-gray-200">
-                <basic-input
-                    v-model="form.name"
-                    :value="form.name"
-                    class="col-span-12 lg:col-span-4"
-                    label="Nome"
-                    type="text"
-                />
-                <basic-input
-                    v-model="form.email"
-                    :value="form.email"
-                    class="col-span-12 lg:col-span-4"
-                    label="Email"
-                    type="text"
-                />
-                <basic-input
-                    v-model="form.role"
-                    :value="form.role"
-                    class="col-span-12 lg:col-span-4"
-                    label="Função"
-                    type="text"
-                />
+
+                <div class="grid grid-cols-12 gap-4 bg-white px-5 py-5">
+                    <div class="col-span-12 sm:col-span-4">
+                        <basic-input
+                            :value="search.name"
+                            v-model="search.name"
+                            label="Nome"
+                            type="text"
+                        />
+                    </div>
+                     <div class="col-span-12 sm:col-span-4">
+                        <basic-input
+                            :value="search.email"
+                            v-model="search.email"
+                            label="Email"
+                            type="text"
+                        />
+                    </div>
+                    <div class="col-span-12 sm:col-span-4">
+                        <v-select
+                            v-model="search.roles"
+                            :value="search.roles"
+                            :options="roles.data"
+                            labelName="name"
+                            valueName="id"
+                            label="Funções"
+                        />
+                    </div>
+                </div>
+
+
+            <div class="flex items-center justify-between py-3 bg-white px-4 sm:rounded-b-lg">
+                <basic-button
+                    @click="clearSearchData"
+                >
+                    Limpar   <TrashIcon class="mx-2 h-5 w-5  text-sys_error-500" aria-hidden="true" />
+                </basic-button>
+                <basic-button
+                    @click="searchData"
+                >
+                    Pesquisar   <SearchIcon class="ml-2 h-5 w-5  text-sys_success-400" aria-hidden="true" />
+                </basic-button>
             </div>
         </div>
-        <div class="flex items-center justify-between px-4 py-3 bg-white sm:px-6 sm:rounded-b-lg">
-            <basic-button
-                type="submit"
-            >
-                Pesquisar
-            </basic-button>
-        </div>
-        </div>
+
       <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
         <div class="overflow-hidden border-b bord:rounded-er-gray-200 shadow smt-lg">
           <table class="min-w-full divide-y divide-gray-200">
@@ -135,6 +148,9 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid'
 import BasicInput from '@/Components/Input'
 import BasicButton from '@/Components/Button'
 
+import { SearchIcon } from '@heroicons/vue/outline'
+import {  TrashIcon } from '@heroicons/vue/solid'
+
 export default {
   metaInfo: { title: 'Users' },
   layout: Layout,
@@ -146,35 +162,41 @@ export default {
 
     BasicInput,
     BasicButton,
+
+    SearchIcon,
+    TrashIcon
   },
   props: {
+    roles: Array,
     users: Object,
   },
   data() {
     return {
-      form: {
-        name: null,
-        email: null
+      search: {
+        name: "",
+        email: "",
+        roles: []
       },
     }
   },
   computed: {
     queryBuilderString() {
-     const qs = new URLSearchParams(this.form);
+     const qs = new URLSearchParams(this.search);
      return qs
     },
   },
-//   watch: {
-//     queryBuilderData: {
-//       deep: true,
-//       handler() {
-//         if (this.$inertia) {
-//           const query = this.queryBuilderString;
-
-//           this.$inertia.get(location.pathname + `?${query}`, {}, { replace: true, preserveState: true });
-//         }
-//       },
-//     },
-//   },
+  methods: {
+    async searchData() {
+      this.$inertia.get(location.pathname + `?${this.queryBuilderString}`, {}, { replace: true, preserveState: true });
+    },
+    async clearSearchData() {
+      this.search = {
+        name: "",
+        email: "",
+        roles: []
+      }
+      await this.searchData()
+    },
+  },
 }
 </script>

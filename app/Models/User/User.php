@@ -20,11 +20,6 @@ class User extends Authenticatable
     use Notifiable;
     use HasRoles;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name',
         'email',
@@ -37,21 +32,11 @@ class User extends Authenticatable
         'establishment_id',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -94,5 +79,26 @@ class User extends Authenticatable
     public function establishmentOnRegister()
     {
         return $this->belongsTo(Establishment::class);
+    }
+
+    public function scopeSearchUser($query)
+    {
+        if (!empty(request()->query('name') && request()->query('name') !== 'null')) {
+            $query->where('name', 'like', '%' . request()->query('name') . '%');
+        }
+
+        if (!empty(request()->query('email') && request()->query('email') !== 'null')) {
+            $query->where('email', 'like', '%' . request()->query('email') . '%');
+        }
+
+        if (!empty(request()->query('roles') && request()->query('roles') !== 'null')) {
+            $roles = explode(',', request()->query('roles'));
+            $query->with('roles')->
+                whereHas('roles', function ($query) use ($roles) {
+                    $query->whereIn('roles.id', $roles);
+                });
+        }
+
+        return $query;
     }
 }

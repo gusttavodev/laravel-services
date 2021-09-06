@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserStoreRequest;
+use App\Http\Resources\User\RoleResource;
 use App\Http\Resources\User\UserResource;
 use App\Models\User\User;
 use Illuminate\Support\Facades\Hash;
@@ -24,10 +25,13 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = UserResource::collection(User::paginate(5));
+        $roles         = Role::all();
+
+        $users = UserResource::collection(User::searchUser()->paginate(5));
 
         return Inertia::render('User/Index', [
-            'users' => $users,
+            'users'  => $users,
+            'roles'  => RoleResource::collection($roles),
         ]);
     }
 

@@ -2,12 +2,12 @@
   <Header title="Usuários" buttonText="Criar" :buttonAction="route('userCreate')" />
 
 
-  <div class="px-4 mt-6 sm:px-6 lg:px-8">
+  <div class="px-4 mt-6 sm:px-6 lg:px-8 ">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
 
         <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
 
-                <div class="grid grid-cols-12 gap-4 bg-white px-5 py-5">
+                <div class="grid grid-cols-12 gap-4 px-5 py-5 bg-gray-50 border-t border-y bord:rounded-er-gray-200 shadow">
                     <div class="col-span-12 sm:col-span-4">
                         <basic-input
                             :value="search.name"
@@ -37,16 +37,19 @@
                 </div>
 
 
-            <div class="flex items-center justify-between py-3 bg-white px-4 sm:rounded-b-lg">
+            <div
+                class="flex items-center justify-between py-3 bg-gray-50 border-t border-y bord:rounded-er-gray-200 shadow smt-lg px-4 sm:rounded-b-lg">
                 <basic-button
+                    className="text-white bg-sys_error-600 hover:bg-sys_error-700 focus:ring-sys_error-500"
                     @click="clearSearchData"
                 >
-                    Limpar   <TrashIcon class="mx-2 h-5 w-5  text-sys_error-500" aria-hidden="true" />
+                    <TrashIcon class="h-5 w-5" aria-hidden="true" />
                 </basic-button>
                 <basic-button
+                className="text-white bg-sys_success-600 hover:bg-sys_success-700 focus:ring-sys_success-500"
                     @click="searchData"
                 >
-                    Pesquisar   <SearchIcon class="ml-2 h-5 w-5  text-sys_success-400" aria-hidden="true" />
+                    <SearchIcon class="h-5 w-5" aria-hidden="true" />
                 </basic-button>
             </div>
         </div>

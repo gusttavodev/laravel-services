@@ -21,6 +21,9 @@ app.use(store)
 import Multiselect from '@vueform/multiselect'
 app.component('v-select', Multiselect)
 
+import Tabs from '@/Layouts/Tabs'
+app.component('v-tabs', Tabs)
+
 import colorPicker from 'vue3-colorpicker'
 import 'vue3-colorpicker/bundle.css'
 app.use(colorPicker)

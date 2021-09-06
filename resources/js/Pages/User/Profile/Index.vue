@@ -1,9 +1,10 @@
 <template>
     <div class="mx-4 space-y-6 sm:p-6">
-        <Tabs
+        <v-tabs
             title="Editar informações do perfil"
             :tabs="tabs"
             @onChangeTab="changeTab"
+            className="py-5 pl-8"
         />
 
         <Information v-show="currentTab == 0" :user="user" :errors="errors" />

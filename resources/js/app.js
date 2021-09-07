@@ -30,6 +30,8 @@ app.component('v-select', SelectInput)
 import SearchCard from '@/Shared/SearchCard'
 app.component('v-search-card', SearchCard)
 
+import VueCheckbox from '@/Components/VueCheckbox'
+app.component('v-checkbox', VueCheckbox)
 
 import colorPicker from 'vue3-colorpicker'
 import 'vue3-colorpicker/bundle.css'

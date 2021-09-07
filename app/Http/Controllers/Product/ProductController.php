@@ -24,10 +24,12 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        $products = $request->user()->products();
+        $categories  = $request->user()->categories();
+        $products    = $request->user()->products()->search();
 
         return Inertia::render('Product/Index', [
-            'products' => ProductCategoryResource::collection($products->paginate(5)),
+            'products'    => ProductCategoryResource::collection($products->paginate(5)),
+            'categories'  => CategoryResource::collection($categories->paginate(20)),
         ]);
     }
 

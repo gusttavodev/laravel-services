@@ -29,4 +29,25 @@ class Product extends Model
             ->withPivot('quantity', 'order_id')
             ->join('orders', 'orders.id', '=', 'order_product_additionals.order_id');
     }
+
+    public function scopeSearch($query)
+    {
+        if (!empty(request()->query('name') && request()->query('name') !== 'null')) {
+            $query->where('name', 'like', '%' . request()->query('name') . '%');
+        }
+
+        if (!empty(request()->query('enable') && request()->query('enable') !== 'null')) {
+            $query->where('enable', request()->query('enable') === 'true' ? true : false);
+        }
+
+        if (!empty(request()->query('categories') && request()->query('categories') !== 'null')) {
+            $categories = explode(',', request()->query('categories'));
+            $query->with('categories')->
+                whereHas('categories', function ($query) use ($categories) {
+                    $query->whereIn('categories.id', $categories);
+                });
+        }
+
+        return $query;
+    }
 }

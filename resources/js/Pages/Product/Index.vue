@@ -3,6 +3,11 @@
 
   <div class="px-4 mt-6 sm:px-6 lg:px-8">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+
+      <Search
+        :categories="categories"
+      />
+
       <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
         <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-t-lg">
           <table class="min-w-full divide-y divide-gray-200">
@@ -125,14 +130,18 @@ import Layout from '@/Shared/Layout'
 import Header from '@/Layouts/Header'
 import Paginate from '@/Layouts/Paginate'
 
+import Search from './Search'
+
 export default {
   metaInfo: { title: 'Produtos' },
   layout: Layout,
   components: {
     Paginate,
     Header,
+    Search
   },
   props: {
+    categories: Object,
     products: Object,
   },
   methods: {

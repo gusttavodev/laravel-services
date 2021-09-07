@@ -106,10 +106,6 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid'
 
 import BasicInput from '@/Components/Input'
 import BasicButton from '@/Components/Button'
-
-import { SearchIcon } from '@heroicons/vue/outline'
-import { TrashIcon } from '@heroicons/vue/solid'
-
 export default {
   metaInfo: { title: 'Users' },
   layout: Layout,
@@ -121,9 +117,6 @@ export default {
 
     BasicInput,
     BasicButton,
-
-    SearchIcon,
-    TrashIcon,
 
     Search
   },

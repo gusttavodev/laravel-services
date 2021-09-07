@@ -39,7 +39,7 @@
             :required="false"
           />
 
-          <select-input
+          <v-h-select
             v-model="form.categories"
             :value="form.categories"
             :options="categories.data"
@@ -51,7 +51,7 @@
             label="Categorias"
           />
 
-          <select-input
+          <v-h-select
             v-model="form.additionals"
             :value="form.additionals"
             :options="additionals.data"
@@ -92,7 +92,7 @@
               <label class="block pr-4 text-sm font-medium text-gray-700 sm:mt-px">
                 Habilitado
               </label>
-              <breeze-checkbox name="enable" v-model:checked="form.enable" />
+              <v-checkbox name="enable" v-model:checked="form.enable" />
             </label>
           </div>
         </div>
@@ -115,20 +115,16 @@ import ImageInput from '@/Shared/ImageInput'
 import TextInput from '@/Shared/TextInput'
 import TextAreaInput from '@/Shared/TextAreaInput'
 import Header from '@/Layouts/Header'
-import SelectInput from '@/Shared/SelectInput'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid'
-import BreezeCheckbox from '@/Components/Checkbox'
 
 export default {
   metaInfo: { title: 'product' },
   layout: Layout,
   components: {
-    BreezeCheckbox,
     TextInput,
     ImageInput,
     ChevronLeftIcon,
     ChevronRightIcon,
-    SelectInput,
     Header,
     TextAreaInput,
   },

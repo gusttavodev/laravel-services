@@ -27,11 +27,23 @@ app.component('v-tabs', Tabs)
 import SelectInput from '@/Shared/SelectInput'
 app.component('v-select', SelectInput)
 
+import HorizontalSelectInput from '@/Shared/HorizontalSelectInput'
+app.component('v-h-select', HorizontalSelectInput)
+
+import MoneyInput from '@/Components/MoneyInput'
+app.component('v-money', MoneyInput)
+
 import SearchCard from '@/Shared/SearchCard'
 app.component('v-search-card', SearchCard)
 
 import VueCheckbox from '@/Components/VueCheckbox'
 app.component('v-checkbox', VueCheckbox)
+
+import BasicInput from '@/Components/Input'
+app.component('v-input', BasicInput)
+
+import TextAreaInput from '@/Shared/TextAreaInput'
+app.component('v-text-area', TextAreaInput)
 
 import colorPicker from 'vue3-colorpicker'
 import 'vue3-colorpicker/bundle.css'

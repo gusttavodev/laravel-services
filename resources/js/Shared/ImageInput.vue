@@ -2,8 +2,8 @@
 <div class="grid grid-cols-12 gap-4 w-full py-5">
     <div class="col-span-12">
         <label class="block py-2 text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-      {{ label }}
-    </label>
+            {{ label }}
+        </label>
     </div>
     <div class="col-span-12">
        <input
@@ -21,6 +21,7 @@
         >
             Escolha Foto
         </button>
+        <div v-if="errors" class="mt-2 text-sm text-sys_error-700">{{ errors }}</div>
     </div>
     <div class="col-span-12">
         <div v-if="isEdit && !editPhotoPreview && defaultImageUrl">

@@ -30,7 +30,7 @@ app.component('v-select', SelectInput)
 import HorizontalSelectInput from '@/Shared/HorizontalSelectInput'
 app.component('v-h-select', HorizontalSelectInput)
 
-import MoneyInput from '@/Components/MoneyInput'
+import MoneyInput from '@/Shared/MoneyInput'
 app.component('v-money', MoneyInput)
 
 import SearchCard from '@/Shared/SearchCard'

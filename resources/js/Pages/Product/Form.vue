@@ -27,7 +27,7 @@
             :required="false"
           />
 
-          <text-input
+          <v-money
             v-model="form.price"
             :value="form.price"
             :error="errors.price"

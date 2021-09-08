@@ -18,7 +18,8 @@
             type="text"
             :required="true"
           />
-          <text-input
+
+          <v-money
             v-model="form.price"
             :value="form.price"
             :error="errors.price"
@@ -27,8 +28,9 @@
             type="number"
             id="price"
             name="price"
-            :required="true"
+            :required="false"
           />
+
           <text-input
             v-model="form.quantity_limit"
             :value="form.quantity_limit"

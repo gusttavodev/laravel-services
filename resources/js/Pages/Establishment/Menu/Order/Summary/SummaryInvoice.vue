@@ -1,5 +1,5 @@
 <template>
-    <dl class="border-t border-gray-200 py-6 px-4 space-y-6 sm:px-6">
+    <dl class="text-gray-800 border-t border-gray-200 py-6 px-4 space-y-6 sm:px-6">
         <div class="flex items-center justify-between">
             <dt class="text-sm">
                 Produtos

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="pt-5">
         <h2 class="text-lg font-medium text-gray-900">Informações de Contato</h2>
 
         <div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">

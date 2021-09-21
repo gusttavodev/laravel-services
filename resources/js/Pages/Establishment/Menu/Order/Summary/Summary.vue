@@ -1,5 +1,5 @@
 <template>
-<div class="mt-10 lg:mt-0">
+<div class="mt-10 lg:mt-0 pt-5">
     <h2 class="text-lg font-medium text-gray-900">Resumo de Pedido</h2>
 
     <div class="mt-4 bg-white border border-gray-200 rounded-lg shadow-sm">

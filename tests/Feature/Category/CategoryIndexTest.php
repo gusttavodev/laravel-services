@@ -77,4 +77,4 @@ it('should be not store category with validation rules messages', function () {
             0 => 'The picture field is required.',
         ],
     ]);
-})->group('current');
+});

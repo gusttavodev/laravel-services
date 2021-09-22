@@ -10,9 +10,7 @@
     >
    <div class="flex items-center justify-center">
         <h3>Produtos No Carrinho </h3>
-        <span class="mx-2 my-2 px-1 py-1 text-sm font-medium text-green-800 bg-green-100 rounded-full">
-            {{ totalPrice }}
-        </span>
+        <establishment-price> {{ totalPrice }}</establishment-price>
    </div>
 
     </div>

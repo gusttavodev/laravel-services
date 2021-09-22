@@ -36,6 +36,7 @@ function createUser($role = 'admin'): User
 
 function createOrder(Establishment $establishment): array
 {
+    $order = Address::factory()->make()->toArray();
     $order['need_change'] = false;
     $order['value_paid_cash'] = null;
     $order['establishment_id'] = $establishment->id;
@@ -43,7 +44,6 @@ function createOrder(Establishment $establishment): array
     $order['contact_name']  = faker()->name;
     $order['delivery_mode'] = Arr::random(array_keys(Order::DELIVERY_MODES));
     $order['payment_mode']  = Arr::random(array_keys(Order::PAYMENT_MODES));
-    $order['address']       = Address::factory()->make()->toArray();
 
     return $order;
 }

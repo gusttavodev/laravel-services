@@ -1,13 +1,11 @@
 <template>
     <Modal v-if="hasProduct" :open="hasProduct" @onCloseModal="closeModal">
       <template v-slot:title>
-       <div class="py-2">
+       <div class="py-2 ">
             <span class="px-2 py-1 text-lg font-medium">
           {{ selectedProduct.name }}
         </span>
-        <span class="px-2 py-1 text-lg font-medium text-green-800 bg-green-100 rounded-full">
-        {{ selectedProduct.formatted_price}}
-        </span>
+        <establishment-price>{{ selectedProduct.formatted_price }}</establishment-price>
        </div>
       </template>
       <template v-slot:body>
@@ -35,20 +33,17 @@
           <span class="px-2 py-1 text-lg font-medium">
           Preço Total
         </span>
-        <span class="px-2 py-1 text-lg font-medium text-green-800 bg-green-100 rounded-full">
-            {{ totalPrice.total }}
-        </span>
-          </div>
+        <establishment-price> {{ totalPrice.total }}</establishment-price>
+        </div>
         </div>
       </template>
       <template v-slot:footer>
-        <button
-          @click="addToCart()"
-          type="button"
-          class="flex items-center justify-center w-full h-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        <establishment-button
+            class="w-full"
+            @click="addToCart()"
         >
-          Adicionar Ao Carrinho
-        </button>
+            Adicionar ao carrinho
+        </establishment-button>
       </template>
     </Modal>
 </template>

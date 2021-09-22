@@ -10,11 +10,12 @@ class Theme extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'primary_color', 'secondary_color', 'text_color', 'title_text_color',
-        'title_text_hover_color', 'background_color', 'button_background_color',
-        'button_hover_color', 'button_text_color', 'button_count_color',
-        'card_background_color', 'card_text_color', 'card_price_color',
+        'name',
+        'colors',
         'user_id',
+    ];
+    protected $casts = [
+        'colors' => 'array',
     ];
 
     public function establishment()

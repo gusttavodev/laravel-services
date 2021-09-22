@@ -5,7 +5,7 @@
             <h3 class="text-lg font-medium leading-6 text-gray-900">Informações Para Entrega</h3>
             <p class="mt-1 text-sm text-gray-500">Esse é o endereço informado para entrega</p>
         </div>
-    <div class="grid grid-cols-6 gap-6">
+        <div class="grid grid-cols-6 gap-6">
             <div class="col-span-6 sm:col-span-3">
                 <basic-input
                     v-model="form.zip_code"
@@ -100,7 +100,7 @@
                 />
             </div>
 
-          </div>
+        </div>
     </div>
 </div>
 </template>

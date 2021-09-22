@@ -11,203 +11,38 @@
             Crie temas para serem usados nos seus estabelecimentos
           </p>
         </div>
-        <div class="grid grid-cols-1 mt-6 gap-y-6 gap-x-4 sm:grid-cols-6">
-            <div class="sm:col-span-2">
-                <text-input-horizontal
-                    v-model="form.name"
-                    :value="form.name"
-                    :error="errors.name"
-                    class="mt-10"
-                    label="Nome do Tema"
-                    type="text"
-                    id="name"
-                    name="name"
-                    :required="false"
-                />
+        <div class="">
+            <div class="grid grid-cols-12 gap-4 w-full py-5">
+                <div class="col-span-12">
+                    <text-input-horizontal
+                        v-model="form.name"
+                        :value="form.name"
+                        :error="errors.name"
+                        class="mt-10"
+                        label="Nome do Tema"
+                        type="text"
+                        id="name"
+                        name="name"
+                        :required="false"
+                    />
+                </div>
             </div>
 
-            <div class="sm:col-span-2">
-                <text-input-color
-                    v-model="form.primary_color"
-                    :value="form.primary_color"
-                    :error="errors.primary_color"
-                    class="mt-10"
-                    label="Cor Primaria"
-                    type="text"
-                    id="primary_color"
-                    name="primary_color"
-                    :required="false"
-                />
-            </div>
+            <v-tabs
+                title="Editar informações do perfil"
+                :tabs="tabs"
+                @onChangeTab="changeTab"
+            />
 
-            <div class="sm:col-span-2">
-            <text-input-color
-                    v-model="form.secondary_color"
-                    :value="form.secondary_color"
-                    :error="errors.secondary_color"
-                    class="mt-10"
-                    label="Cor Secundaria"
-                    type="text"
-                    id="secondary_color"
-                    name="secondary_color"
-                    :required="false"
-                />
-            </div>
+            <ColorsGeneral v-show="currentTab == 0" :errors="errors" :theme="form.colors" @onChange="setColors"/>
+            <ColorsHeader v-show="currentTab == 1" :errors="errors" :theme="form.colors"  @onChange="setColors"/>
+            <ColorsInfo v-show="currentTab == 2" :errors="errors" :theme="form.colors"  @onChange="setColors"/>
+            <ColorsProduct v-show="currentTab == 3" :errors="errors" :theme="form.colors"  @onChange="setColors"/>
+            <ColorsFooter v-show="currentTab == 4" :errors="errors" :theme="form.colors"  @onChange="setColors"/>
+            <ColorsOther v-show="currentTab == 5" :errors="errors" :theme="form.colors"  @onChange="setColors"/>
 
-            <div class="sm:col-span-2">
-                <text-input-color
-                    v-model="form.background_color"
-                    :value="form.background_color"
-                    :error="errors.background_color"
-                    class="mt-10"
-                    label="Cor de Fundo"
-                    type="text"
-                    id="background_color"
-                    name="background_color"
-                    :required="false"
-                />
-            </div>
-
-            <div class="sm:col-span-2">
-                <text-input-color
-                    v-model="form.text_color"
-                    :value="form.text_color"
-                    :error="errors.text_color"
-                    class="mt-10"
-                    label="Cor do Texto"
-                    type="text"
-                    id="text_color"
-                    name="text_color"
-                    :required="false"
-                />
-            </div>
-
-            <div class="sm:col-span-2">
-                <text-input-color
-                    v-model="form.title_text_color"
-                    :value="form.title_text_color"
-                    :error="errors.title_text_color"
-                    class="mt-10"
-                    label="Cor do Titulo"
-                    type="text"
-                    id="title_text_color"
-                    name="title_text_color"
-                    :required="false"
-                />
-            </div>
-
-            <div class="sm:col-span-2">
-                <text-input-color
-                    v-model="form.title_text_hover_color"
-                    :value="form.title_text_hover_color"
-                    :error="errors.title_text_hover_color"
-                    class="mt-10"
-                    label="Cor Sobrepor Texto"
-                    type="text"
-                    id="title_text_hover_color"
-                    name="title_text_hover_color"
-                    :required="false"
-                />
-            </div>
-
-            <div class="sm:col-span-2">
-                <text-input-color
-                    v-model="form.button_background_color"
-                    :value="form.button_background_color"
-                    :error="errors.button_background_color"
-                    class="mt-10"
-                    label="Cor de Fundo do Botão"
-                    type="text"
-                    id="button_background_color"
-                    name="button_background_color"
-                    :required="false"
-                />
-            </div>
-
-            <div class="sm:col-span-2">
-                <text-input-color
-                    v-model="form.button_hover_color"
-                    :value="form.button_hover_color"
-                    :error="errors.button_hover_color"
-                    class="mt-10"
-                    label="Cor ao Sobrepor Botão"
-                    type="text"
-                    id="button_hover_color"
-                    name="button_hover_color"
-                    :required="false"
-                />
-            </div>
-
-            <div class="sm:col-span-2">
-                <text-input-color
-                    v-model="form.button_text_color"
-                    :value="form.button_text_color"
-                    :error="errors.button_text_color"
-                    class="mt-10"
-                    label="Cor do Texto do Botão"
-                    type="text"
-                    id="button_text_color"
-                    name="button_text_color"
-                    :required="false"
-                />
-            </div>
-
-            <div class="sm:col-span-2">
-                <text-input-color
-                    v-model="form.button_count_color"
-                    :value="form.button_count_color"
-                    :error="errors.button_count_color"
-                    class="mt-10"
-                    label="Cor do Contador de Produtos"
-                    type="text"
-                    id="button_count_color"
-                    name="button_count_color"
-                    :required="false"
-                />
-            </div>
-
-            <div class="sm:col-span-2">
-                <text-input-color
-                    v-model="form.card_background_color"
-                    :value="form.card_background_color"
-                    :error="errors.card_background_color"
-                    class="mt-10"
-                    label="Cor de Fundo do Produto"
-                    type="text"
-                    id="card_background_color"
-                    name="card_background_color"
-                    :required="false"
-                />
-            </div>
-
-            <div class="sm:col-span-2">
-                <text-input-color
-                    v-model="form.card_text_color"
-                    :value="form.card_text_color"
-                    :error="errors.card_text_color"
-                    class="mt-10"
-                    label="Cor do Texto do Produto"
-                    type="text"
-                    id="card_text_color"
-                    name="card_text_color"
-                    :required="false"
-                />
-            </div>
-
-              <div class="sm:col-span-2">
-                <text-input-color
-                    v-model="form.card_price_color"
-                    :value="form.card_price_color"
-                    :error="errors.card_price_color"
-                    class="mt-10"
-                    label="Cor do Texto do Preço"
-                    type="text"
-                    id="card_price_color"
-                    name="card_price_color"
-                    :required="false"
-                />
-            </div>
         </div>
+
         <div class="px-4 py-3 text-right bg-gray-50 sm:px-6">
           <button
             type="submit"
@@ -234,6 +69,12 @@ import BreezeCheckbox from '@/Components/Checkbox'
 import TextInputColor from '@/Shared/TextInputColor'
 import TextInputHorizontal from '@/Shared/TextInputHorizontal'
 
+import ColorsGeneral from './ColorForms/General.vue'
+import ColorsHeader from './ColorForms/Header.vue'
+import ColorsInfo from './ColorForms/Info.vue'
+import ColorsProduct from './ColorForms/Product.vue'
+import ColorsFooter from './ColorForms/Footer.vue'
+import ColorsOther from './ColorForms/Other.vue'
 
 export default {
   metaInfo: { title: 'tema' },
@@ -248,7 +89,14 @@ export default {
     Header,
     TextAreaInput,
     TextInputColor,
-    TextInputHorizontal
+    TextInputHorizontal,
+
+    ColorsGeneral,
+    ColorsHeader,
+    ColorsInfo,
+    ColorsProduct,
+    ColorsFooter,
+    ColorsOther
   },
   props: {
     errors: Object,
@@ -256,23 +104,66 @@ export default {
   },
   data() {
     return {
+      currentTab: 0,
+      tabs: [
+        { name: 'Geral', href: '#', current: true },
+        { name: 'Cabeçalho', href: '#', current: false },
+        { name: 'Informações', href: '#', current: false },
+        { name: 'Produtos', href: '#', current: false },
+        { name: 'Rodapé', href: '#', current: false },
+        { name: 'Outros', href: '#', current: false },
+      ],
       form: {
         name: "",
-        primary_color: "#1ca4e6",
-        secondary_color: "#162FA1",
-        text_color: "#111827",
-        title_text_color: "#111827",
-        title_text_hover_color: "#F9FAFB",
-        background_color: "#F3F4F6",
+        colors: {
+            general_title       : "#1ca4e6",
+            general_txt         : "#162FA1",
+            general_bg          : "#111827",
+            general_icon        : "#111827",
 
-        button_background_color: "#6600cc",
-        button_hover_color: "#9f74c9",
-        button_text_color: "#F3F4F6",
-        button_count_color: "#50ed17",
+            header_title  : "#6600cc",
+            header_txt    : "#9f74c9",
+            header_bg     : "#F3F4F6",
+            header_icon   : "#50ed17",
 
-        card_background_color: "#F9FAFB",
-        card_text_color: "#111827",
-        card_price_color: "#111827",
+            info_title       : "#F9FAFB",
+            info_txt         : "#111827",
+            info_bg          : "#111827",
+            info_icon        : "#111827",
+            info_separator   : "#111827",
+
+            product_title                 : "#F9FAFB",
+            product_txt                   : "#111827",
+            product_bg                    : "#111827",
+            product_icon                  : "#111827",
+            product_separator             : "#111827",
+
+            footer_title                  : "#F9FAFB",
+            footer_txt                    : "#111827",
+            footer_bg                     : "#111827",
+            footer_icon                   : "#111827",
+
+            time_txt                        : "#F9FAFB",
+            time_bg                         : "#111827",
+
+            button_txt                         : "#111827",
+            button_bg                          : "#111827",
+            button_hover                       : "#111827",
+
+            counter_txt                           : "#111827",
+            counter_bg                            : "#111827",
+
+            price_txt                           : "#111827",
+            price_bg                            : "#111827",
+        }
+      },
+      labels: {
+        title: "Titulo",
+        text: "Texto",
+        bg: "Fundo",
+        icon: "Icones",
+        separator: "Linha divisoria",
+        hover: "Sobrepor",
       },
     }
   },
@@ -287,6 +178,12 @@ export default {
       }
       this.$inertia.post(route('themeStore'), this.form)
     },
+    changeTab(tab) {
+      this.currentTab = tab
+    },
+    setColors(values){
+        this.form.colors = Object.assign(this.form.colors, values);
+    }
   },
 }
 </script>

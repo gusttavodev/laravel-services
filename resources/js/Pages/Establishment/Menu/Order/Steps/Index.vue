@@ -1,49 +1,43 @@
 <template>
-    <form @submit.prevent="submit" class="px-4 py-2 mt-6 sm:px-6 lg:px-8 bg-gray-200">
-        <div class="mx-4 my-6 space-y-6 bg-white sm:p-6 shadow sm:rounded-md sm:overflow-hidden">
-            <Steps
-                class=" bg-white"
-                title="Editar informações do perfil"
-                :steps="steps"
-                @onNextStep="nextStep"
-                @onPreviusStep="previusStep"
-                @onJumpToStep="jumpToStep"
-            />
+     <main class="max-w-7xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto lg:max-w-none">
+        <h1 class="sr-only">Finalize sua compra</h1>
 
-            <transition name="slide-fade">
-                <ContactInformation v-show="currentStep.id == 0" :user="user" :errors="errors" :step="currentStep"/>
-            </transition>
-            <transition name="slide-fade">
-               <AddressInformation v-show="currentStep.id == 1" :establishment="establishment" :user="user" :errors="errors" :step="currentStep" :delivery_mode_options="delivery_mode_options"/>
-            </transition>
-            <transition name="slide-fade">
-               <PaymentInformation v-show="currentStep.id == 2" :establishment="establishment" :user="user" :errors="errors" :step="currentStep" :payment_mode_options="payment_mode_options"/>
-            </transition>
-        </div>
-    </form>
+        <form @submit.prevent="submit" class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
+
+          <Form
+            :errors="errors"
+            :delivery_mode_options="delivery_mode_options"
+            :payment_mode_options="payment_mode_options"
+            :establishment="establishment"
+          />
+
+          <Summary
+            @finishOrder="submit"
+            :errors="errors"
+          />
+
+        </form>
+
+      </div>
+    </main>
 </template>
 
 <script>
 import MenuLayout from '@/Shared/MenuLayout'
 
-import Steps from '@/Layouts/Steps'
+import Summary from '@Establishment/Menu/Order/Summary/Summary'
+import Form from '@Establishment/Menu/Order/Form'
 
-import ContactInformation from '@Establishment/Menu/Order/Steps/ContactInformation'
-import AddressInformation from '@Establishment/Menu/Order/Steps/AddressInformation'
-import PaymentInformation from '@Establishment/Menu/Order/Steps/PaymentInformation'
-
-
-import { GET_STEPS, GET_CURRENT_STEP } from '@/store/mutationsTypes/Order'
+import { GET_CART_PRODUCTS_LIST, GET_CART_TOTAL_MONEY } from '@/store/mutationsTypes/StoreCart'
+import { GET_ORDER, GET_VALUE_PAID_CASH } from '@/store/mutationsTypes/Order'
 
 export default {
   name: 'EstablishmentOrder',
   metaInfo: { title: 'establishment' },
   layout: MenuLayout,
   components: {
-    Steps,
-    ContactInformation,
-    AddressInformation,
-    PaymentInformation
+    Summary, Form
   },
   props: {
     errors: Object,
@@ -51,44 +45,31 @@ export default {
     payment_mode_options: Array,
     establishment: Array
   },
-  created() {
-
-  },
   computed: {
-    user() {
-      return this.$page.props?.auth?.user?.data
+    valuePaidCash() {
+        return this.$store.getters[GET_VALUE_PAID_CASH]
     },
-    steps() {
-      return this.$store.getters[GET_STEPS]
+    totalPrice() {
+        return this.$store.getters[GET_CART_TOTAL_MONEY]
     },
-    currentStep() {
-      return this.$store.getters[GET_CURRENT_STEP]
-    }
-  },
-  data() {
-    return {
-
-    }
+    Order() {
+      return this.$store.getters[GET_ORDER]
+    },
+    cartProducts() {
+      return this.$store.getters[GET_CART_PRODUCTS_LIST]
+    },
   },
   methods: {
-    jumpToStep(step) {
-        // this.currentStep = step
-    },
-    onNextStep(step) {
-    //   this.currentStep = step
-    },
-    onPreviusStep(step) {
-    //   this.currentStep = step
-    },
+    submit() {
+        this.$inertia.post(route('orderStore'), {
+            ...this.Order,
+            products: this.cartProducts,
+            establishment_id: this.establishment.data.id,
+
+            amount_total_price: this.totalPrice.getAmount(),
+            amount_value_paid_cash: this.valuePaidCash.getAmount()
+        })
+    }
   },
 }
 </script>
-<style scoped>
-.slide-fade-leave-active {
-  transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.slide-fade-leave-to {
-  transform: translateX(10px);
-  opacity: 0;
-}
-</style>

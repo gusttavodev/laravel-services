@@ -1,28 +1,31 @@
 <template>
+<div>
     <label v-if="label" :for="id" class="block text-sm font-medium text-gray-700">
         {{ label }}
     </label>
     <div class="mt-1 relative rounded-md shadow-sm">
-      <input
-        :class="computedClass"
-        class="block w-full pr-10 focus:outline-none sm:text-sm rounded-md"
-        :id="id"
-        :name="name"
-        :type="type"
-        :value="value"
-        :required="required"
+        <input
+            :class="computedClass"
+            class="block w-full pr-10 focus:outline-none sm:text-sm rounded-md"
+            :id="id"
+            :name="name"
+            :type="type"
+            :value="value"
+            :required="required"
 
-        :disabled="disabled"
+            :disabled="disabled"
 
-        ref="input"
-        @input="$emit('update:modelValue', $event.target.value)"
-      />
-      <div v-if="error" class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+            :autocomplete="autocomplete"
+
+            ref="input"
+            @input="$emit('update:modelValue', $event.target.value)"
+        />
+    <div v-if="error" class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
         <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
-      </div>
+    </div>
     </div>
     <p v-if="error" class="mt-2 text-sm text-red-600" :id="`${id}-error`">{{ error }}</p>
-
+</div>
 </template>
 
 
@@ -35,7 +38,7 @@ export default {
     computedClass() {
       if(this.error) return 'border-red-300 text-red-900 placeholder-red-300  focus:ring-red-500 focus:border-red-500'
       if(this.disabled) return 'border-gray-300 text-gray-900 placeholder-gray-300  focus:ring-gray-500 focus:border-gray-500 cursor-not-allowed '
-      return 'border-indigo-300 text-indigo-900 placeholder-indigo-300  focus:ring-indigo-500 focus:border-indigo-500'
+      return 'border-gray-300 text-indigo-900 placeholder-indigo-300  focus:ring-indigo-500 focus:border-indigo-500'
     }
   },
   props: {
@@ -59,16 +62,26 @@ export default {
     },
     type: {
       type: String,
-      default: 'text',
+      default() {
+        return `text`
+      },
     },
+    autocomplete: {
+      type: String,
+      default() {
+        return `off`
+      },
+    },
+
     value: String,
     label: String,
     error: String,
+
     required: {
       type: Boolean,
       default() {
         return false
-      },
+      }
     },
   },
   methods: {

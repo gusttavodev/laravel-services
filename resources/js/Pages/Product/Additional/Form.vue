@@ -18,7 +18,8 @@
             type="text"
             :required="true"
           />
-          <text-input
+
+          <v-money
             v-model="form.price"
             :value="form.price"
             :error="errors.price"
@@ -27,8 +28,9 @@
             type="number"
             id="price"
             name="price"
-            :required="true"
+            :required="false"
           />
+
           <text-input
             v-model="form.quantity_limit"
             :value="form.quantity_limit"
@@ -41,7 +43,7 @@
             :required="true"
           />
 
-          <select-input
+          <v-h-select
             v-model="form.products"
             :value="form.products"
             :options="products.data"
@@ -71,7 +73,6 @@ import Layout from '@/Shared/Layout'
 import ImageInput from '@/Shared/ImageInput'
 import TextInput from '@/Shared/TextInput'
 import Header from '@/Layouts/Header'
-import SelectInput from '@/Shared/SelectInput'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid'
 
 export default {
@@ -82,7 +83,6 @@ export default {
     ImageInput,
     ChevronLeftIcon,
     ChevronRightIcon,
-    SelectInput,
     Header,
   },
   props: {

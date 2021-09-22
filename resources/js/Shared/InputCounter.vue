@@ -10,7 +10,7 @@
     <input
         :disabled="true"
         :value="counter"
-        class="w-full text-lg text-center border-gray-300 rounded-none focus:ring-indigo-500 focus:border-indigo-500"
+        class="w-full bg-gray-300 text-lg text-center border-gray-300 rounded-none focus:ring-indigo-500 focus:border-indigo-500"
     />
 
     <button
@@ -19,6 +19,7 @@
     >
       <PlusCircleIcon class="w-5 h-5 mr-2 -ml-1 text-gray-400" aria-hidden="true" />
     </button>
+
   </div>
 </template>
 

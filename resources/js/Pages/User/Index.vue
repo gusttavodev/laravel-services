@@ -1,10 +1,16 @@
 <template>
   <Header title="Usuários" buttonText="Criar" :buttonAction="route('userCreate')" />
 
-  <div class="px-4 mt-6 sm:px-6 lg:px-8">
+
+  <div class="px-4 mt-6 sm:px-6 lg:px-8 ">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+
+      <Search
+        :roles="roles"
+      />
+
       <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-        <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-t-lg">
+        <div class="overflow-hidden border-b bord:rounded-er-gray-200 shadow smt-lg">
           <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
               <tr>
@@ -94,9 +100,12 @@
 <script>
 import Layout from '@/Shared/Layout'
 import Header from '@/Layouts/Header'
+import Search from '@/Pages/User/Search'
 import Paginate from '@/Layouts/Paginate'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid'
 
+import BasicInput from '@/Components/Input'
+import BasicButton from '@/Components/Button'
 export default {
   metaInfo: { title: 'Users' },
   layout: Layout,
@@ -105,9 +114,43 @@ export default {
     ChevronRightIcon,
     Header,
     Paginate,
+
+    BasicInput,
+    BasicButton,
+
+    Search
   },
   props: {
+    roles: Array,
     users: Object,
+  },
+  data() {
+    return {
+      search: {
+        name: "",
+        email: "",
+        roles: []
+      },
+    }
+  },
+  computed: {
+    queryBuilderString() {
+     const qs = new URLSearchParams(this.search);
+     return qs
+    },
+  },
+  methods: {
+    async searchData() {
+      this.$inertia.get(location.pathname + `?${this.queryBuilderString}`, {}, { replace: true, preserveState: true });
+    },
+    async clearSearchData() {
+      this.search = {
+        name: "",
+        email: "",
+        roles: []
+      }
+      await this.searchData()
+    },
   },
 }
 </script>

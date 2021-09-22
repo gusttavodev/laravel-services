@@ -6,7 +6,7 @@
         <div class="flex mt-1 rounded-md shadow-sm">
             <input
                 :class="{ 'opacity-50': true }"
-                :disabled="true"
+
                 class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-sys_primary-500 focus:border-sys_primary-500 sm:max-w-xs sm:text-sm"
                 :id="id"
                 :name="name"
@@ -19,6 +19,8 @@
             <span class="relative inline-flex items-center px-4 py-2 -ml-px space-x-2 text-sm font-medium text-gray-700 border border-sys_primary-300 rounded-r-md bg-sys_primary-50 hover:bg-sys_primary-100 focus:outline-none focus:ring-1 focus:ring-sys_primary-500 focus:border-sys_primary-500">
                 <popu-color-picker
                     v-model:color="selectedColor"
+                    mode="chrome"
+                    :chrome-color-picker="{format: 'hex'}"
                 />
             </span>
         </div>

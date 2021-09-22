@@ -74,7 +74,7 @@
 
                 <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                   <span
-                    v-for="product in additional.products"
+                    v-for="product in additional.products.slice(0, 2)"
                     :key="product"
                     class="
                       m-1
@@ -90,6 +90,23 @@
                     "
                   >
                     {{ product.name }}
+                  </span>
+                  <span
+                     v-if="additional.products.length > 2"
+                     class="
+                      m-1
+                      inline-flex
+                      items-center
+                      px-2.5
+                      py-0.5
+                      rounded-md
+                      text-sm
+                      font-medium
+                      bg-sys_secondary-100
+                      text-sys_secondary-800
+                    "
+                  >
+                    +
                   </span>
                 </td>
 

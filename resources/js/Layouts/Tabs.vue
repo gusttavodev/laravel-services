@@ -11,11 +11,11 @@
         </select>
     </div>
 
+
     <div class="hidden sm:block">
-        <div class="px-4 py-2 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+        <div class="sm:flex sm:items-center sm:justify-between">
             <div class="sm:flex sm:items-baseline">
-                <div class="mt-4 sm:mt-0 sm:ml-10">
-                <nav class="-mb-px flex space-x-8">
+                <nav :class="['flex space-x-8', className]">
 
                     <a
                 v-for="tab in tabs"
@@ -33,7 +33,6 @@
             </a>
                 </nav>
                 </div>
-            </div>
         </div>
     </div>
 
@@ -44,7 +43,11 @@ export default {
   name: 'Header',
   props: {
     title: Object,
-    tabs: Object
+    tabs: Object,
+    className: {
+        type: String,
+        default: ''
+    }
   },
   data() {
     return {

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Establishment\Theme\ThemeStoreRequest;
 use App\Http\Requests\Establishment\Theme\ThemeUpdateRequest;
 use App\Http\Resources\Establishment\ThemeResource;
+use App\Models\Establishment\Establishment;
 use App\Models\Establishment\Theme;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -69,5 +70,16 @@ class ThemeController extends Controller
         $request->user()->themes()->findOrFail($theme->id)->delete();
 
         return Redirect::back()->with('success', 'Tema Removido.');
+    }
+
+    public function establishmentThemeStore(Request $request)
+    {
+        $establishes = Establishment::find($request->establishment_id);
+
+        $establishes->theme_id = $request->theme_id;
+
+        $establishes->save();
+
+        return Redirect::back()->with('success', 'Tema Vinculado.');
     }
 }

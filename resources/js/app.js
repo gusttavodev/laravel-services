@@ -46,7 +46,7 @@ import TextAreaInput from '@/Shared/TextAreaInput'
 app.component('v-text-area', TextAreaInput)
 
 import colorPicker from 'vue3-colorpicker'
-import 'vue3-colorpicker/bundle.css'
+import "vue3-colorpicker/style.css";
 app.use(colorPicker)
 
 app.mixin({ methods: { route } }).use(InertiaPlugin).mount(el)

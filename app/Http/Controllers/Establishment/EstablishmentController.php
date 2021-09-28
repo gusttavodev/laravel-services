@@ -6,11 +6,11 @@ use App\Enums\DaysOfWeek;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Establishment\EstablishmentStoreRequest;
 use App\Http\Resources\Establishment\EstablishmentResource;
+use App\Http\Resources\Establishment\ThemeResource;
 use App\Http\Resources\Product\CategoryProductResource;
 use App\Models\Establishment\Establishment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -22,11 +22,6 @@ class EstablishmentController extends Controller
         $this->middleware('verified')->except('showEstablishmentPublic');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $establishments = $request->user()->establishments();
@@ -36,23 +31,11 @@ class EstablishmentController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return Inertia::render('Establishment/Form');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\EstablishmentStoreRequest $request
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function store(EstablishmentStoreRequest $request)
     {
         $input = $request->validated();
@@ -66,24 +49,10 @@ class EstablishmentController extends Controller
         return Redirect::route('establishmentIndex')->with('success', 'Estabelecimento criado com sucesso!.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\Establishment $establishment
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function show(Establishment $establishment)
     {
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\Establishment $establishment
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Request $request, Establishment $establishment)
     {
         $establishment =  $request->user()->establishments()->findOrFail($establishment->id);
@@ -91,13 +60,6 @@ class EstablishmentController extends Controller
         return Inertia::render('Establishment/Form', ['establishment' => new EstablishmentResource($establishment)]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \App\Models\Establishment $establishment
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Establishment $establishment)
     {
         $establishment =  $request->user()->establishments()->findOrFail($establishment->id);
@@ -124,13 +86,6 @@ class EstablishmentController extends Controller
         return Redirect::route('establishmentIndex')->with('success', 'Estabelecimento atualizado com sucesso!.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Models\Establishment $establishment
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request, Establishment $establishment)
     {
         $request->user()->establishments()->findOrFail($establishment->id)->delete();
@@ -150,6 +105,7 @@ class EstablishmentController extends Controller
         return Inertia::render('Establishment/Customize', [
             'establishment' => new EstablishmentResource($establishment),
             'daysOfWeek'    => $daysOfWeek,
+            'themesOptions' => ThemeResource::collection($request->user()->themes),
         ]);
     }
 

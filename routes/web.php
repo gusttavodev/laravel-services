@@ -110,6 +110,7 @@ Route::prefix('establishment')->group(function () {
 
         Route::post('opening_hour_store', [OpeningHourController::class, 'store'])->name('establishmentOpeningHourStore');
         Route::post('address_store', [AddressController::class, 'store'])->name('establishmentAddressStore');
+        Route::post('theme', [ThemeController::class, 'establishmentThemeStore'])->name('establishmentThemeStore');
     });
 });
 

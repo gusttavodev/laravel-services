@@ -16,6 +16,14 @@
         :establishmentAddress="establishment.data.address"
       />
   </div>
+  <div class="px-4 mt-6 sm:px-6 lg:px-8">
+      <ThemeSelect
+        :errors="errors"
+        :establishment="establishment"
+        :establishment-theme="establishment.data.theme"
+        :themes-options="themesOptions.data"
+      />
+  </div>
 </template>
 
 <script>
@@ -23,6 +31,7 @@ import Layout from '@/Shared/Layout'
 import Header from '@/Layouts/Header'
 import OpeningHourForm from '@Establishment/OpeningHour/Form'
 import AddressForm from '@Establishment/Address/Form'
+import ThemeSelect from '@Establishment/Theme/Select.vue'
 
 export default {
   metaInfo: { title: 'establishment' },
@@ -30,13 +39,15 @@ export default {
   components: {
     Header,
     OpeningHourForm,
-    AddressForm
+    AddressForm,
+    ThemeSelect
   },
   props: {
     errors: Object,
     establishment: Object,
     daysOfWeek: Object,
-    establishmentAddress: Object
+    establishmentAddress: Object,
+    themesOptions: Array
   },
   data() {
     return {

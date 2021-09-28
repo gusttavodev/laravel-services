@@ -12,48 +12,39 @@ class ThemeFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-
+            'name'   => $this->faker->name(),
             'colors' => [
-                'general_title'          => '#1ca4e6',
-                'general_txt'            => '#162FA1',
-                'general_bg'             => '#111827',
-                'general_icon'           => '#111827',
-
-                'header_title'     => '#6600cc',
-                'header_txt'       => '#9f74c9',
-                'header_bg'        => '#F3F4F6',
-                'header_icon'      => '#50ed17',
-
-                'info_title'          => '#F9FAFB',
-                'info_txt'            => '#111827',
-                'info_bg'             => '#111827',
-                'info_icon'           => '#111827',
-                'info_separator'      => '#111827',
-
-                'product_title'                    => '#F9FAFB',
-                'product_txt'                      => '#111827',
-                'product_bg'                       => '#111827',
-                'product_icon'                     => '#111827',
-                'product_separator'                => '#111827',
-
-                'footer_title'                     => '#F9FAFB',
-                'footer_txt'                       => '#111827',
-                'footer_bg'                        => '#111827',
-                'footer_icon'                      => '#111827',
-
-                'time_txt'                           => '#F9FAFB',
-                'time_bg'                            => '#111827',
-
-                'button_txt'                            => '#111827',
-                'button_bg'                             => '#111827',
-                'button_hover'                          => '#111827',
-
-                'counter_txt'                              => '#111827',
-                'counter_bg'                               => '#111827',
-
-                'price_txt'                              => '#111827',
-                'price_bg'                               => '#111827',
+                'info_bg'           => '#111827',
+                'time_bg'           => '#6600cc',
+                'info_txt'          => '#FFFFFF',
+                'price_bg'          => '#6EBD51',
+                'time_txt'          => '#F9FAFB',
+                'button_bg'         => '#6600cc',
+                'footer_bg'         => '#111827',
+                'header_bg'         => '#111827',
+                'info_icon'         => '#6600cc',
+                'price_txt'         => '#F9FAFB',
+                'button_txt'        => '#FFFFFF',
+                'counter_bg'        => '#6EBD51',
+                'footer_txt'        => '#F9FAFB',
+                'general_bg'        => '#C8CFDE',
+                'header_txt'        => '#9f74c9',
+                'info_title'        => '#FFFFFF',
+                'product_bg'        => '#111827',
+                'counter_txt'       => '#F9FAFB',
+                'footer_icon'       => '#6600cc',
+                'general_txt'       => '#FFFFFF',
+                'header_icon'       => '#6600cc',
+                'product_txt'       => '#FFFFFF',
+                'button_hover'      => '#9f74c9',
+                'footer_title'      => '#6600cc',
+                'general_icon'      => '#6600cc',
+                'header_title'      => '#FFFFFF',
+                'product_icon'      => '#FFFFFF',
+                'general_title'     => '#FFFFFF',
+                'product_title'     => '#FFFFFF',
+                'info_separator'    => '#9f74c9',
+                'product_separator' => '#9f74c9',
             ],
         ];
     }

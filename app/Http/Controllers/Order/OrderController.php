@@ -29,8 +29,8 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
-        // $orders = $request->user()->additionals();
-        $orders = Order::where('id', '>', 0);
+        $establishments = Establishment::where('user_id', $request->user()->id)->get();
+        $orders         = Order::whereIn('establishment_id', $establishments->pluck('id'));
 
         return Inertia::render('Order/Index', [
             'orders' => OrderResource::collection($orders->paginate(5)),

@@ -124,6 +124,23 @@ class Order extends Model
         return $this->hasMany(OrderStatusChanges::class);
     }
 
+    public function getInvoiceAttribute()
+    {
+        $order    = $this;
+
+        return $this->products()->with(['order_additionals' => function ($q) use ($order) {
+            $q
+            ->select([
+                'order_product_additionals.additional_id',
+                'additionals.name',
+                'order_product_additionals.quantity',
+                'order_product_additionals.unity_price',
+            ])
+            ->where('order_id', $order->id);
+        }])
+        ->get();
+    }
+
     public function getAdditionalsTotalPriceAttribute()
     {
         return $this->additionals->sum(function ($additional) {

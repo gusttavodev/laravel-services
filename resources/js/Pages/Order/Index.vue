@@ -150,7 +150,8 @@
                     :href="route('orderEdit', order.id)"
                     type="button"
                     class="inline-flex items-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-sys_primary-600 order-0 hover:bg-sys_primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3"
-                    >Vêr
+                    >
+                    <EyeIcon class="h-5 w-5  text-white-400" aria-hidden="true" />
                   </inertia-link>
                 </td>
 
@@ -169,13 +170,14 @@
 import Layout from '@/Shared/Layout'
 import Header from '@/Layouts/Header'
 import Paginate from '@/Layouts/Paginate'
-
+import { EyeIcon } from '@heroicons/vue/solid'
 export default {
   metaInfo: { title: 'Produtos' },
   layout: Layout,
   components: {
     Paginate,
     Header,
+    EyeIcon
   },
   props: {
     orders: Object,

@@ -29,6 +29,9 @@ class ProductResource extends JsonResource
 
             'additionals' => AdditionalWithNotProductResource::collection($this->additionals),
 
+            'unity_price'       => number_format((float) $this?->pivot?->unity_price, 2, '.', ''),
+            'quantity'          => $this?->pivot?->quantity,
+
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

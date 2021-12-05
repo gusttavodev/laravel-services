@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\User\User;
+use App\Models\Establishment\Establishment;
 use App\Models\Order\Order;
+use App\Models\User\User;
 use App\Models\User\WppUser;
 use Illuminate\Database\Seeder;
-use App\Models\Establishment\Establishment;
 
 class OrderSeeder extends Seeder
 {
@@ -30,31 +30,30 @@ class OrderSeeder extends Seeder
                     $order->products()->save(
                         $productValue,
                         [
-                            'quantity' => 3,
-                            'unity_price' => $productValue->price
+                            'quantity'    => 3,
+                            'unity_price' => $productValue->price,
                         ]
                     );
                 }
 
                 foreach ($allAdditionals as $additionalsKey => $additionalsValue) {
                     foreach ($order->products as $orderProdKey => $orderProdValue) {
-                        $orderProdValue->order_additionals()->save($additionalsValue,  [
-                            'quantity' => 3,
-                            'order_id' => $order->id,
-                            'unity_price' => $additionalsValue->price
+                        $orderProdValue->order_additionals()->save($additionalsValue, [
+                            'quantity'    => 3,
+                            'order_id'    => $order->id,
+                            'unity_price' => $additionalsValue->price,
                         ]);
                     }
                 }
-
             });
         });
 
-        $orders = Order::all();
+        $orders  = Order::all();
         $wppUser =  WppUser::factory(2)->create();
         foreach ($wppUser as $wppUserKey => $wppUserValue) {
             foreach ($orders as $ordersKey => $ordersValue) {
-               $ordersValue->wpp_user_id = $wppUserValue->id;
-               $ordersValue->save();
+                $ordersValue->wpp_user_id = $wppUserValue->id;
+                $ordersValue->save();
             }
         }
 
@@ -70,37 +69,34 @@ class OrderSeeder extends Seeder
                     $order->products()->save(
                         $productValue,
                         [
-                            'quantity' => 3,
-                            'unity_price' => $productValue->price
+                            'quantity'    => 3,
+                            'unity_price' => $productValue->price,
                         ]
                     );
                 }
 
                 foreach ($allAdditionals as $additionalsKey => $additionalsValue) {
                     foreach ($order->products as $orderProdKey => $orderProdValue) {
-                        $orderProdValue->order_additionals()->save($additionalsValue,   [
-                            'quantity' => 3,
-                            'order_id' => $order->id,
-                            'unity_price' => $additionalsValue->price
+                        $orderProdValue->order_additionals()->save($additionalsValue, [
+                            'quantity'    => 3,
+                            'order_id'    => $order->id,
+                            'unity_price' => $additionalsValue->price,
                         ]);
                     }
                 }
-
             });
         });
 
-        $users = User::factory(2)->create()->each(function($user) {
+        $users = User::factory(2)->create()->each(function ($user) {
             $user->assignRole('client');
         });
 
         $orders = Order::where('wpp_user_id', null)->get();
         foreach ($users as $usersKey => $usersValue) {
             foreach ($orders as $ordersKey => $ordersValue) {
-               $ordersValue->user_id = $usersValue->id;
-               $ordersValue->save();
+                $ordersValue->user_id = $usersValue->id;
+                $ordersValue->save();
             }
         }
-
-
     }
 }

@@ -1,0 +1,34 @@
+:root {
+  --general-title: #cf0606;
+  --general-txt: #F9FAFB;
+  --general-bg: #e99797;
+  --general-icon: #4b4b4b;
+  --header-title: #1d2125;
+  --header-txt: #F9FAFB;
+  --header-bg: #1ca4e6;
+  --header-icon: #4b4b4b;
+  --info-title: #1d2125;
+  --info-txt: #F9FAFB;
+  --info-bg: #1ca4e6;
+  --info-icon: #162FA1;
+  --info-separator: #162FA1;
+  --product-title: #1d2125;
+  --product-txt: #162FA1;
+  --product-bg: #1ca4e6;
+  --product-icon: #162FA1;
+  --product-separator: #162FA1;
+  --product-bg-button: #6600cc;
+  --footer-title: #1d2125;
+  --footer-txt: #F9FAFB;
+  --footer-bg: #1ca4e6;
+  --footer-icon: #162FA1;
+  --time-txt: #F9FAFB;
+  --time-bg: #6600cc;
+  --button-txt: #F9FAFB;
+  --button-bg: #6600cc;
+  --button-hover: #162FA1;
+  --counter-txt: #F9FAFB;
+  --counter-bg: #11cc00;
+  --price-txt: #F9FAFB;
+  --price-bg: #6600cc;
+}

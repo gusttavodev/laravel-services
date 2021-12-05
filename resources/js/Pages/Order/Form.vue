@@ -23,6 +23,11 @@
         :errors="errors"
     />
 
+    <OrderInvoice
+        :products="order.data.invoice"
+        class="px-4 mt-6 sm:px-6 lg:px-8"
+    />
+
 </template>
 
 <script>
@@ -30,6 +35,7 @@ import Layout from '@/Shared/Layout'
 import OrderNextStatus from '@/Pages/Order/OrderNextStatus'
 import OrderAddressInformation from '@/Pages/Order/OrderAddressInformation'
 import OrderContactInformation from '@/Pages/Order/OrderContactInformation'
+import OrderInvoice from '@/Pages/Order/OrderInvoice'
 
 export default {
   metaInfo: { title: 'product' },
@@ -37,7 +43,8 @@ export default {
   components: {
     OrderNextStatus,
     OrderContactInformation,
-    OrderAddressInformation
+    OrderAddressInformation,
+    OrderInvoice
   },
   props: {
     errors: Object,

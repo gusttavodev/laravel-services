@@ -253,7 +253,7 @@
         </div>
       </main>
 
-      <footer class="bg-gray-800 fixed bottom-0 w-full pt-10" aria-labelledby="footerHeading">
+      <footer class="bg-gray-800 fixed bottom-0 w-full pt-40" aria-labelledby="footerHeading">
         <h2 id="footerHeading" class="sr-only">Footer</h2>
         <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:py-16 lg:px-8">
           <div

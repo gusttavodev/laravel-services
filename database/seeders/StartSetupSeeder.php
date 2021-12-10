@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Establishment\Address;
 use App\Models\Establishment\Establishment;
 use App\Models\Establishment\Theme;
+use App\Models\Product\Additional;
 use App\Models\Product\Category;
 use App\Models\Product\Product;
 use App\Models\User\User;
@@ -14,6 +15,17 @@ use Illuminate\Support\Facades\Storage;
 
 class StartSetupSeeder extends Seeder
 {
+    protected $additional = [
+        [
+            'name'     => 'Granola',
+        ],
+        [
+            'name'     => 'Leite Condensado',
+        ],
+        [
+            'name'     => 'Morango',
+        ],
+    ];
     protected $categories = [
         [
             'name'     => 'Açai',
@@ -158,8 +170,25 @@ class StartSetupSeeder extends Seeder
                 $filePath = Storage::disk(env('FILESYSTEM_DRIVER'))->put($filePath, $assetPath);
             }
 
-            $category->products()->saveMany(
-                Product::factory(1)->make(['name' => $value['name'], 'picture' => $filePath, 'user_id' => $user->id])
+            $product = Product::factory()->make(['name' => $value['name'], 'picture' => $filePath, 'user_id' => $user->id]);
+            $category->products()->saveMany([$product]);
+            if ($category['name'] == 'Açai') {
+                $this->createAdditionals($product, $user);
+            }
+        }
+    }
+
+    private function createAdditionals(Product $product, User $user)
+    {
+        foreach ($this->additional as $key => $value) {
+            $additional = Additional::where('name', $value['name'])->first();
+
+            if (empty($additional)) {
+                $additional = Additional::factory()->make(['name' => $value['name'], 'user_id' => $user->id]);
+            }
+
+            $product->additionals()->saveMany(
+                [$additional]
             );
         }
     }

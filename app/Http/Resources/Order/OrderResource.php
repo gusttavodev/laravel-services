@@ -29,7 +29,7 @@ class OrderResource extends JsonResource
             return [
                 'id'       => $invoice['id'],
                 'name'     => $invoice['name'],
-                'picture'  => asset('/imagecache/large/' . $this->picture),
+                'picture'  => asset('/imagecache/large/' . $invoice['picture']),
 
                 'quantity'       => $invoice['pivot']['quantity'],
                 'unity_price'    => number_format((float) $invoice['pivot']['unity_price'], 2, '.', ''),

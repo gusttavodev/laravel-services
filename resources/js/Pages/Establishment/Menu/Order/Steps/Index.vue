@@ -30,7 +30,7 @@ import Summary from '@Establishment/Menu/Order/Summary/Summary'
 import Form from '@Establishment/Menu/Order/Form'
 
 import { GET_CART_PRODUCTS_LIST, GET_CART_TOTAL_MONEY } from '@/store/mutationsTypes/StoreCart'
-import { GET_ORDER, GET_VALUE_PAID_CASH } from '@/store/mutationsTypes/Order'
+import { GET_ORDER, GET_VALUE_PAID_CASH, SET_ADDRESS_INFORMATION, SET_CONTACT_INFORMATION } from '@/store/mutationsTypes/Order'
 
 export default {
   name: 'EstablishmentOrder',
@@ -40,6 +40,7 @@ export default {
     Summary, Form
   },
   props: {
+    user: Object,
     errors: Object,
     delivery_mode_options: Array,
     payment_mode_options: Array,
@@ -58,6 +59,12 @@ export default {
     cartProducts() {
       return this.$store.getters[GET_CART_PRODUCTS_LIST]
     },
+  },
+  created(){
+    this.$store.dispatch(SET_CONTACT_INFORMATION, {
+        contact_name: this.user.data.name, contact_phone: this.user.data.phone
+    })
+    this.$store.dispatch(SET_ADDRESS_INFORMATION, this.user.data.address)
   },
   methods: {
     submit() {

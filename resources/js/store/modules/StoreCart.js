@@ -54,13 +54,30 @@ function formatTotalInvoice(storeCart){
     return {total:  total.toFormat(), productTotal: productTotal.toFormat(), additionalTotal: additionalTotal.toFormat()}
 }
 
+function overFlowProduct(findProduct, newProduct){
+    findProduct.quantity += newProduct.quantity
+
+    findProduct.additionals.forEach(element => {
+        const findedAdditional = newProduct.additionals.findIndex(item => item.id === element.id)
+        if(findedAdditional >= 0){
+            findProduct.additionals[findedAdditional].quantity += newProduct.additionals[findedAdditional].quantity
+        }
+    });
+    return findProduct
+}
+
 export default {
     state: {
         storeCart: [],
     },
     mutations: {
         [ADD_ITEM]: (state, product) => {
-            state.storeCart.push(calculateInvoice(product));
+            const finded = state.storeCart.findIndex(item => item.id === product.id)
+            if(finded >= 0){
+                state.storeCart[finded] = calculateInvoice(overFlowProduct(state.storeCart[finded], product))
+                return
+            }
+            return state.storeCart.push(calculateInvoice(product));
         },
         [REMOVE_ITEM]: (state, index) => {
             state.storeCart.splice(index, 1);

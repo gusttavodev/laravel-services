@@ -7,6 +7,7 @@ use App\Http\Requests\Order\OrderUpdateRequest;
 use App\Http\Requests\Order\StoreOrderRequest;
 use App\Http\Resources\Establishment\EstablishmentResource;
 use App\Http\Resources\Order\OrderResource;
+use App\Http\Resources\User\UserResource;
 use App\Models\Establishment\Establishment;
 use App\Models\Order\Order;
 use App\Models\Product\Product;
@@ -52,6 +53,7 @@ class OrderController extends Controller
         $paymentModeOptions = Order::PAYMENT_MODES;
 
         return Inertia::render('Establishment/Menu/Order/Steps/Index', [
+            'user'                  => new UserResource($request->user()),
             'establishment'         => new EstablishmentResource($establishment),
             'delivery_mode_options' => $deliveryOptions,
             'payment_mode_options'  => $paymentModeOptions,

@@ -1,6 +1,8 @@
 import {
     SET_PAYMENT_MODE,
     SET_DELIVERY_MODE,
+    SET_ADDRESS_INFORMATION,
+    SET_CONTACT_INFORMATION,
 
     GET_ORDER,
     GET_DELIVERY_TAX,
@@ -46,6 +48,20 @@ export default {
         },
         [SET_PAYMENT_MODE]: (state, form) => {
             state.order.form.payment_mode = form
+        },
+        [SET_ADDRESS_INFORMATION]: (state, address) => {
+            state.order.form.zip_code = address?.zip_code
+            state.order.form.city = address?.city
+            state.order.form.complement = address?.complement
+            state.order.form.country = address?.country
+            state.order.form.district = address?.district
+            state.order.form.state = address?.state
+            state.order.form.street = address?.street
+            state.order.form.number = address?.number
+        },
+        [SET_CONTACT_INFORMATION]: (state, contactInformation) => {
+            state.order.form.contact_name = contactInformation?.contact_name
+            state.order.form.contact_phone = contactInformation?.contact_phone
         }
     },
     getters: {
@@ -67,6 +83,12 @@ export default {
         },
         [SET_PAYMENT_MODE]: ({ commit }, payment_mode) => {
             commit(SET_PAYMENT_MODE, payment_mode)
-        }
+        },
+        [SET_ADDRESS_INFORMATION]: ({ commit }, address) => {
+            commit(SET_ADDRESS_INFORMATION, address)
+        },
+        [SET_CONTACT_INFORMATION]: ({ commit }, contactInformation) => {
+            commit(SET_CONTACT_INFORMATION, contactInformation)
+        },
     }
 };

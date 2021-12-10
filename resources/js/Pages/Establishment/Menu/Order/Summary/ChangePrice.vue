@@ -1,6 +1,6 @@
 <template>
     <dl v-if="Order.payment_mode == 0"  class="border-t border-gray-200 py-6 px-4 space-y-6 sm:px-6">
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between text-gray-900">
             <dt class="text-sm">
                 Precisa de troco ?
             </dt>
@@ -20,7 +20,7 @@
         </div>
 
         <div v-if="Order.need_change" class="flex items-center justify-between">
-            <dt class="text-sm">
+            <dt class="text-sm text-gray-900">
                 Quanto vai pagar em dinheiro ?
             </dt>
             <dd class="text-sm font-medium text-gray-900">
